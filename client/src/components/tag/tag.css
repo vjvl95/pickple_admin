@@ -1,0 +1,36 @@
+.main {
+  background-color: #eaeff1;
+}
+.paper {
+  max-width: 936;
+  width: 936px;
+  margin: 30px auto;
+  overflow: "hidden";
+}
+.tag_add_button {
+  margin-bottom: 10px;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+.paper_tagadd {
+  padding-bottom: 10px;
+  max-width: 936;
+  width: 936px;
+  margin: 30px auto;
+  margin-bottom: 50px;
+}
+/*
+.searchBar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.searchInput {
+  margin-top: 10px;
+}
+.block {
+  display: "block";
+}
+.contentWrapper {
+  margin: auto;
+}
+*/
