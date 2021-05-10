@@ -16,7 +16,6 @@ import TableCell from '@material-ui/core/TableCell';
 import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import SearchInput from '../tag/searchinput';
 import {Link} from "react-router-dom"
 
 const User = () => {
@@ -41,7 +40,7 @@ const User = () => {
               <SearchIcon className="block" color="inherit" />
             </Grid>
             <Grid item xs>
-                <SearchInput className="searchInput" position="static" color="default"/>
+               {/* <SearchInput className="searchInput" position="static" color="default"/>*/}
             </Grid>
 
           </Grid>

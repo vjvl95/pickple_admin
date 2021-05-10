@@ -18,12 +18,7 @@ import {Link} from "react-router-dom"
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const Tagheader =(props) => {
-  const { classes, onDrawerToggle } = props;
-  const [selectedTab,setSelectedTab]=React.useState(0);
- 
-  const handleChange=(event,newValue) => {
-    setSelectedTab(newValue);
-  }
+  const { classes } = props;
 
   return (
     <React.Fragment>
@@ -52,19 +47,6 @@ const Tagheader =(props) => {
   );
 }
 
-function TabPanel(props)
-{
-  const {children, value,index}=props;
-  return (
-    <div>
-     {
-       value==index&&(
-         <h1>{children}</h1>
-       )
-     }
-    </div>
-  )
-}
 
 Tagheader.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -12,7 +12,6 @@ import TableCell from '@material-ui/core/TableCell';
 import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST, USER_DETAIL_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import SearchInput from '../tag/searchinput';
 import { Link } from "react-router-dom";
 import {RouteComponentProps} from "react-router"
 import theme from '../layout/theme'

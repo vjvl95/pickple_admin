@@ -12,7 +12,8 @@ const loadTagAPI = (payload) =>
             "X-AUTH-TOKEN": localStorage.getItem("token")
         }
     }
-    return axios.get("/api/v1/tag",payload);
+    console.log(config)
+    return axios.get("/api/v1/tag/all",config);
 }
 
 function* loadTag(action){
@@ -22,7 +23,7 @@ function* loadTag(action){
         console.log(result)
         yield put({
             type:TAG_LOADING_SUCCESS,
-            payload: result.data
+            payload: result.data.data
         })
     } catch(e){
         yield put({
@@ -60,14 +61,20 @@ function* uploadTag(action){
         window.location.reload()
 
     } catch(e){
-
+        if(e.response.data.code==="TG02")
+        {
+            alert("이미 해당 태그가 존재합니다.")
+        }
+        else if(e.response.data.code==="GE01")
+        {
+            alert("내용을 입력하셔야 합니다.")
+        }
         yield put({
             type: TAG_UPLOADING_FAILURE,
             payload:e,
         })
-        console.log(e)
 
-        alert("태그등록에 실패했습니다.")
+        window.location.reload()
 
     }
 }

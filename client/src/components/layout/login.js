@@ -25,10 +25,16 @@ const Login = () =>{
     const onSubmit = (id,password) => {
         console.log(id)
         console.log(password)
+
+        try{
         dispatch({
             type:LOGIN_REQUEST,
             payload:{idString:id}
         })
+    }
+    catch(e){
+        console.log(e.response)
+    }
     }
     return(
         <div className="LoginWapper">

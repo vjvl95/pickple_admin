@@ -20,7 +20,7 @@ import styles from '../layout/style'
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 function Header(props) {
-  const { classes, onDrawerToggle } = props;
+  const { classes } = props;
   return (
     <React.Fragment>
       <div className={classes.header}>

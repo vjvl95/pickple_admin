@@ -13,13 +13,8 @@ import styles from '../layout/style'
 
 
 const ReportHeader =(props) => {
-  const { classes, onDrawerToggle } = props;
-  const [selectedTab,setSelectedTab]=React.useState(0);
- 
-  const handleChange=(event,newValue) => {
-    setSelectedTab(newValue);
-  }
- 
+  const { classes } = props;
+
   return (
     <React.Fragment>
       <div className={classes.header}>
@@ -48,19 +43,6 @@ const ReportHeader =(props) => {
   );
 }
 
-function TabPanel(props)
-{
-  const {children, value,index}=props;
-  return (
-    <div>
-     {
-       value==index&&(
-         <h1>{children}</h1>
-       )
-     }
-    </div>
-  )
-}
 
 ReportHeader.propTypes = {
   classes: PropTypes.object.isRequired,

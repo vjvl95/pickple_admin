@@ -12,12 +12,7 @@ import Profile from '../profile/profile'
 import styles from '../layout/style'
 
 const ProfileHeader =(props) => {
-  const { classes, onDrawerToggle } = props;
-  const [selectedTab,setSelectedTab]=React.useState(0);
- 
-  const handleChange=(event,newValue) => {
-    setSelectedTab(newValue);
-  }
+  const { classes } = props;
  
   return (
     <React.Fragment>
@@ -47,19 +42,6 @@ const ProfileHeader =(props) => {
   );
 }
 
-function TabPanel(props)
-{
-  const {children, value,index}=props;
-  return (
-    <div>
-     {
-       value==index&&(
-         <h1>{children}</h1>
-       )
-     }
-    </div>
-  )
-}
 
 ProfileHeader.propTypes = {
   classes: PropTypes.object.isRequired,

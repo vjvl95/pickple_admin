@@ -12,12 +12,8 @@ import Board from '../board/board'
 import styles from '../layout/style'
 
 const BoardHeader =(props) => {
-  const { classes, onDrawerToggle } = props;
-  const [selectedTab,setSelectedTab]=React.useState(0);
+  const { classes } = props;
  
-  const handleChange=(event,newValue) => {
-    setSelectedTab(newValue);
-  }
  
   return (
     <React.Fragment>
@@ -45,20 +41,6 @@ const BoardHeader =(props) => {
       
     </React.Fragment>
   );
-}
-
-function TabPanel(props)
-{
-  const {children, value,index}=props;
-  return (
-    <div>
-     {
-       value==index&&(
-         <h1>{children}</h1>
-       )
-     }
-    </div>
-  )
 }
 
 BoardHeader.propTypes = {

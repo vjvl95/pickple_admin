@@ -16,7 +16,6 @@ import TableCell from '@material-ui/core/TableCell';
 import { TAG_UPLOADING_REQUEST,TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import SearchInput from './searchinput';
 import { hot } from 'react-hot-loader'
 import TextField from '@material-ui/core/TextField';
 import Pagination from '../layout/Pagenation'
@@ -51,12 +50,10 @@ const Tagadd = () => {
       <div className="contentWrapper">
         <Typography color="textSecondary" align="center">
         <TextField id="standard-basic" label="태그등록" onChange={(e) => {setContents(e.target.value)}} value={contents} />
-        <Button className="tag_add_button"variant="contained" color="primary" onClick={()=>onuploadClick(contents)}>
+        <Button className="tag_add_button" variant="contained" color="primary" onClick={()=>onuploadClick(contents)}>
         등록
         </Button>
         </Typography>
-        <Pagination/>
-
       </div>
     </Paper>
   );

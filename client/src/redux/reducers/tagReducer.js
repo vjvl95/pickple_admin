@@ -15,6 +15,7 @@ const initialState={
 
    const tagReducer = (state = initialState, action) => {
 
+    console.log(action.payload)
     switch (action.type) {
         
         case TAG_LOADING_REQUEST:
@@ -26,9 +27,8 @@ const initialState={
         case TAG_LOADING_SUCCESS:
             return {
                 ...state,
-                tags:[...state.tags, ...action.payload.data.content],
-                totalElements:action.payload.data.totalElements,
-                totalPages:action.payload.data.totalPages,
+                tags:[...state.tags, ...action.payload],
+                totalElements:action.payload.length,
                 loading: false,
             }
         case TAG_LOADING_FAILURE:
@@ -60,7 +60,6 @@ const initialState={
         case TAG_SEARCH_REQUEST:
             return {
                 ...state,
-                tags:[],
                 keyword:action.payload,
                 loading: true
             }

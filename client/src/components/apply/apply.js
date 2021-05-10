@@ -16,7 +16,6 @@ import TableCell from '@material-ui/core/TableCell';
 import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import SearchInput from '../tag/searchinput';
 
 
 const Board = () => {
@@ -45,8 +44,8 @@ const Board = () => {
               <SearchIcon className="block" color="inherit" />
             </Grid>
             <Grid item xs>
-                <SearchInput className="searchInput" position="static" color="default"/>
-              {/* <TextField
+              {/*  <SearchInput className="searchInput" position="static" color="default"/>
+               <TextField
                 fullWidth
                 placeholder="태그를 입력하세요"
                 InputProps={{
