@@ -21,6 +21,7 @@ const initialState={
 };
 
 const userReducer = (state = initialState, action) => {
+    console.log(action.payload)
     switch (action.type) {
         case USER_LOADING_REQUEST:
             return {
@@ -31,7 +32,7 @@ const userReducer = (state = initialState, action) => {
         case USER_LOADING_SUCCESS:
             return {
                 ...state,
-                users:[...state.users, ...action.payload],
+                users:[...state.users, ...action.payload.content],
                 loading: false,
             }
 
@@ -51,8 +52,16 @@ const userReducer = (state = initialState, action) => {
             case USER_DETAIL_SUCCESS:
                 return {
                     ...state,
-                    users:[...state.users, ...action.payload],
+                    account_id: action.payload.accountId,
+                    account_type: action.payload.accountType,
+                    email:action.payload.email,
+                    idString:action.payload.idString,
+                    is_certifited:action.payload.isCertified,
+                    is_deleted:action.payload.isDeleted,
+                    name:action.payload.name,
+                    register_type:action.payload.registerType,
                     loading: false,
+            
                 }
     
             case USER_DETAIL_FAILURE:

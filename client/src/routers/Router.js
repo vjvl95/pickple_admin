@@ -23,7 +23,7 @@ const Router = () => {
 
           <ThemeProvider theme={theme}>
           <Header/>                              
-          <Navigator  className="Navigator" PaperProps={{ style: { width: "20%", min_width:"200px"} }}/>
+          <Navigator  className="Navigator" PaperProps={{ style: { width: "20%"} }}/>
           <Route path="/" exact component={loginpage}/>                              
                             <Switch>
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 

@@ -22,7 +22,7 @@ function* loadUser(action){
 
         yield put({
             type:USER_LOADING_SUCCESS,
-            payload: result.data.data.content
+            payload: result.data.data
         })
     } catch(e){
         yield put({
@@ -53,7 +53,7 @@ function* loadUserDetail(action){
 
         yield put({
             type:USER_DETAIL_SUCCESS,
-            payload: result.data.data.content
+            payload: result.data.data
         })
     } catch(e){
         yield put({

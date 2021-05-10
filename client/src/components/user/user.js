@@ -16,7 +16,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Link} from "react-router-dom"
+import Usertable from "./usertable"
 
 const User = () => {
 
@@ -47,30 +47,7 @@ const User = () => {
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-        <Typography color="textSecondary" align="center">
-                <Table>
-                <TableHead>
-                    <TableCell> 회원 번호  </TableCell>
-                    <TableCell> 회원 아이디 </TableCell>
-                    <TableCell> 회원 이름</TableCell>
-                    <TableCell> 소속 경로</TableCell>
-
-                </TableHead>
-
-                <TableBody>
-                    {users.map((user)=>(
-                    <TableRow component={Link} to ={`/admin/user/${user.idString}`} key={user.accountId}>
-                        <TableCell>{user.accountId}</TableCell>
-                        <TableCell>{user.idString}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.register_type}</TableCell>
-                    </TableRow>  
-                    ))
-                }
-                  </TableBody>
-                
-                </Table>
-        </Typography>
+        <Usertable users={users}/>
       </div>
     </Paper>
   );

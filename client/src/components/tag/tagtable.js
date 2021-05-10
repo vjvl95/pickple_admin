@@ -21,6 +21,8 @@ const Tagtable = ({tags}) =>{
         },
     }
 
+    
+
     const onDeleteClick = (id,name) => {
         var answer = window.confirm(name+"을 삭제하시겠습니까?");
         console.log(id)
@@ -31,16 +33,20 @@ const Tagtable = ({tags}) =>{
           })
         }     
       }
+
       console.log(tags)
       
     return(
         <Typography color="textSecondary" align="center">
-        <Table>
+        {  tags.length===0
+            ?null  
+        :<Table>
         <TableHead >
             <TableCell style = {styles.tableHead}> 태그내용 </TableCell>
             <TableCell style = {styles.tableHead}> 태그삭제</TableCell>
         </TableHead>
         <TableBody >
+                      
             {tags.map((tag,index)=>(
               <TableRow key={index}>
                 <TableCell style = {styles.tableCell}>{tag.tagName}</TableCell>
@@ -48,10 +54,11 @@ const Tagtable = ({tags}) =>{
               </TableRow>  
             )             
             )           
-           }
+}
      
         </TableBody>
         </Table>
+        }
 </Typography>
     )
 }

@@ -12,8 +12,8 @@ const loadTagAPI = (payload) =>
             "X-AUTH-TOKEN": localStorage.getItem("token")
         }
     }
-    console.log(config)
-    return axios.get("/api/v1/tag/all",config);
+    console.log(payload)
+    return axios.get("/api/v1/tag",payload,config);
 }
 
 function* loadTag(action){
@@ -102,7 +102,6 @@ function* deleteTag(action){
        console.log(result)
         yield put({
             type:TAG_DELETE_SUCCESS,
-            payload: result.data
         })
         alert("삭제되었습니다.")
         window.location.reload()

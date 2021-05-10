@@ -19,3 +19,6 @@
 .loginform {
   margin-top: 50px;
 }
+.MuiPagination-ul{
+  justify-content: center;
+}

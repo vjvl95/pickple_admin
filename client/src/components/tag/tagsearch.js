@@ -30,10 +30,19 @@ const SearchInput = () => {
     const onSubmit = async(e) => {
         await e.preventDefault()
         const {keyword} = form
+        console.log(keyword)
+        if(keyword)
+        { 
         dispatch({
             type:TAG_SEARCH_REQUEST,
             payload:keyword
         })
+        }
+        
+        else{
+            alert("검색어를 입력하십시요.")
+        }
+       
     }
     const resetValue=useRef(null)
 
@@ -60,7 +69,7 @@ const SearchInput = () => {
   </Toolbar>
 </AppBar>
     <div className="contentWrapper">
-    <Tagtable tags={searchResult}/>
+    {<Tagtable tags={searchResult}/>}
       </div>
 </Paper>
 

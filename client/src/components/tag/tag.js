@@ -27,42 +27,46 @@ const Tag = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
 
-  const {tags,totalElements,totalPages} = useSelector((state) => state.tag);
+  const {tags,totalElements} = useSelector((state) => state.tag);
 
   
   const indexOfLastTag=currentPage*postsPerPage
   const indexOfFirstTag=indexOfLastTag-postsPerPage
   const currentTags=tags.slice(indexOfFirstTag,indexOfLastTag)
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
   const dispatch = useDispatch();
-  console.log(totalElements)
+
+  console.log(currentPage)
+
+  
   useEffect(()=>{
     dispatch({
       type: TAG_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:1, size:8}}
+      payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      currentPage:currentPage
     })
-    },[])
+    },[currentPage])
 
    
+    console.log(tags)
+    console.log(currentTags)
     
   return (
     <Fragment>
     <Tagadd/>
     <Tagsearch/>
+
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
-        <Toolbar>
-          
-        </Toolbar>
+        <Toolbar style={{color:"#007bff"}}/>       
       </AppBar>
       <div className="contentWrapper">
-      <Tagtable tags={currentTags}/>
+      <Tagtable tags={tags}/>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={paginate}/>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
     </Paper>
     </Fragment>
   );
 }
 
-export default hot(module)(Tag);
+export default (Tag);

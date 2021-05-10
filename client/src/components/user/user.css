@@ -1,0 +1,20 @@
+.titlename{
+    font-weight:bold;
+    color:#007bff
+}
+.usertitle{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight:bold;
+
+}
+.userbody{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight:bold;
+
+}
+.userbutton
+{
+    margin-bottom: 30px;
+}
