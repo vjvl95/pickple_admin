@@ -35,9 +35,6 @@ const Tag = () => {
   const currentTags=tags.slice(indexOfFirstTag,indexOfLastTag)
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const dispatch = useDispatch();
-
-  console.log(currentPage)
-
   
   useEffect(()=>{
     dispatch({
@@ -46,10 +43,6 @@ const Tag = () => {
       currentPage:currentPage
     })
     },[currentPage])
-
-   
-    console.log(tags)
-    console.log(currentTags)
     
   return (
     <Fragment>

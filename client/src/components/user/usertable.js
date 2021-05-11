@@ -20,16 +20,16 @@ const Usertable =({users}) => {
         },
     }
 
-
     return(
         <Typography color="textSecondary" align="center">
-                <Table>
+         { users.length===0
+         ?null  
+         :<Table>
                 <TableHead>
                     <TableCell style = {styles.tableHead}> 회원 번호  </TableCell>
                     <TableCell style = {styles.tableHead}> 회원 아이디 </TableCell>
                     <TableCell style = {styles.tableHead}> 회원 이름</TableCell>
                     <TableCell style = {styles.tableHead}> 소속 경로</TableCell>
-
                 </TableHead>
 
                 <TableBody>
@@ -45,7 +45,9 @@ const Usertable =({users}) => {
                   </TableBody>
                 
                 </Table>
+            }
         </Typography>
+
     )
 }
 

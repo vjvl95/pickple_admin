@@ -17,39 +17,47 @@ import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userActio
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Usertable from "./usertable"
+import UserSearch from "./userSearch"
+import { Fragment } from 'react';
+import Pagination from '../layout/Pagenation'
 
 const User = () => {
 
-    const dispatch = useDispatch();
-    const {users} = useSelector((state) => state.user);
-    useEffect(()=>{
-      dispatch({
-        type: USER_LOADING_REQUEST,
-        payload:{params:{direction:"ASC", page:"1", size:"10"}}
-      })
-      },[dispatch,users.userid])
-  
-      console.log(users)
- 
+  const [currentPage, setCurrentPage]=useState(1)
+  const [postsPerPage, setTagsPerPage]=useState(10);
+  const dispatch = useDispatch();
+  const {users,totalElements} = useSelector((state) => state.user);
+  useEffect(()=>{
+    dispatch({
+      type: USER_LOADING_REQUEST,
+      payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}}
+    })
+    },[currentPage])
+
+    console.log(users)
+    console.log(totalElements)
+
+  const indexOfLastTag=currentPage*postsPerPage
+  const indexOfFirstTag=indexOfLastTag-postsPerPage
+  const currentTags=users.slice(indexOfFirstTag,indexOfLastTag)
+
+   
   return (
+    <Fragment>
+    <UserSearch/>
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <SearchIcon className="block" color="inherit" />
-            </Grid>
-            <Grid item xs>
-               {/* <SearchInput className="searchInput" position="static" color="default"/>*/}
-            </Grid>
-
-          </Grid>
+        
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
         <Usertable users={users}/>
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+
     </Paper>
+    </Fragment>
   );
 }
 

@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { USER_LOADING_REQUEST, USER_DETAIL_REQUEST } from '../../actions/userAction';
+import { USER_LOADING_REQUEST, USER_DETAIL_REQUEST,USER_DELETE_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { Link } from "react-router-dom";
@@ -32,9 +32,26 @@ const UserDetail = (req) => {
       })
       },[dispatch])
 
-      console.log(account_id)
+      const ondelete = () => {
+        try{
+          var answer = window.confirm(name+"을 삭제하시겠습니까?");
+        if (answer) 
+        {
+          dispatch({
+            type:USER_DELETE_REQUEST,
+            payload:{idString:idString, name:name}
+          },[])
+          }  
+        }
+      catch(e)
+      {
+          console.log(e)
+      }
+
+      }
   return (
     <Fragment>
+
       <Header/>
     <Paper className="paper-detail" elevation={3}>
       <div className="contentWrapper-detail">
@@ -53,7 +70,13 @@ const UserDetail = (req) => {
             <div className="userbody">인증 여부 : {is_certifited===0 ? "인증안됨" : "인증"}</div>
             <div className="userbody">가입경로 : {register_type}</div>
         </div>
-        <div ><Button className="userbutton" variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"25px"}}>회원 삭제</Button></div>
+        
+        {is_deleted===0
+        ?<div  className="userbutton" ><Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>ondelete()}>회원 삭제</Button></div>
+        :<div className="space"> </div>
+        }
+
+        
         </Typography>
       </div>
     </Paper>

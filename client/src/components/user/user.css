@@ -1,20 +1,22 @@
-.titlename{
-    font-weight:bold;
-    color:#007bff
+.titlename {
+  font-weight: bold;
+  color: #007bff;
 }
-.usertitle{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight:bold;
+.usertitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+.userbody {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.userbutton {
+  margin: auto;
+}
 
-}
-.userbody{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight:bold;
-
-}
-.userbutton
-{
-    margin-bottom: 30px;
+.space {
+  width: 30px;
+  height: 30px;
 }

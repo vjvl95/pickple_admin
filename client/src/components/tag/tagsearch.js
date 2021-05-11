@@ -16,8 +16,6 @@ const SearchInput = () => {
     const [form, setValues] = useState({keyword:""})
     const {searchResult} = useSelector((state)=>state.tag)
    
-    console.log(searchResult)
-
     const onChange= (e) => {
         setValues(
             {
@@ -42,7 +40,16 @@ const SearchInput = () => {
         else{
             alert("검색어를 입력하십시요.")
         }
-       
+    }
+
+    const onReset = () =>
+    {
+        resetValue.current.value=""
+        const {keyword} = ""
+        dispatch({
+            type:TAG_SEARCH_REQUEST,
+            payload:keyword
+        })
     }
     const resetValue=useRef(null)
 
@@ -59,9 +66,14 @@ const SearchInput = () => {
             <Form  className="col mt-2">
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{    marginBottom:"5px",width: "80%" , left: "-25px", top: "-20px",  position: "absolute"}}/>
             </Form>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{position: "absolute", right: "100px", top: "10px",  marginBottom:"5px"}}>
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{position: "absolute", right: "115px", top: "10px",  marginBottom:"5px"}}>
           검색
             </Button>
+
+            <Button className="reset" variant="contained" onClick={onReset} style={{position: "absolute", right: "18px", top: "10px",  marginBottom:"5px"}}>
+          초기화
+            </Button>
+
         </Fragment>  
             </Grid>
           </Grid>
@@ -72,10 +84,6 @@ const SearchInput = () => {
     {<Tagtable tags={searchResult}/>}
       </div>
 </Paper>
-
-
-
-
     )
 }
 

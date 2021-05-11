@@ -33,8 +33,6 @@ const Tagtable = ({tags}) =>{
           })
         }     
       }
-
-      console.log(tags)
       
     return(
         <Typography color="textSecondary" align="center">

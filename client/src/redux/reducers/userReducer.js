@@ -1,4 +1,4 @@
-import { USER_LOADING_REQUEST,USER_LOADING_SUCCESS,USER_LOADING_FAILURE,USER_DETAIL_FAILURE,USER_DETAIL_SUCCESS,USER_DETAIL_REQUEST} from "../../actions/userAction";
+import { USER_LOADING_REQUEST,USER_LOADING_SUCCESS,USER_LOADING_FAILURE,USER_DETAIL_FAILURE,USER_DETAIL_SUCCESS,USER_DETAIL_REQUEST,USER_DELETE_FAILURE,USER_DELETE_REQUEST,USER_DELETE_SUCCESS,USER_SEARCH_FAILURE,USER_SEARCH_REQUEST,USER_SEARCH_SUCCESS} from "../../actions/userAction";
 const initialState={
     isAuthenticated: null,
     loading : false,
@@ -33,6 +33,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users:[...state.users, ...action.payload.content],
+                totalElements:action.payload.totalElements,
                 loading: false,
             }
 
@@ -63,13 +64,48 @@ const userReducer = (state = initialState, action) => {
                     loading: false,
             
                 }
-    
             case USER_DETAIL_FAILURE:
                 return {
                     ...state,
                     users:[],
                     loading: false,
                 }
+
+                case USER_DELETE_REQUEST:
+                    return {
+                        ...state,
+                        loading: true
+                    }
+                case USER_DELETE_SUCCESS:
+                    return {
+                        ...state,
+                        loading: false,
+                    }
+        
+                case USER_DELETE_FAILURE:
+                    return {
+                        ...state,
+                        loading: false,
+                    }
+        
+                    case USER_SEARCH_REQUEST:
+                        return {
+                            ...state,
+                            loading: true
+                        }
+                    case USER_SEARCH_SUCCESS:
+                        return {
+                            ...state,
+                            loading: false,
+                        }
+            
+                    case USER_SEARCH_FAILURE:
+                        return {
+                            ...state,
+                            loading: false,
+                        }
+
+
             default:
             return state
         }
