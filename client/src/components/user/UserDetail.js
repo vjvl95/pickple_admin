@@ -56,34 +56,45 @@ const UserDetail = (req) => {
       <Header/>
     <Paper className="paper-detail" elevation={3}>
       <div className="contentWrapper-detail">
-        <Typography color="textSecondary" align="center">
+        <Typography color="textSecondary">
        <h2 className="usertitle">
           <span className="titlename">{usersDetail.name}</span>  상세 조회
         </h2>
        <Divider/>
-        <div className="label">
-            <div className="userbody">회원 번호: {usersDetail.accountId}</div>
-            <div className="userbody">회원 아이디: {usersDetail.idString}</div>
-            <div className="userbody">회원 이름: {usersDetail.name}</div>
-            <div className="userbody">이메일 : {usersDetail.email}</div>
-            <div className="userbody">회원 등급 : {usersDetail.accountType}</div>
-            <div className="userbody">삭제 여부 : {usersDetail.isDeleted===0 ? "회원" : "탈퇴회원"}</div>
-            <div className="userbody">인증 여부 : {usersDetail.isCertified===0 ? "인증안됨" : "인증"}</div>
-            <div className="userbody">가입경로 : {usersDetail.registerType}</div>
+      
+      <div className="left">
         </div>
+
+      <div className="right">
+      <div className="label">
+            <div className="label2">
+            <div className="userbody"><span className="userspan">회원 번호</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountId}</span></div>
+            <div className="userbody"><span className="userspan">회원 아이디</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.idString}</span></div>
+            <div className="userbody"><span className="userspan">회원 이름</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.name}</span></div>
+            <div className="userbody"><span className="userspan">이메일</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.email}</span></div>
+            <div className="userbody"><span className="userspan">회원등급</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.accountType}</span></div>
+            <div className="userbody"><span className="userspan">삭제여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isDeleted===0 ? "회원" : "탈퇴회원"}</span></div>
+            <div className="userbody"><span className="userspan">인증 여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isCertified===0 ? "인증안됨" : "인증"}</span></div>
+            <div className="userbody"><span className="userspan">가입경로</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.registerType}</span> </div>
+            
+            {usersDetail.isDeleted===0
+            ?<Fragment>
+             <div  className="userbutton" ><Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>ondelete()}>회원 삭제</Button>
+            <Link to={`/admin/user/${usersDetail.idString}/edit`}>
+            <Button variant="contained" color="primary" style={{marginBottom:"25px",marginTop:"15px",marginLeft:"30px"}}>회원 수정</Button>
+              </Link>
+            </div>
+            </Fragment>
+            :<div className="space"> </div>
+}
+</div>
+
+        </div>
+      </div>
+
         
-        {usersDetail.isDeleted===0
-
-        ?<Fragment>
-        <div  className="userbutton" ><Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>ondelete()}>회원 삭제</Button>
-        <Link to={`/admin/user/${usersDetail.idString}/edit`}>
-        <Button variant="contained" color="primary" style={{marginBottom:"25px",marginTop:"15px",marginLeft:"30px"}}>회원 수정</Button>
-          </Link>
-        </div>
-        </Fragment>
-        :<div className="space"> </div>
-        }
-
+        
+        
         
         </Typography>
       </div>

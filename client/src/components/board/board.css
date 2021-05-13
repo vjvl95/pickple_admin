@@ -6,7 +6,7 @@
 .board_title {
   font-size: 35px;
   font-weight: bold;
-  color: #007bff;
+  text-align: center;
 }
 .board_tag {
   padding: 5px 10px;
@@ -47,4 +47,8 @@
 .textlabel {
   color: #007bff;
   font-weight: bold;
+}
+.board-body
+{
+  width: 30%;
 }

@@ -46,10 +46,10 @@ const BoardDetail = (req) =>{
         <Fragment>
         <Paper className="paper-detail" elevation={3}>
           <div className="contentWrapper-detail">
-            <Typography color="textSecondary" align="center">
+            <Typography color="textSecondary">
             <h2 className="board_title">{boardDetails.title}</h2>
 
-           <Divider className="line"/>
+           <Divider style={{backgroundColor: "#E2E2E2"}}/>
             <div className="work_paper">
 
             <div className="workdate"><span className="textlabel">업무일</span> : {workStartDate} ~ {workEndDate}</div>
@@ -65,9 +65,9 @@ const BoardDetail = (req) =>{
                         
             </div>
             <br/>
-            <Divider style={{marginTop:"20px"}}/>
+            <Divider style={{marginTop:"20px",backgroundColor: "#E2E2E2"}}/>
 
-            <div className> {boardDetails.text}</div>
+            <div className="board-body"> {boardDetails.text}</div>
             </div>
             
             </Typography>

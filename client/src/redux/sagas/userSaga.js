@@ -92,20 +92,19 @@ const UserSearchAPI = (payload) =>{
         },
     }
 
-    return axios.get(`/api/v1/account/search`,payload,config);
+    return axios.get(`/api/v1/account/search`,payload);
 }
 
 
 function* UserSearch(action){
     try{
+        console.log(action.payload)
         const result= yield call(UserSearchAPI,action.payload)
         console.log(result, "UserSearch");
 
         yield put({
             type:USER_SEARCH_SUCCESS,
         })
-        alert(action.payload.name+"님이 삭제되었습니다.")
-        yield put(push("/admin/user"))
     } catch(e){
         yield put({
             type: USER_SEARCH_FAILURE,

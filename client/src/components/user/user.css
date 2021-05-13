@@ -6,8 +6,10 @@
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: bold;
+  margin-left: 38%;
 }
 .userbody {
+  display: flex;
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: bold;
@@ -26,4 +28,36 @@
   background-color: rgba(0, 0, 0, 0.09);
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+}
+.left{
+  width: 50%;
+  height: 100%;
+}
+
+.label
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.label2
+{    
+  margin-left: 38%;
+}
+
+.userspan
+{
+  display: flex;
+  width: 20%;
+}
+.userspan2
+{
+  display:flex;
+  width:3%
+}
+.userspan3
+{
+  display:flex;
+  width:72%;
+  padding-left: 5px;
 }
