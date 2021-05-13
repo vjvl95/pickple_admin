@@ -24,7 +24,7 @@ import "./user.css"
 const UserDetail = (req) => {
 
     const dispatch = useDispatch();
-    const {account_id,account_type,email,idString,is_certifited,is_deleted,name,register_type} = useSelector((state) => state.user);
+    const {usersDetail} = useSelector((state) => state.user);
     useEffect(()=>{
       dispatch({
         type: USER_DETAIL_REQUEST,
@@ -34,12 +34,12 @@ const UserDetail = (req) => {
 
       const ondelete = () => {
         try{
-          var answer = window.confirm(name+"을 삭제하시겠습니까?");
+          var answer = window.confirm(usersDetail.name+"을 삭제하시겠습니까?");
         if (answer) 
         {
           dispatch({
             type:USER_DELETE_REQUEST,
-            payload:{idString:idString, name:name}
+            payload:{idString:UserDetail.idString, name:UserDetail.name}
           },[])
           }  
         }
@@ -49,6 +49,7 @@ const UserDetail = (req) => {
       }
 
       }
+      console.log(usersDetail)
   return (
     <Fragment>
 
@@ -57,22 +58,29 @@ const UserDetail = (req) => {
       <div className="contentWrapper-detail">
         <Typography color="textSecondary" align="center">
        <h2 className="usertitle">
-          <span className="titlename">{name}</span>  상세 조회
+          <span className="titlename">{usersDetail.name}</span>  상세 조회
         </h2>
-       <Divider className="line"/>
+       <Divider/>
         <div className="label">
-            <div className="userbody">회원 번호: {account_id}</div>
-            <div className="userbody">회원 아이디: {idString}</div>
-            <div className="userbody">회원 이름: {name}</div>
-            <div className="userbody">이메일 : {email}</div>
-            <div className="userbody">회원 등급 : {account_type}</div>
-            <div className="userbody">삭제 여부 : {is_deleted===0 ? "회원" : "탈퇴회원"}</div>
-            <div className="userbody">인증 여부 : {is_certifited===0 ? "인증안됨" : "인증"}</div>
-            <div className="userbody">가입경로 : {register_type}</div>
+            <div className="userbody">회원 번호: {usersDetail.accountId}</div>
+            <div className="userbody">회원 아이디: {usersDetail.idString}</div>
+            <div className="userbody">회원 이름: {usersDetail.name}</div>
+            <div className="userbody">이메일 : {usersDetail.email}</div>
+            <div className="userbody">회원 등급 : {usersDetail.accountType}</div>
+            <div className="userbody">삭제 여부 : {usersDetail.isDeleted===0 ? "회원" : "탈퇴회원"}</div>
+            <div className="userbody">인증 여부 : {usersDetail.isCertified===0 ? "인증안됨" : "인증"}</div>
+            <div className="userbody">가입경로 : {usersDetail.registerType}</div>
         </div>
         
-        {is_deleted===0
-        ?<div  className="userbutton" ><Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>ondelete()}>회원 삭제</Button></div>
+        {usersDetail.isDeleted===0
+
+        ?<Fragment>
+        <div  className="userbutton" ><Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>ondelete()}>회원 삭제</Button>
+        <Link to={`/admin/user/${usersDetail.idString}/edit`}>
+        <Button variant="contained" color="primary" style={{marginBottom:"25px",marginTop:"15px",marginLeft:"30px"}}>회원 수정</Button>
+          </Link>
+        </div>
+        </Fragment>
         :<div className="space"> </div>
         }
 

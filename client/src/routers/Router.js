@@ -15,7 +15,7 @@ import userdetailpage from "../components/user/UserDetail"
 import loginpage from "../pages/loginpage"
 import PrivateRoute from "./privateRouter"
 import boarddetailpage from "../components/board/boarddetail"
-
+import userupdatepage from "../components/user/userupdate"
 
 const Router = () => {
     return (
@@ -30,7 +30,9 @@ const Router = () => {
                                         <PrivateRoute path="/admin/tag" exact component={tagpage} />
                                         <PrivateRoute path="/admin/report" exact component={reportpage} />   
                                         <PrivateRoute path="/admin/user" exact component={userpage} />     
-                                        <PrivateRoute path='/admin/user/:id' exact component={userdetailpage} />     
+                                        <PrivateRoute path='/admin/user/:id' exact component={userdetailpage} />
+                                        <PrivateRoute path='/admin/user/:id/edit' exact component={userupdatepage} />     
+     
                                         <PrivateRoute path="/admin/profile" exact component={profilepage} />     
                                         <PrivateRoute path="/admin/apply" exact component={applypage} />
                                         <PrivateRoute path="/admin/board" exact component={boardpage} />

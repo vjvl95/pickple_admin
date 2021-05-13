@@ -4,6 +4,7 @@ const initialState={
     isAuthenticated: null,
     loading : false,
     boards:[],
+    boardDetails:[],
     boardid:"",
     wirterId:"",
     boardtype:"",
@@ -16,7 +17,6 @@ const initialState={
     isDeleted:"",
     text:"",
     title:"",
-    boarddetail:"",
     totalElements:"",
     totalPages:"",
     error:"",
@@ -45,10 +45,12 @@ const boardReducer = (state=initialState,action) =>{
      case BOARD_DETAIL_REQUEST:
             return{
                 ...state,
+                boardDetails:[],
             }
      case BOARD_DETAIL_SUCCESS:
             return{
                 ...state,
+                boardDetails:action.payload.data
             }
      case BOARD_DETAIL_FAILURE:
                 return{

@@ -14,8 +14,7 @@ const initialState={
 };
 
    const tagReducer = (state = initialState, action) => {
-    switch (action.type) {
-        
+    switch (action.type) {        
         case TAG_LOADING_REQUEST:
             return {
                 ...state,
@@ -70,7 +69,6 @@ const initialState={
         case TAG_SEARCH_FAILURE:
             return {
                 ...state,
-                searchResult: action.payload,
                 loading: false,
             }        
         

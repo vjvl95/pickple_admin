@@ -48,10 +48,10 @@ function* loadBoardDetail (action)
     console.log(action)
     try {
     const result =  yield call(loadBoardDetailAPI,action.payload)
-    console.log(result)
+    console.log(result.data)
     yield put({
         type:BOARD_DETAIL_SUCCESS,
-        payload:result.data.data.content
+        payload:result.data
     })
     } catch (error) {
         yield put({

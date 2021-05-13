@@ -1,8 +1,9 @@
-import { USER_LOADING_REQUEST,USER_LOADING_SUCCESS,USER_LOADING_FAILURE,USER_DETAIL_FAILURE,USER_DETAIL_SUCCESS,USER_DETAIL_REQUEST,USER_DELETE_FAILURE,USER_DELETE_REQUEST,USER_DELETE_SUCCESS,USER_SEARCH_FAILURE,USER_SEARCH_REQUEST,USER_SEARCH_SUCCESS} from "../../actions/userAction";
+import { USER_LOADING_REQUEST,USER_LOADING_SUCCESS,USER_LOADING_FAILURE,USER_DETAIL_FAILURE,USER_DETAIL_SUCCESS,USER_DETAIL_REQUEST,USER_DELETE_FAILURE,USER_DELETE_REQUEST,USER_DELETE_SUCCESS,USER_SEARCH_FAILURE,USER_SEARCH_REQUEST,USER_SEARCH_SUCCESS,USER_UPLOAD_FAILURE,USER_UPLOAD_SUCCESS,USER_UPLOAD_REQUEST} from "../../actions/userAction";
 const initialState={
     isAuthenticated: null,
     loading : false,
     users:[],
+    usersDetail:[],
     account_id:"",
     idString:"",
     password:"",
@@ -21,7 +22,6 @@ const initialState={
 };
 
 const userReducer = (state = initialState, action) => {
-    console.log(action.payload)
     switch (action.type) {
         case USER_LOADING_REQUEST:
             return {
@@ -47,20 +47,13 @@ const userReducer = (state = initialState, action) => {
             case USER_DETAIL_REQUEST:
                 return {
                     ...state,
-                    users:[],
+                    usersDetail:[],
                     loading: true
                 }
             case USER_DETAIL_SUCCESS:
                 return {
                     ...state,
-                    account_id: action.payload.accountId,
-                    account_type: action.payload.accountType,
-                    email:action.payload.email,
-                    idString:action.payload.idString,
-                    is_certifited:action.payload.isCertified,
-                    is_deleted:action.payload.isDeleted,
-                    name:action.payload.name,
-                    register_type:action.payload.registerType,
+                    usersDetail:action.payload,                  
                     loading: false,
             
                 }
@@ -104,7 +97,22 @@ const userReducer = (state = initialState, action) => {
                             ...state,
                             loading: false,
                         }
-
+                        case USER_UPLOAD_REQUEST:
+                            return {
+                                ...state,
+                                loading: true
+                            }
+                        case USER_UPLOAD_SUCCESS:
+                            return {
+                                ...state,
+                                loading: false,
+                            }
+                
+                        case USER_UPLOAD_FAILURE:
+                            return {
+                                ...state,
+                                loading: false,
+                            }
 
             default:
             return state

@@ -17,7 +17,7 @@ import theme from '../layout/theme'
 import styles from '../layout/style'
 import Divider from '@material-ui/core/Divider';
 import { BOARD_DETAIL_REQUEST } from '../../actions/boardAction';
-
+import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import "./board.css"
 
@@ -26,7 +26,12 @@ const BoardDetail = (req) =>{
     const boardid=Number(req.match.params.id)
     console.log(req.match.params.id)
     const dispatch = useDispatch();
-    const {tilte,text,boardtype,isDeleted,paymentMax,workStartDate,workEndDate,BoardTagList} = useSelector((state) => state.board);
+    const {boardDetails} = useSelector((state) => state.board);
+    const recEndDate = moment(boardDetails.recEndDate).format('YYYY-MM-DD')
+    const workStartDate = moment(boardDetails.workStartDate).format('YYYY-MM-DD')
+    const workEndDate = moment(boardDetails.workEndDate).format('YYYY-MM-DD')
+    const recStartDate = moment(boardDetails.recStartDate).format('YYYY-MM-DD')
+
     useEffect(()=>{
     dispatch({
       type: BOARD_DETAIL_REQUEST,
@@ -34,27 +39,37 @@ const BoardDetail = (req) =>{
     })
     },[])
    
-
-
+    console.log(recEndDate)
+    console.log(boardDetails)
+    console.log(recStartDate)
     return(
-
-
         <Fragment>
-      
         <Paper className="paper-detail" elevation={3}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary" align="center">
-            <h2 className="board_title">title</h2>
+            <h2 className="board_title">{boardDetails.title}</h2>
 
            <Divider className="line"/>
-            <div className="label">
+            <div className="work_paper">
 
-            <div>게시글 번호:</div>
-            <div>게시글 삭제여부:</div>
-            <div>모집 마깁일:</div>
-            <div>모집 시작일:</div>
-            <div>본문:</div>
+            <div className="workdate"><span className="textlabel">업무일</span> : {workStartDate} ~ {workEndDate}</div>
+            <div className="worknumber"><span className="textlabel">모집인원</span> : {boardDetails.recNumber}명</div>
+            <div className="workstart"><span className="textlabel">모집 시작일</span> : {recStartDate}</div>
+            <br/>
+            <div className="payment"><span className="textlabel">최대 지급 지용</span> : {boardDetails.paymentMax}원</div>
+            <div className="reqireskile"><span className="textlabel">필요기술 </span>: {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
+                                        return(
+                                                    <span className="board_tag">{tagName}</span>
+                                            )
+                                        }) :""}
+                        
             </div>
+            <br/>
+            <Divider style={{marginTop:"20px"}}/>
+
+            <div className> {boardDetails.text}</div>
+            </div>
+            
             </Typography>
           </div>
         </Paper>
