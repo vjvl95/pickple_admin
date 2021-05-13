@@ -63,9 +63,8 @@ const SearchInput = () => {
 
         dispatch({
             type:USER_SEARCH_REQUEST,
-            payload:{keyword:keyword, "pageRequest.direction": "ASC" , "pageRequest.page": 1, "pageRequest.size": 10, type:type }
+            payload:{params:{keyword:keyword, "pageRequest.direction" : "ASC", "pageRequest.page" : 1, "pageRequest.size":10,type:type}  }
         })
-        
     }
 
     const resetValue=useRef(null)
