@@ -3,7 +3,7 @@
 }
 .paper {
   max-width: 936;
-  width: 936px;
+  width: 70%;
   margin: 30px auto;
   overflow: "hidden";
 }
@@ -16,7 +16,7 @@
 .paper_tagadd {
   padding-bottom: 10px;
   max-width: 936;
-  width: 936px;
+  width: 70%;
   margin: 30px auto;
   margin-bottom: 50px;
 }

@@ -66,11 +66,11 @@ const SearchInput = () => {
             <Form  className="col mt-2">
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{    marginBottom:"5px",width: "80%" , left: "-25px", top: "-20px",  position: "absolute"}}/>
             </Form>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{position: "absolute", right: "115px", top: "10px",  marginBottom:"5px"}}>
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{position: "absolute", right: "90px", top: "10px",  marginBottom:"5px"}}>
           검색
             </Button>
 
-            <Button className="reset" variant="contained" onClick={onReset} style={{position: "absolute", right: "18px", top: "10px",  marginBottom:"5px"}}>
+            <Button className="reset" variant="contained" onClick={onReset} style={{position: "absolute", right: "10px", top: "10px",  marginBottom:"5px"}}>
           초기화
             </Button>
 

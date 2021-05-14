@@ -36,9 +36,7 @@ const Board = () => {
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <SearchIcon className="block" color="inherit" />
-            </Grid>
+           
             <Grid item xs>
             </Grid>
 

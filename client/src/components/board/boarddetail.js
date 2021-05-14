@@ -31,7 +31,6 @@ const BoardDetail = (req) =>{
     const workStartDate = moment(boardDetails.workStartDate).format('YYYY-MM-DD')
     const workEndDate = moment(boardDetails.workEndDate).format('YYYY-MM-DD')
     const recStartDate = moment(boardDetails.recStartDate).format('YYYY-MM-DD')
-
     useEffect(()=>{
     dispatch({
       type: BOARD_DETAIL_REQUEST,
@@ -52,16 +51,21 @@ const BoardDetail = (req) =>{
            <Divider style={{backgroundColor: "#E2E2E2"}}/>
             <div className="work_paper">
 
-            <div className="workdate"><span className="textlabel">업무일</span> : {workStartDate} ~ {workEndDate}</div>
-            <div className="worknumber"><span className="textlabel">모집인원</span> : {boardDetails.recNumber}명</div>
-            <div className="workstart"><span className="textlabel">모집 시작일</span> : {recStartDate}</div>
+      <div className="upside">
+            <div className="workdate"><span className="textlabel">업무일</span> {workStartDate}~{workEndDate}</div>
+            <div className="worknumber"><span className="textlabel">모집인원</span>  {boardDetails.recNumber}명</div>
+            <div className="workstart"><span className="textlabel">모집 기간</span>  {recStartDate}~{recEndDate}</div>
             <br/>
-            <div className="payment"><span className="textlabel">최대 지급 지용</span> : {boardDetails.paymentMax}원</div>
-            <div className="reqireskile"><span className="textlabel">필요기술 </span>: {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
+            <div className="payment"><span className="textlabel">최대 지급 지용</span>  {boardDetails.paymentMax}원</div>
+      </div>
+            <div className="reqireskile"><span className="textlabel2">필요기술 </span>  <div className="board_tag_div">   {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
                                         return(
-                                                    <span className="board_tag">{tagName}</span>
+                                               
+                                            <span className="board_tag">{tagName}</span>
+                                          
                                             )
                                         }) :""}
+                                          </div>
                         
             </div>
             <br/>
