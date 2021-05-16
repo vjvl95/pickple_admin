@@ -11,13 +11,9 @@ import Apply from '../apply/apply'
 import styles from '../layout/style'
 
 const BoardHeader =(props) => {
-  const { classes, onDrawerToggle } = props;
-  const [selectedTab,setSelectedTab]=React.useState(0);
+  const { classes } = props;
  
-  const handleChange=(event,newValue) => {
-    setSelectedTab(newValue);
-  }
- 
+
   return (
     <React.Fragment>
       <div className={classes.header}>
@@ -62,7 +58,6 @@ function TabPanel(props)
 
 BoardHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(BoardHeader);

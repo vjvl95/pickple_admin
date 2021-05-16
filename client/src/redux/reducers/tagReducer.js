@@ -63,7 +63,7 @@ const initialState={
         case TAG_SEARCH_SUCCESS:
             return {
                 ...state,
-                searchResult: action.payload,
+                tags: action.payload,
                 loading: false,
             }
         case TAG_SEARCH_FAILURE:

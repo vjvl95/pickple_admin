@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { all, call, put, takeEvery,fork } from 'redux-saga/effects';
-import { LOGIN_FAILURE, LOGIN_SUCCESS,LOGIN_REQUEST } from '../../actions/loginAction'
+import { LOGIN_FAILURE, LOGIN_SUCCESS,LOGIN_REQUEST,LOGOUT_FAILURE,LOGOUT_REQUEST,LOGOUT_SUCCESS } from '../../actions/loginAction'
 import { push } from "connected-react-router";
 
 const loginUserAPI = (payload) => {
@@ -12,6 +12,8 @@ const loginUserAPI = (payload) => {
     return axios.post('api/v1/signin',payload,config)
 }
 
+
+
 function* loginUser(action)
 {
     try{
@@ -22,6 +24,8 @@ function* loginUser(action)
             payload:result.data
         })
         yield put(push(`/admin/`))
+        window.location.reload()
+
     }
     catch(e){
         if(e.response.data.code==="GE01")
@@ -40,12 +44,39 @@ function* loginUser(action)
     }
 }
 
+
+function* logoutUser()
+{
+    try{
+        yield put({
+            type:LOGOUT_SUCCESS,
+        })
+        yield put(push(`/`))
+        window.location.reload()
+
+    }
+    catch(e){
+        yield put({
+            type: LOGOUT_FAILURE,
+          });
+    }
+}
+
+
+
+
+
 function* watchLoginUser(){
     yield takeEvery(LOGIN_REQUEST,loginUser)
 }
 
+function* watchLogoutUser(){
+    yield takeEvery(LOGOUT_REQUEST,logoutUser)
+}
+
+
 
 export default function* loginSaga()
 {
-    yield all([fork(watchLoginUser)])
+    yield all([fork(watchLoginUser),fork(watchLogoutUser)])
 }

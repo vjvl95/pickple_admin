@@ -60,7 +60,7 @@ const userReducer = (state = initialState, action) => {
             case USER_DETAIL_FAILURE:
                 return {
                     ...state,
-                    users:[],
+                    usersDetail:[],
                     loading: false,
                 }
 
@@ -84,11 +84,14 @@ const userReducer = (state = initialState, action) => {
                     case USER_SEARCH_REQUEST:
                         return {
                             ...state,
+                            users:[],
+
                             loading: true
                         }
                     case USER_SEARCH_SUCCESS:
                         return {
                             ...state,
+                            users:[...state.users, ...action.payload.content],
                             loading: false,
                         }
             

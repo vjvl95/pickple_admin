@@ -1,27 +1,55 @@
-import React from 'react';
+import React , {useEffect}from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+import {useDispatch } from "react-redux";
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import "./Header.css";
 import styles from '../layout/style'
+import {LOGOUT_REQUEST} from "../../actions/loginAction"
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
+
+
+
 function Header(props) {
+
+  useEffect(() => {
+
+  }, []);
   const { classes } = props;
+  const dispatch = useDispatch();
+const token=localStorage.getItem("token")
+const onLogout = () => {
+  dispatch({
+    type: LOGOUT_REQUEST,
+  });
+}
+
+const authLink = (
+  <Button color="inherit"  onClick={()=>onLogout()} >
+  LOGOUT
+  </Button>
+
+);
+
+const guestLink = (
+  <Button color="inherit" >
+  LOGIN
+  </Button>
+)
   return (
+
+
+
+
     <React.Fragment>
       <div className={classes.header}>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -29,9 +57,7 @@ function Header(props) {
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />            
             <Grid item>
-              <Button color="inherit" className={classes.iconButtonAvatar}>
-               LOGOUT
-              </Button>
+              {token ? authLink : guestLink}
             </Grid>
           </Grid>
         </Toolbar>
@@ -45,7 +71,6 @@ function Header(props) {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Header);

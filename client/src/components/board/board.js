@@ -35,12 +35,7 @@ const Board = () => {
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
-          <Grid container spacing={2} alignItems="center">
-           
-            <Grid item xs>
-            </Grid>
-
-          </Grid>
+  
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">

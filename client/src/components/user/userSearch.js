@@ -17,7 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import "./user.css"
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -34,7 +34,9 @@ const SearchInput = () => {
     const dispatch=useDispatch()
     const [form, setValues] = useState({keyword:""})
     const {searchResult} = useSelector((state)=>state.tag)
-   
+    const [type, setType] = React.useState('');
+    const classes = useStyles();
+
     const onChange= (e) => {
         setValues(
             {
@@ -44,22 +46,18 @@ const SearchInput = () => {
         )
     }
 
-    const classes = useStyles();
-    const [type, setType] = React.useState('');
   
-    const handleChange = (event) => {
-        setType(event.target.value);
-        console.log(type)
+    const handleChange = (e) => {
+        setType(e.target.value);
     };
 
-    
+    console.log(type)
+
 
     const onSubmit = async(e) => {
         await e.preventDefault()
         const {keyword} = form
         console.log(keyword)
-
-        const pageRequest=[]
 
         dispatch({
             type:USER_SEARCH_REQUEST,
@@ -70,45 +68,28 @@ const SearchInput = () => {
     const resetValue=useRef(null)
 
     return (       
-<Paper className="paper_tagadd">
-<AppBar className="searchBar" position="static" color="default" elevation={0} style={{paddingTop: "5px", paddingBottom:"5px"}}>
-  <Toolbar  style={{marginBottom:"5px"}}>
-  <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <SearchIcon className="block" color="inherit"  style={{marginLeft:"20px", marginTop:"3px", position: "absolute", left: "5px", bottom: "6px"}} />
-            </Grid>
-            <Grid item xs>     
+<Grid container spacing={2} alignItems="center">
+      <Grid item xs>     
             <Fragment>
-            <Form  className="col mt-2">
-            <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{    marginBottom:"5px",width: "80%" , left: "-60px", top: "-20px",  position: "absolute"}}/>
-            </Form>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{position: "absolute", right: "17px", top: "10px",  marginBottom:"5px"}}>
-          검색
-            </Button>
+        <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
+                <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+                <FormControl className={classes.formControl} >
 
-            <FormControl className={classes.formControl} style={{position: "absolute", right: "90px", bottom: "-4px"}}>
-        <InputLabel id="demo-simple-select-label">Type</InputLabel>
-        <Select labelId="demo-simple-select-label" id="demo-simple-select" value={type} onChange={handleChange}>
-          <MenuItem value="ADMIN">ADMIN</MenuItem>
-          <MenuItem value="MEMBER">MEMBER</MenuItem>
-          <MenuItem value="ALL">ALL</MenuItem>
-        </Select>
-      </FormControl>
+            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={type} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
+              <MenuItem value="ADMIN">ADMIN</MenuItem>
+              <MenuItem value="MEMBER">MEMBER</MenuItem>
+              <MenuItem value="ALL">ALL</MenuItem>
+            </Select>
+          </FormControl>
+              
 
+                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+              검색
+                </Button>      
+      </div>
         </Fragment>  
             </Grid>
           </Grid>
-
-  </Toolbar>
-</AppBar>
-    <div className="contentWrapper">
-    {<Usertable users={searchResult}/>}
-      </div>
-</Paper>
-
-
-
-
     )
 }
 

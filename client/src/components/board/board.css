@@ -5,8 +5,8 @@
 }
 .board_title {
   font-size: 27px;
-  margin: 5px 0px 5px 0px;
-    font-weight: bold;
+  padding: 10px 0 10px 0px;
+  font-weight: bold;
   text-align: center;
 }
 .board_tag {
@@ -21,44 +21,41 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-width: 0px 1px 0px 1px;
+  border-width: 0px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
-  width: 42%;
-  padding: 0px 10px;
-
+  width: 25%;
+  padding: 20px 10px 20px 0px;
 }
 .work_paper {
   width: 100%;
-  margin: 10px auto;
+  margin: auto;
 }
 .worknumber {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-width: 0px 1px 0px 1px;
+  border-width: 0px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
-  width: 17%;
-  padding: 0px 10px;
-
+  width: 25%;
+  padding: 20px 10px 20px 0px;
 }
 .workstart {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 42%;
-  border-width: 0px 1px 0px 1px;
-    border-style: solid;
-    border-color: rgb(226, 226, 226);
-    padding: 0px 10px;
-
+  width: 25%;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: rgb(226, 226, 226);
+  padding: 20px 10px 20px 0px;
 }
-.reqireskile {
-      width: 80%;
-      display: flex;
-      margin: 40px 0px 0px 55px;
 
+.reqireskile {
+  width: 80%;
+  display: flex;
+  margin: 40px 0px 0px 55px;
 }
 .workbody {
 }
@@ -67,11 +64,11 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-width: 0px 1px 0px 1px;
+  border-width: 0px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
-  width: 27%;
-  padding: 0px 10px;
+  width: 25%;
+  padding: 20px 10px 20px 0px;
 }
 .textlabel {
   font-weight: bold;
@@ -80,21 +77,20 @@
   padding-left: 10px;
   font-weight: bold;
 }
-.board-body
-{
+.board-body {
   width: 80%;
   min-height: 200px;
-  margin:40px 0px 0px 55px;
-  padding-top:20px;
+  margin: 40px 0px 0px 55px;
 }
-.upside{
+.upside {
   display: flex;
-  width: 85%;
+  width: 100%;
   justify-content: center;
   margin: auto;
-  margin-top: 30px;
 }
-.board_tag_div
-{
+.board_tag_div {
   margin-left: 50px;
+}
+.board-detail-item {
+  margin-top: 10px;
 }

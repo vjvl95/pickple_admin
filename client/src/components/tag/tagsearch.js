@@ -80,9 +80,6 @@ const SearchInput = () => {
 
   </Toolbar>
 </AppBar>
-    <div className="contentWrapper">
-    {<Tagtable tags={searchResult}/>}
-      </div>
 </Paper>
     )
 }

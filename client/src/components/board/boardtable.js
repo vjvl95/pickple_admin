@@ -38,7 +38,6 @@ const Boardtable = ({boards}) =>
             ))
         }
           </TableBody>
-        
         </Table>
 }
 </Typography>

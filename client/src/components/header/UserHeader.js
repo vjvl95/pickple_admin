@@ -46,7 +46,6 @@ const Tagheader =(props) => {
 
 Tagheader.propTypes = {
   classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Tagheader);

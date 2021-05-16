@@ -45,7 +45,6 @@ const BoardHeader =(props) => {
 
 BoardHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(BoardHeader);

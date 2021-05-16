@@ -16,56 +16,39 @@ import TableCell from '@material-ui/core/TableCell';
 import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-
+import Profiletable from "./profiletable"
+import { PROFILE_LOADING_REQUEST } from '../../actions/profileAction';
+import "./profile.css"
 
 const Profile = () => {
+  const [currentPage, setCurrentPage]=useState(1)
+  const [postsPerPage, setTagsPerPage]=useState(10);
+
+  const indexOfLastTag=currentPage*postsPerPage
+  const indexOfFirstTag=indexOfLastTag-postsPerPage
 
     const dispatch = useDispatch();
-    const {users} = useSelector((state) => state.user);
+    const {profiles} = useSelector((state) => state.profile);
     useEffect(()=>{
-      dispatch({type: USER_LOADING_REQUEST})
-      },[dispatch])
+      dispatch({
+        type: PROFILE_LOADING_REQUEST,
+        payload: {params:{direction:"ASC", page:1, size:10}},
+        currentPage:currentPage
+      })
+      },[currentPage])
   
-      console.log(users)
+      console.log(profiles)
  
   return (
-    <Paper className="paper">
+    <Paper className="profile-paper" style={{width:"60%", margin:"50px auto"}}>
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <SearchIcon className="block" color="inherit" />
-            </Grid>
-            <Grid item xs>
-               { /*<SearchInput className="searchInput" position="static" color="default"/>*/}
-            </Grid>
-
-          </Grid>
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-        <Typography color="textSecondary" align="center">
-                <Table>
-                <TableHead>
-                    <TableCell> 회원 번호  </TableCell>
-                    <TableCell> 회원 아이디 </TableCell>
-                    <TableCell> 회원 이름</TableCell>
-                    <TableCell> 소속 경로</TableCell>
+        <Profiletable profiles={profiles}/>
 
-                </TableHead>
-                {<TableBody>
-                    {users.map((user)=>(
-                      <TableRow key={user.account_id}>
-                        <TableCell>{user.account_id}</TableCell>
-                        <TableCell>{user.idString}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.register_type}</TableCell>
-                      </TableRow>  
-                    ))}
-                </TableBody>
-                }
-                </Table>
-        </Typography>
+        
       </div>
     </Paper>
   );

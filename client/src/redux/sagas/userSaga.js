@@ -104,6 +104,7 @@ function* UserSearch(action){
 
         yield put({
             type:USER_SEARCH_SUCCESS,
+            payload:result.data.data
         })
     } catch(e){
         yield put({

@@ -1,4 +1,4 @@
-import { CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../../actions/loginAction"
+import { CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,LOGOUT_REQUEST,LOGOUT_FAILURE,LOGOUT_SUCCESS } from "../../actions/loginAction"
 const initialState={
     token:localStorage.getItem('token'),
     isAuthenticated:null,
@@ -38,7 +38,31 @@ const loginReducer=(state= initialState, action) => {
               isLoading: false,
             };
         }
-
+       
+   case LOGOUT_REQUEST:
+          return{
+              ...state,
+              errorMsg:"",
+              isLoading:true,
+          }
+    case LOGOUT_SUCCESS:{
+        localStorage.removeItem("token")
+        return{
+            ...state,
+            ...action.payload,
+            isAuthenticated:false,
+            errorMsg: "",
+            isLoading: true,
+        }
+      }
+    case LOGOUT_FAILURE:{
+          return {
+            ...state,
+            token: null,
+            isAuthenticated: false,
+            isLoading: false,
+          };
+      }
         
   case CLEAR_ERROR_REQUEST:
         return {

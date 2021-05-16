@@ -29,35 +29,51 @@
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
-.left{
+.left {
   width: 50%;
   height: 100%;
 }
 
-.label
-{
+.label {
   display: flex;
   flex-direction: column;
 }
 
-.label2
-{    
+.label2 {
   margin-left: 38%;
 }
 
-.userspan
-{
+.userspan {
   display: flex;
   width: 20%;
 }
-.userspan2
-{
-  display:flex;
-  width:3%
+.userspan2 {
+  display: flex;
+  width: 3%;
 }
-.userspan3
-{
-  display:flex;
-  width:72%;
+
+.userspan-email {
+  display: flex;
+  width: 20%;
+  margin-top: 7px;
+}
+.userspan-email2 {
+  display: flex;
+  width: 3%;
+  margin-top: 7px;
+}
+
+.userspan3 {
+  display: flex;
+  width: 72%;
   padding-left: 5px;
+}
+
+.MuiFormLabel-root
+  .MuiInputLabel-root
+  .MuiInputLabel-formControl
+  .MuiInputLabel-animated {
+  position: relative;
+  bottom: 20px;
+  margin-left: 3rem;
 }

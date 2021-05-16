@@ -77,7 +77,7 @@ const UserDetailEdit = (req) => {
         </h2>
        <Divider/>
         <div className="label">          
-            <div className="userbody"> <span style={{position: "relative",top: "28px"}}>이메일 : </span><TextField id="outlined-basic" label="email" name="email" variant="outlined" value={form.email} onChange={onChange} style={{marginTop:"10px"}}/></div>
+            <div className="userbody"> <span style={{position: "relative",top: "28px"}}>이메일 : </span></div>
         </div>
 
         <Fragment>

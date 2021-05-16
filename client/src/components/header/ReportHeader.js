@@ -46,7 +46,6 @@ const ReportHeader =(props) => {
 
 ReportHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ReportHeader);

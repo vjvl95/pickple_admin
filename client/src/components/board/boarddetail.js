@@ -52,11 +52,11 @@ const BoardDetail = (req) =>{
             <div className="work_paper">
 
       <div className="upside">
-            <div className="workdate"><span className="textlabel">업무일</span> {workStartDate}~{workEndDate}</div>
-            <div className="worknumber"><span className="textlabel">모집인원</span>  {boardDetails.recNumber}명</div>
-            <div className="workstart"><span className="textlabel">모집 기간</span>  {recStartDate}~{recEndDate}</div>
+            <div className="workdate"><span className="textlabel">업무일</span><span style={{marginTop:"10px"}}>{workStartDate}</span>~ <span>{workEndDate}</span></div>
+            <div className="worknumber"><span className="textlabel">모집인원</span>  <span style={{marginTop:"10px"}}>{boardDetails.recNumber}명</span></div>
+            <div className="workstart"><span className="textlabel">모집 기간</span>  <span style={{marginTop:"10px"}}>{recStartDate}</span> <span>~</span><span>{recEndDate}</span></div>
             <br/>
-            <div className="payment"><span className="textlabel">최대 지급 지용</span>  {boardDetails.paymentMax}원</div>
+            <div className="payment"><span className="textlabel">최대 지급 지용</span>  <span style={{marginTop:"10px"}}>{boardDetails.paymentMax}원</span></div>
       </div>
             <div className="reqireskile"><span className="textlabel2">필요기술 </span>  <div className="board_tag_div">   {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
                                         return(

@@ -4,6 +4,7 @@ import tagReducer from "./tagReducer";
 import userReducer from "./userReducer";
 import loginReducer from "./loginReducer";
 import boardReducer from "./boardReducer";
+import profileReducer from "./profileReducer";
 
 const createRootReducer = (history) =>
   combineReducers({
@@ -12,6 +13,8 @@ const createRootReducer = (history) =>
     user:userReducer,
     login:loginReducer,
     board:boardReducer,
+    profile:profileReducer,
+    
   });
 
 export default createRootReducer;

@@ -15,8 +15,7 @@ import userdetailpage from "../components/user/UserDetail"
 import loginpage from "../pages/loginpage"
 import PrivateRoute from "./privateRouter"
 import boarddetailpage from "../components/board/boarddetail"
-import userupdatepage from "../components/user/userupdate"
-
+import profiledetailpage from "../components/profile/profiledetail"
 const Router = () => {
     return (
       <Fragment>
@@ -31,9 +30,10 @@ const Router = () => {
                                         <PrivateRoute path="/admin/report" exact component={reportpage} />   
                                         <PrivateRoute path="/admin/user" exact component={userpage} />     
                                         <PrivateRoute path='/admin/user/:id' exact component={userdetailpage} />
-                                        <PrivateRoute path='/admin/user/:id/edit' exact component={userupdatepage} />     
      
                                         <PrivateRoute path="/admin/profile" exact component={profilepage} />     
+                                        <PrivateRoute path="/admin/profile/:id" exact component={profiledetailpage} />
+
                                         <PrivateRoute path="/admin/apply" exact component={applypage} />
                                         <PrivateRoute path="/admin/board" exact component={boardpage} />
                                         <PrivateRoute path="/admin/board/:id" exact component={boarddetailpage} />
