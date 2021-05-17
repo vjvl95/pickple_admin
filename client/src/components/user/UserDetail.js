@@ -22,7 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Header from '../header/UserHeader'
 import TextField from '@material-ui/core/TextField';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "./user.css"
 
 const UserDetail = (req) => {
@@ -105,9 +105,9 @@ const UserDetail = (req) => {
       <div className="contentWrapper-detail">
         <Typography color="textSecondary">
       
-       <h2 className="usertitle">
-       <Button variant="contained" color="secondary" style={{marginBottom:"25px",marginTop:"15px"}} onClick={()=>goBack()}>뒤로 가기</Button>
-          <span className="titlename">{usersDetail.name}</span>  상세 조회
+       <h2 className="usertitle" style={{display:"flex"}}>
+       <ArrowBackIcon onClick={()=>goBack()} style={{marginLeft:"10px"}}/>
+          <div style={{marginLeft:"250px"}}><span className="titlename" >{usersDetail.name}</span>  상세 조회</div>
         </h2>
        <Divider/>
       

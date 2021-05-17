@@ -53,7 +53,6 @@ const Tag = () => {
     const onReset = () =>
     {
         resetValue.current.value=""
-        const {keyword} = ""
         dispatch({
           type: TAG_LOADING_REQUEST,
           payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}},

@@ -1,4 +1,4 @@
-import { BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST, BOARD_LOADING_SUCCESS,BOARD_DETAIL_REQUEST, BOARD_DETAIL_SUCCESS,BOARD_DETAIL_FAILURE } from "../../actions/boardAction"
+import { BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST, BOARD_LOADING_SUCCESS,BOARD_DETAIL_REQUEST, BOARD_DETAIL_SUCCESS,BOARD_DETAIL_FAILURE,BOARD_DELETE_REQUEST,BOARD_DELETE_SUCCESS,BOARD_DELETE_FAILURE } from "../../actions/boardAction"
 
 const initialState={
     isAuthenticated: null,
@@ -56,6 +56,20 @@ const boardReducer = (state=initialState,action) =>{
                 return{
                     ...state,
                 }
+
+                case BOARD_DELETE_REQUEST:
+                    return{
+                        ...state,
+                        boardDetails:[],
+                    }
+             case BOARD_DELETE_SUCCESS:
+                    return{
+                        ...state,
+                    }
+             case BOARD_DELETE_FAILURE:
+                        return{
+                            ...state,
+                        }
      default:
             return state;
     }

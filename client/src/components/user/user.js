@@ -1,5 +1,9 @@
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import React , {useRef} from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
+import {Form,Input} from 'reactstrap'
 
-import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,15 +17,29 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
+import { USER_LOADING_REQUEST,USER_SEARCH_REQUEST} from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Usertable from "./usertable"
 import UserSearch from "./userSearch"
 import { Fragment } from 'react';
 import Pagination from '../layout/Pagenation'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const User = () => {
+
+  
   const dispatch=useDispatch()
   const [form, setValues] = useState({keyword:""})
   const [type, setType] = React.useState('');
@@ -51,18 +69,26 @@ const User = () => {
 }
 
 
-const handleChange = (e) => {
-    setType(e.target.value);
+const handleChange = (e) => {  
+  setType(e.target.value);
 };
 
 const onSubmit = async(e) => {
     await e.preventDefault()
     const {keyword} = form
-    console.log(keyword)
-    dispatch({
+    console.log(type)
+    if(type!=="ALL"){
+      dispatch({
         type:USER_SEARCH_REQUEST,
         payload:{params:{keyword:keyword, "pageRequest.direction" : "ASC", "pageRequest.page" : 1, "pageRequest.size":10,type:type}  }
     })
+    }
+    else{
+      dispatch({
+      type:USER_SEARCH_REQUEST,
+      payload:{params:{keyword:keyword, "pageRequest.direction" : "ASC", "pageRequest.page" : 1, "pageRequest.size":10}  }
+  })
+}
 }
 
 const resetValue=useRef(null)

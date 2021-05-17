@@ -16,10 +16,12 @@ import {RouteComponentProps} from "react-router"
 import theme from '../layout/theme'
 import styles from '../layout/style'
 import Divider from '@material-ui/core/Divider';
-import { BOARD_DETAIL_REQUEST } from '../../actions/boardAction';
+import { BOARD_DETAIL_REQUEST,BOARD_DELETE_REQUEST } from '../../actions/boardAction';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import "./board.css"
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from "react-router-dom";
 
 const BoardDetail = (req) =>{
     
@@ -31,6 +33,10 @@ const BoardDetail = (req) =>{
     const workStartDate = moment(boardDetails.workStartDate).format('YYYY-MM-DD')
     const workEndDate = moment(boardDetails.workEndDate).format('YYYY-MM-DD')
     const recStartDate = moment(boardDetails.recStartDate).format('YYYY-MM-DD')
+   
+    const history = useHistory();
+
+   
     useEffect(()=>{
     dispatch({
       type: BOARD_DETAIL_REQUEST,
@@ -38,15 +44,40 @@ const BoardDetail = (req) =>{
     })
     },[])
    
-    console.log(recEndDate)
-    console.log(boardDetails)
-    console.log(recStartDate)
+
+    const goBack = () => {
+      history.goBack();
+     };
+
+
+    const ondelete = () =>{
+
+      try{
+        var answer = window.confirm("모집글을 삭제하시겠습니까?");
+      if (answer) 
+      {
+        dispatch({
+          type:BOARD_DELETE_REQUEST,
+          payload:{}
+        },[])
+        }  
+      }
+    catch(e)
+    {
+        console.log(e)
+    }
+
+    }
+
     return(
         <Fragment>
         <Paper className="paper-detail" elevation={3}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">
-            <h2 className="board_title">{boardDetails.title}</h2>
+
+            <h2 className="board_title" >
+            <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span> {boardDetails.title}</div>
+              </h2>
 
            <Divider style={{backgroundColor: "#E2E2E2"}}/>
             <div className="work_paper">
@@ -73,7 +104,9 @@ const BoardDetail = (req) =>{
 
             <div className="board-body"> {boardDetails.text}</div>
             </div>
-            
+            <div className="board-delete-button" style={{textAlign:"center", marginBottom:"100px", paddingBottom:"20px" }}>
+            <Button variant="contained" color="secondary" onClick={() => ondelete()}>모집글 삭제</Button>
+            </div>
             </Typography>
           </div>
         </Paper>
