@@ -45,9 +45,9 @@ const BoardDetail = (req) =>{
     },[])
    
 
-    const goBack = () => {
+const goBack = () => {
       history.goBack();
-     };
+     };    
 
 
     const ondelete = () =>{
@@ -105,7 +105,7 @@ const BoardDetail = (req) =>{
             <div className="board-body"> {boardDetails.text}</div>
             </div>
             <div className="board-delete-button" style={{textAlign:"center", marginBottom:"100px", paddingBottom:"20px" }}>
-            <Button variant="contained" color="secondary" onClick={() => ondelete()}>모집글 삭제</Button>
+            <Button variant="contained" onClick={() => ondelete()}>모집글 삭제</Button>
             </div>
             </Typography>
           </div>

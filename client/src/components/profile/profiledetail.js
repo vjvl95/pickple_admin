@@ -6,11 +6,17 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import { USER_DETAIL_REQUEST } from "../../actions/userAction";
 import { PROFILE_DETAIL_REQUEST } from "../../actions/profileAction";
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from "react-router-dom";
 
 const ProfileDetail = (req) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
+    const goBack = () => {
+        history.goBack();
+       };    
+  
     useEffect(()=>{
         dispatch({
             type:PROFILE_DETAIL_REQUEST,
@@ -25,11 +31,12 @@ const ProfileDetail = (req) => {
     return(
         <Fragment>
       <Header/>
-      <Paper className="paper-detail" elevation={3} style={{margin:"auto",marginTop:"70px",width:"65"}}>
+      <Paper className="paper-detail" elevation={3} style={{margin:"auto",marginTop:"70px",width:"65",borderRadius:"0px",    padding: "10px 30px 10px 10px"}}>
       <div className="contentWrapper-detail">
         <Typography color="textSecondary">
        <h2 className="profiletitle">
-          <span className="titlename">{profileDetail.userName}</span>  님의 프로필
+       <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span>  <span className="titlename">{profileDetail.userName}</span>  님의 프로필</div>
+         
        </h2>
     <div style={{display:"flex"}}>
        <div className="info-div">
