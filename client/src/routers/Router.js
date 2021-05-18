@@ -16,6 +16,7 @@ import loginpage from "../pages/loginpage"
 import PrivateRoute from "./privateRouter"
 import boarddetailpage from "../components/board/boarddetail"
 import profiledetailpage from "../components/profile/profiledetail"
+import applydetailpage from "../components/apply/applydetail"
 const Router = () => {
     return (
       <Fragment>
@@ -35,6 +36,8 @@ const Router = () => {
                                         <PrivateRoute path="/admin/profile/:id" exact component={profiledetailpage} />
 
                                         <PrivateRoute path="/admin/apply" exact component={applypage} />
+                                        <PrivateRoute path="/admin/apply/:id" exact component={applydetailpage} />
+
                                         <PrivateRoute path="/admin/board" exact component={boardpage} />
                                         <PrivateRoute path="/admin/board/:id" exact component={boarddetailpage} />
                             </Switch>

@@ -5,6 +5,7 @@ import userReducer from "./userReducer";
 import loginReducer from "./loginReducer";
 import boardReducer from "./boardReducer";
 import profileReducer from "./profileReducer";
+import applyReducer from "./applyReducer"
 
 const createRootReducer = (history) =>
   combineReducers({
@@ -14,7 +15,7 @@ const createRootReducer = (history) =>
     login:loginReducer,
     board:boardReducer,
     profile:profileReducer,
-    
+    apply:applyReducer,
   });
 
 export default createRootReducer;

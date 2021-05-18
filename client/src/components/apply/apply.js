@@ -13,28 +13,28 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
+import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import Modal from '@material-ui/core/Modal';
+import {Link} from "react-router-dom"
 
 
 const Board = () => {
+  const [modal, setModal] = useState(false)
 
   const dispatch = useDispatch();
-  const {tags} = useSelector((state) => state.tag);
+  const {applys} = useSelector((state) => state.apply);
   useEffect(()=>{
-    dispatch({type: TAG_LOADING_REQUEST})
+    dispatch({
+      type: APPLY_LOADING_REQUEST,
+      payload:{params:{direction:"ASC", page:1, size:10}}   
+     })
     },[dispatch])
    
  
-
-    const onDeleteClick = (name) => {
-      dispatch({
-        type:TAG_DELETE_REQUEST,
-        payload:{name},
-      })
-
-    }
+    console.log(applys)
+  
   return (
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -44,15 +44,6 @@ const Board = () => {
               <SearchIcon className="block" color="inherit" />
             </Grid>
             <Grid item xs>
-              {/*  <SearchInput className="searchInput" position="static" color="default"/>
-               <TextField
-                fullWidth
-                placeholder="태그를 입력하세요"
-                InputProps={{
-                  disableUnderline: true,
-                  className: "searchInput",
-                }}
-              /> */}
             </Grid>
 
           </Grid>
@@ -62,12 +53,24 @@ const Board = () => {
         <Typography color="textSecondary" align="center">
                 <Table>
                 <TableHead>
-                    <TableCell> 모집글번호  </TableCell>
-                    <TableCell> 제목 </TableCell>
-                    <TableCell> 작성자</TableCell>
+                    <TableCell> 지원번호  </TableCell>
+                    <TableCell> 계약여부  </TableCell>
+                    <TableCell> 리뷰      </TableCell>
+                    <TableCell> 리뷰상태</TableCell>
+                    <TableCell> </TableCell>
+
                 </TableHead>
                 <TableBody>
-                   
+                {applys.map((apply)=>(
+            <TableRow component={Link} to ={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
+                <TableCell >{apply.applyId}</TableCell>
+                <TableCell>{apply.isContracted===1?"계약 완료" : "계약 전"}</TableCell>
+                <TableCell>{apply.review===null?"리뷰 작성 전":apply.review }</TableCell>
+                <TableCell>{apply.reviewState}</TableCell>
+
+            </TableRow>  
+            ))
+        }
                 </TableBody>
                 </Table>
         </Typography>

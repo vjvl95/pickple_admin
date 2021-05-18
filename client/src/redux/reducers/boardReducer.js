@@ -46,11 +46,16 @@ const boardReducer = (state=initialState,action) =>{
             return{
                 ...state,
                 boardDetails:[],
+                title:"",
+                text:"",
+
             }
      case BOARD_DETAIL_SUCCESS:
             return{
                 ...state,
-                boardDetails:action.payload.data
+                boardDetails:action.payload.data,
+                text:action.payload.data.text,
+                title:action.payload.data.title,
             }
      case BOARD_DETAIL_FAILURE:
                 return{
