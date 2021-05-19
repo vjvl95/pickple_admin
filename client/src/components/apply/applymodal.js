@@ -29,7 +29,7 @@ const ApplyModal = (props) => {
           {
             dispatch({
               type:REVIEW_ACCEPT_REQUEST,
-              payload:{params:{applyId:applydetails.applyId, reviewState:"ACCEPT"}},
+              payload:{applyId:applydetails.applyId, reviewState:"ACCEPT"}
             },[])
             }  
           }
@@ -46,7 +46,7 @@ const ApplyModal = (props) => {
           {
             dispatch({
               type:REVIEW_REJECT_REQUEST,
-              payload:{params:{applyId:applydetails.applyId, reviewState:"REJECT"}},
+              payload:{applyId:applydetails.applyId, reviewState:"REJECT"},
             },[])
             }  
           }
@@ -80,7 +80,7 @@ const ApplyModal = (props) => {
 
             {applydetails.reviewState==="WAITING"
             ?<Fragment>
-             <div  className="reviewButton"  style={{textAlign:"center", marginTop: "30px", marginBottom:"20px"}}>
+             <div  className="reviewButton"  style={{textAlign:"center", marginTop: "70px", marginBottom:"20px"}}>
             <Button variant="contained" color="primary"  style={{marginRight:"20px"}} onClick={() => onaccept()}>리뷰 승인</Button>
             <Button variant="contained" color="secondary" style={{marginLeft:"20px"}} onClick={() => onreject()}>리뷰 반려</Button>
             </div>

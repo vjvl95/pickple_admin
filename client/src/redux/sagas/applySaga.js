@@ -66,7 +66,7 @@ const reviewAcceptAPI = (payload) =>{
         }
     }
 
-    return axios.put("/api/v1/apply/manage",config,payload)
+    return axios.put("/api/v1/apply/manage",payload,config)
     
 }
 

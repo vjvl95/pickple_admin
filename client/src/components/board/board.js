@@ -32,7 +32,7 @@ const Board = () => {
   useEffect(()=>{
     dispatch({
       type: BOARD_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:currentPage, size:8}},
+      payload:{params:{direction:"ASC", page:currentPage, size:10}},
       currentPage:currentPage
 
     })

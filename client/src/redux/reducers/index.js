@@ -6,7 +6,7 @@ import loginReducer from "./loginReducer";
 import boardReducer from "./boardReducer";
 import profileReducer from "./profileReducer";
 import applyReducer from "./applyReducer"
-
+import reportReducer from "./reportReducer"
 const createRootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
@@ -16,6 +16,7 @@ const createRootReducer = (history) =>
     board:boardReducer,
     profile:profileReducer,
     apply:applyReducer,
+    report:reportReducer,
   });
 
 export default createRootReducer;

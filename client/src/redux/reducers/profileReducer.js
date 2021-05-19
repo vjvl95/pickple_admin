@@ -1,36 +1,35 @@
-import { PROFILE_LOADING_FAILURE, PROFILE_LOADING_REQUEST, PROFILE_LOADING_SUCCESS,PROFILE_DETAIL_REQUEST,PROFILE_DETAIL_FAILURE,PROFILE_DETAIL_SUCCESS } from "../../actions/profileAction"
+import { PROFILE_LOADING_FAILURE, PROFILE_LOADING_REQUEST, PROFILE_LOADING_SUCCESS, PROFILE_DETAIL_REQUEST, PROFILE_DETAIL_FAILURE, PROFILE_DETAIL_SUCCESS } from "../../actions/profileAction"
 
-const initialState={
+const initialState = {
 
     isAuthenticated: null,
     profiles: [],
     profileDetail: [],
     loading: false,
-    resultMsg:"",
-    tags:[],
-    profileId:"",
-    profiletagList:[],
-    kakaoId:"",
-    totalElements:"",
+    resultMsg: "",
+    tags: [],
+    profileId: "",
+    profiletagList: [],
+    kakaoId: "",
+    totalElements: "",
 
 }
 
 
-const profileReducer =(state= initialState, action) =>{
-    switch(action.type)
-    {
+const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
         case PROFILE_LOADING_REQUEST:
             return {
                 ...state,
-                profiles:[],
+                profiles: [],
                 loading: true
             }
-    
+
         case PROFILE_LOADING_SUCCESS:
             return {
                 ...state,
-                profiles:action.payload,
-                totalElements:action.payload.totalElements,
+                profiles: action.payload,
+                totalElements: action.payload.totalElements,
 
                 loading: true
             }
@@ -41,25 +40,25 @@ const profileReducer =(state= initialState, action) =>{
             }
 
         case PROFILE_DETAIL_REQUEST:
-                return {
-                    ...state,
-                    profileDetail:[],
-                    loading: true
-                }
-        
-        case PROFILE_DETAIL_SUCCESS:
-                return {
-                    ...state,
-                    profileDetail:action.payload,
-                    loading: true
-                }
-        case PROFILE_DETAIL_FAILURE:
-                return {
-                    ...state,
-                    loading: true
-                }
+            return {
+                ...state,
+                profileDetail: [],
+                loading: true
+            }
 
-        default :
+        case PROFILE_DETAIL_SUCCESS:
+            return {
+                ...state,
+                profileDetail: action.payload,
+                loading: true
+            }
+        case PROFILE_DETAIL_FAILURE:
+            return {
+                ...state,
+                loading: true
+            }
+
+        default:
             return state;
 
     }

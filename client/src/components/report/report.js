@@ -6,27 +6,30 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
+import { REPORT_LOADING_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 
 
-const Profile = () => {
+const Report = () => {
+  const [currentPage, setCurrentPage]=useState(1)
+  const [postsPerPage, setTagsPerPage]=useState(10);
 
     const dispatch = useDispatch();
-    const {users} = useSelector((state) => state.user);
+    const {reports} = useSelector((state) => state.report);
     useEffect(()=>{
-      dispatch({type: USER_LOADING_REQUEST})
-      },[dispatch])
-  
-      console.log(users)
+      dispatch({
+        type: REPORT_LOADING_REQUEST,
+        payload: {params:{direction:"ASC", page:1, size:10}},
+        currentPage:currentPage
+      })
+      },[currentPage])
+      console.log(reports)
  
   return (
     <Paper className="paper">
@@ -51,7 +54,6 @@ const Profile = () => {
 
                 </TableHead>
                 {<TableBody>
-                    {}
                 </TableBody>
                 }
                 </Table>
@@ -61,4 +63,4 @@ const Profile = () => {
   );
 }
 
-export default Profile;
+export default Report;
