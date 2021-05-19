@@ -13,35 +13,70 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
+import { APPLY_LOADING_REQUEST, APPLY_DETAIL_REQUEST } from '../../actions/applyAction';
+import {BOARD_DETAIL_REQUEST} from "../../actions/boardAction"
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Modal from '@material-ui/core/Modal';
 import {Link} from "react-router-dom"
-
+import ApplyModal from "./applymodal"
+import SelectInput from '@material-ui/core/Select/SelectInput';
+import Pagination from '../layout/Pagenation'
 
 const Board = () => {
-  const [modal, setModal] = useState(false)
-
   const dispatch = useDispatch();
-  const {applys} = useSelector((state) => state.apply);
+
+  const [currentPage, setCurrentPage]=useState(1)
+  const [postsPerPage, setTagsPerPage]=useState(10);
+  const [open, setOpen] = useState(false)
+  const [applyId]=useState("")
+  const {applys,applydetails,totalElements} = useSelector((state) => state.apply);
+  const {text,title} = useSelector((state) => state.board);
+  const indexOfLastTag=currentPage*postsPerPage
+  const indexOfFirstTag=indexOfLastTag-postsPerPage
+
+  const styles = {
+    tableHead :{
+      textAlign : 'center',
+    },
+    tableCell : {
+        textAlign : 'center',
+    },
+}
+
+
   useEffect(()=>{
     dispatch({
       type: APPLY_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:1, size:10}}   
+      payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}} , 
+      currentPage:currentPage
      })
-    },[dispatch])
-   
+    },[currentPage])
+
+     const detailLoading = (applyId) =>{
+     
+        setOpen(true)
+
+        dispatch({
+          type: APPLY_DETAIL_REQUEST,
+          payload:applyId
+        },[applyId])
+
+        dispatch({
+          type: BOARD_DETAIL_REQUEST,
+          payload: applydetails.recruitmentBoardId
+        },)
+    } 
  
-    console.log(applys)
-  
+console.log(totalElements)
+
   return (
+    <div>
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
             <Grid item>
-              <SearchIcon className="block" color="inherit" />
             </Grid>
             <Grid item xs>
             </Grid>
@@ -53,21 +88,20 @@ const Board = () => {
         <Typography color="textSecondary" align="center">
                 <Table>
                 <TableHead>
-                    <TableCell> 지원번호  </TableCell>
-                    <TableCell> 계약여부  </TableCell>
-                    <TableCell> 리뷰      </TableCell>
-                    <TableCell> 리뷰상태</TableCell>
-                    <TableCell> </TableCell>
-
+                    <TableCell  style = {styles.tableHead}> 지원번호  </TableCell>
+                    <TableCell  style = {styles.tableHead}> 계약여부  </TableCell>
+                    <TableCell  style = {styles.tableHead}> 리뷰      </TableCell>
+                    <TableCell  style = {styles.tableHead}> 리뷰상태 </TableCell>
+                    <TableCell  style = {styles.tableHead}> 상세보기 </TableCell>
                 </TableHead>
                 <TableBody>
                 {applys.map((apply)=>(
-            <TableRow component={Link} to ={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
-                <TableCell >{apply.applyId}</TableCell>
-                <TableCell>{apply.isContracted===1?"계약 완료" : "계약 전"}</TableCell>
-                <TableCell>{apply.review===null?"리뷰 작성 전":apply.review }</TableCell>
-                <TableCell>{apply.reviewState}</TableCell>
-
+            <TableRow /*component={Link} to ={`/admin/apply/${apply.applyId}`} key={apply.applyId}*/>
+                <TableCell style = {styles.tableCell} >{apply.applyId}</TableCell>
+                <TableCell  style = {styles.tableCell}>{apply.isContracted===1?"계약 완료" : "계약 전"}</TableCell>
+                <TableCell style = {styles.tableCell}>{apply.review===null?"리뷰 작성 전":apply.review }</TableCell>
+                <TableCell style = {styles.tableCell}>{apply.reviewState}</TableCell>
+                <TableCell style = {styles.tableCell}><Button color="primary" onClick={ () => detailLoading(apply.applyId)}>리뷰처리</Button> </TableCell>
             </TableRow>  
             ))
         }
@@ -75,7 +109,14 @@ const Board = () => {
                 </Table>
         </Typography>
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+
     </Paper>
+      <ApplyModal  useOpen={[open,setOpen]}  applyId={applyId} applydetails={applydetails} text={text} title={title}/>
+
+</div>
+
+
   );
 }
 

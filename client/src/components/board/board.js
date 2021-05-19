@@ -19,17 +19,24 @@ import {useDispatch, useSelector} from "react-redux"
 import { BOARD_LOADING_REQUEST } from '../../actions/boardAction';
 import {Link} from "react-router-dom"
 import Boardtable from "./boardtable"
+import Pagination from '../layout/Pagenation'
 
 const Board = () => {
 
   const dispatch = useDispatch();
-  const {boards} = useSelector((state) => state.board);
+  const [currentPage, setCurrentPage]=useState(1)
+  const [postsPerPage]=useState(10);
+  const {boards,totalElements} = useSelector((state) => state.board);
+
+  console.log(totalElements)
   useEffect(()=>{
     dispatch({
       type: BOARD_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:1, size:10}}
+      payload:{params:{direction:"ASC", page:currentPage, size:8}},
+      currentPage:currentPage
+
     })
-    },[dispatch,boards.boardId])
+    },[currentPage])
    
   return (
     <Paper className="paper">
@@ -41,6 +48,8 @@ const Board = () => {
       <div className="contentWrapper">
        <Boardtable boards={boards}/>
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+
     </Paper>
   );
 }

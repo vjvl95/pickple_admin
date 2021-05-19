@@ -35,11 +35,6 @@ const Tag = () => {
 
   const {tags,totalElements} = useSelector((state) => state.tag);
 
-  
-  const indexOfLastTag=currentPage*postsPerPage
-  const indexOfFirstTag=indexOfLastTag-postsPerPage
-  const currentTags=tags.slice(indexOfFirstTag,indexOfLastTag)
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const dispatch = useDispatch();
   
   useEffect(()=>{

@@ -15,10 +15,10 @@ function* loadBoards (action)
     console.log(action)
     try {
     const result =  yield call(loadBoardAPI,action.payload)
-    console.log(result.data.data.content)
+    console.log(result)
     yield put({
         type:BOARD_LOADING_SUCCESS,
-        payload:result.data.data.content
+        payload:result.data.data
     })
     } catch (error) {
         yield put({

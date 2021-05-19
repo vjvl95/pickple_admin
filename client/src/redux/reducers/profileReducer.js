@@ -11,6 +11,8 @@ const initialState={
     profileId:"",
     profiletagList:[],
     kakaoId:"",
+    totalElements:"",
+
 }
 
 
@@ -28,6 +30,8 @@ const profileReducer =(state= initialState, action) =>{
             return {
                 ...state,
                 profiles:action.payload,
+                totalElements:action.payload.totalElements,
+
                 loading: true
             }
         case PROFILE_LOADING_FAILURE:

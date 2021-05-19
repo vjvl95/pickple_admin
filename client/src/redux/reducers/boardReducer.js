@@ -36,7 +36,8 @@ const boardReducer = (state=initialState,action) =>{
      case BOARD_LOADING_SUCCESS:
             return{
                 ...state,
-                boards:[...state.boards,...action.payload],
+                boards:[...state.boards,...action.payload.content],
+                totalElements:action.payload.totalElements
             }
      case BOARD_LOADING_FAILURE:
                 return{

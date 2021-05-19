@@ -34,10 +34,8 @@ const Profile = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
             <Grid item>
-              <SearchIcon className="block" color="inherit" />
             </Grid>
             <Grid item xs>
-                {/*<SearchInput className="searchInput" position="static" color="default"/>*/}
             </Grid>
 
           </Grid>
@@ -53,14 +51,7 @@ const Profile = () => {
 
                 </TableHead>
                 {<TableBody>
-                    {/*{users.map((user)=>(
-                      <TableRow key={user.account_id}>
-                        <TableCell>{user.account_id}</TableCell>
-                        <TableCell>{user.idString}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.register_type}</TableCell>
-                      </TableRow>  
-                    ))*/}
+                    {}
                 </TableBody>
                 }
                 </Table>

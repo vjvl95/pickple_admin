@@ -55,10 +55,6 @@ const User = () => {
     })
     },[currentPage])
 
-  const indexOfLastTag=currentPage*postsPerPage
-  const indexOfFirstTag=indexOfLastTag-postsPerPage
-  const currentTags=users.slice(indexOfFirstTag,indexOfLastTag)
-
   const onChange= (e) => {
     setValues(
         {

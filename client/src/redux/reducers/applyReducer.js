@@ -7,7 +7,8 @@ const initialState={
     applydetails:[],
     sucessMsg:"",
     errorMsg:"",
-
+    totalElements:"",
+    totalPages:"",
 };
 
 const applyReducer = (state=initialState,action) =>{
@@ -22,7 +23,8 @@ const applyReducer = (state=initialState,action) =>{
      case  APPLY_LOADING_SUCCESS:
             return{
                 ...state,
-                applys:[...state.applys,...action.payload],
+                applys:[...state.applys,...action.payload.content],
+                totalElements:action.payload.totalElements
             }
      case  APPLY_LOADING_FAILURE:
                 return{

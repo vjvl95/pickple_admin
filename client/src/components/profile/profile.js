@@ -18,27 +18,24 @@ import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Profiletable from "./profiletable"
 import { PROFILE_LOADING_REQUEST } from '../../actions/profileAction';
+import Pagination from '../layout/Pagenation'
+
 import "./profile.css"
 
 const Profile = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
 
-  const indexOfLastTag=currentPage*postsPerPage
-  const indexOfFirstTag=indexOfLastTag-postsPerPage
-
     const dispatch = useDispatch();
-    const {profiles} = useSelector((state) => state.profile);
+    const {profiles,totalElements} = useSelector((state) => state.profile);
     useEffect(()=>{
       dispatch({
         type: PROFILE_LOADING_REQUEST,
-        payload: {params:{direction:"ASC", page:1, size:10}},
+        payload: {params:{direction:"ASC", page:currentPage, size:postsPerPage}},
         currentPage:currentPage
       })
       },[currentPage])
-  
-      console.log(profiles)
- 
+   
   return (
     <Paper className="profile-paper" style={{width:"60%", margin:"50px auto"}}>
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -47,9 +44,9 @@ const Profile = () => {
       </AppBar>
       <div className="contentWrapper">
         <Profiletable profiles={profiles}/>
-
-        
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+
     </Paper>
   );
 }

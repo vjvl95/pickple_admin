@@ -17,7 +17,7 @@ function* loadApplys (action)
     console.log(result)
     yield put({
         type:APPLY_LOADING_SUCCESS,
-        payload: result.data.data.content
+        payload: result.data.data
     })
     } catch (error) {
         yield put({
