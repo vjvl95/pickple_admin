@@ -24,14 +24,12 @@ const Boardtable = ({boards}) =>
         ?null
         :<Table>
         <TableHead>
-            <TableCell style = {styles.tableHead}> 모집글번호  </TableCell>
             <TableCell style = {styles.tableHead}> 제목 </TableCell>
             <TableCell style = {styles.tableHead}> 작성자</TableCell>
         </TableHead>
         <TableBody>
-            {boards.map((board)=>(
+            {boards.map((board,index)=>(
             <TableRow component={Link} to ={`/admin/board/${board.boardId}`} key={board.boardId}>
-                <TableCell style = {styles.tableCell}>{board.boardId}</TableCell>
                 <TableCell style = {styles.tableCell}>{board.title}</TableCell>
                 <TableCell style = {styles.tableCell}>{board.idString}</TableCell>
             </TableRow>  

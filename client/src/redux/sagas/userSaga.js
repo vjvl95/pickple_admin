@@ -61,6 +61,7 @@ function* loadUserDetail(action){
 
 
 const UserDeleteAPI = (payload) =>{
+    console.log(payload)
     return axios.delete("/api/v1/account",{ headers:{"X-AUTH-TOKEN":localStorage.getItem("token"),"Content-Type" : "application/json"} , data:{idString: payload.idString}});
 }
 

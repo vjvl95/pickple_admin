@@ -80,7 +80,7 @@ const UserDetail = (req) => {
         {
           dispatch({
             type:USER_DELETE_REQUEST,
-            payload:{idString:UserDetail.idString, name:UserDetail.name}
+            payload:{idString:usersDetail.idString, name:usersDetail.name}
           },[])
           }  
         }

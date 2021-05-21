@@ -65,7 +65,7 @@ const deleteBoardAPI = (payload) =>{
             "X-AUTH-TOKEN": localStorage.getItem("token")
         }
     }
-    return axios.get(`/api/v1/recboard/${payload}`,config)
+    return axios.delete(`/api/v1/recboard/${payload}`,{ headers:{"X-AUTH-TOKEN":localStorage.getItem("token"),"Content-Type" : "application/json"}})
 }
 
 function* deleteBoard(action)
@@ -76,6 +76,8 @@ function* deleteBoard(action)
         type:BOARD_DELETE_SUCCESS,
         payload:result.data
     })
+    alert("모집글이 삭제되었습니다.")
+    yield put(push("/admin/board"))
     } catch (error) {
         yield put({
             type:BOARD_DELETE_FAILURE,

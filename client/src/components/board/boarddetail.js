@@ -54,7 +54,7 @@ const goBack = () => {
       {
         dispatch({
           type:BOARD_DELETE_REQUEST,
-          payload:{}
+          payload:boardid
         },[])
         }  
       }
