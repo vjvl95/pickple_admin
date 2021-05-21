@@ -51,7 +51,7 @@ const Board = () => {
     switch (reviewstate) {
       case "BEFORE":
         return (<div>리뷰 작성 전</div>)
-      case "WATING":
+      case "WAITING":
         return (<div>리뷰 승인 대기</div>)
       case "ACCEPT":
         return (<div>리뷰 승인</div>)
@@ -117,7 +117,7 @@ const Board = () => {
                     <TableCell style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
                     <TableCell style={styles.tableCell}>{apply.review === null ? "리뷰 작성 전" : apply.review}</TableCell>
                     <TableCell style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
-                    <TableCell style={styles.tableCell}>{apply.reviewState !== "BEFORE" ? "" : <Button color="primary" onClick={() => detailLoading(apply.applyId)} style={{ height: "0px" }}>리뷰처리</Button>}</TableCell>
+                    <TableCell style={styles.tableCell}>{apply.reviewState !== "WAITING" ? "" : <Button color="primary" onClick={() => detailLoading(apply.applyId)} style={{ height: "0px" }}>리뷰처리</Button>}</TableCell>
                   </TableRow>
                 ))
                 }

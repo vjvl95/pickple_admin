@@ -79,6 +79,8 @@ function* reviewAccept (action)
     yield put({
         type:REVIEW_ACCEPT_SUCCESS,
     })
+    alert("리뷰를 승인하였습니다.")
+    window.location.reload()
     } catch (error) {
         yield put({
             type:REVIEW_ACCEPT_FAILURE,
@@ -94,7 +96,7 @@ const reviewRejectAPI = (payload) =>{
         }
     }
     
-    return axios.put("/api/v1/apply/manage",config,payload)
+    return axios.put("/api/v1/apply/manage",payload,config)
 }
 
 function* reviewReject (action)
@@ -106,6 +108,9 @@ function* reviewReject (action)
     yield put({
         type:REVIEW_REJECT_SUCCESS,
     })
+    alert("리뷰를 반려하였습니다.")
+    window.location.reload()
+
     } catch (error) {
         yield put({
             type:REVIEW_REJECT_FAILURE,
