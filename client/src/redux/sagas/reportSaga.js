@@ -20,9 +20,9 @@ function* loadReport (action)
     console.log(action)
     try {
     const result =  yield call(loadReportAPI,action.payload)
-    console.log(result)
     yield put({
         type:REPORT_LOADING_SUCCESS,
+        payload:result.data.data
     })
     } catch (error) {
         yield put({

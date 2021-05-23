@@ -5,8 +5,19 @@ import { push } from "connected-react-router";
 
 
 const loadApplyAPI = (payload) =>{
+    const config = {
+
+        headers:{
+            "Content-Type" : "application/json",
+            "X-AUTH-TOKEN": localStorage.getItem("token")
+        },
+        
+        params:payload.params
+    }
     
-    return axios.get("/api/v1/apply",payload)
+    return axios.get("/api/v1/apply",config)
+
+
 }
 
 function* loadApplys (action)

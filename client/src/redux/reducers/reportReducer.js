@@ -8,28 +8,25 @@ const initialState = {
 }
 
 const reportReducer = (state = initialState, action) => {
-
-    switch (action) {
+    switch (action.type) {
 
         case REPORT_LOADING_REQUEST:
             return {
                 ...state,
                 reports: [],
+                totalElements:"",
                 loading: true
             }
 
         case REPORT_LOADING_SUCCESS:
             return {
                 ...state,
-                reports: action.payload,
+                reports: action.payload.content,
                 totalElements: action.payload.totalElements,
-
-                loading: true
             }
         case REPORT_LOADING_FAILURE:
             return {
                 ...state,
-                loading: true
             }
 
         default:

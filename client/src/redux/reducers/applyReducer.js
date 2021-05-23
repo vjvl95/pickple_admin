@@ -18,13 +18,16 @@ const applyReducer = (state=initialState,action) =>{
             return{
                 ...state,
                 applys:[],
+                isAuthenticated: null,
 
             }
      case  APPLY_LOADING_SUCCESS:
             return{
                 ...state,
                 applys:[...state.applys,...action.payload.content],
-                totalElements:action.payload.totalElements
+                totalElements:action.payload.totalElements,
+                isAuthenticated: null,
+
             }
      case  APPLY_LOADING_FAILURE:
                 return{

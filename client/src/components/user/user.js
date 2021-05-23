@@ -50,9 +50,9 @@ const User = () => {
   const {users,totalElements} = useSelector((state) => state.user);
   useEffect(()=>{
     dispatch({
-      type: USER_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}}
-    })
+      type:USER_SEARCH_REQUEST,
+      payload:{params:{keyword:"", "pageRequest.direction" : "ASC", "pageRequest.page" : currentPage, "pageRequest.size":postsPerPage}  }
+  })
     },[currentPage])
 
   const onChange= (e) => {

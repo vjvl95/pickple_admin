@@ -17,20 +17,24 @@ import {useDispatch, useSelector} from "react-redux"
 
 
 const Report = () => {
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
+  const {reports,totalElements} = useSelector((state) => state.report);
 
-    const dispatch = useDispatch();
-    const {reports} = useSelector((state) => state.report);
-    useEffect(()=>{
-      dispatch({
-        type: REPORT_LOADING_REQUEST,
-        payload: {params:{direction:"ASC", page:1, size:10}},
-        currentPage:currentPage
-      })
-      },[currentPage])
+  useEffect(()=>{
+    dispatch({
+      type: REPORT_LOADING_REQUEST,
+      payload: {params:{direction:"ASC", page:1, size:10}},
+      currentPage:currentPage
+    })
+    },[currentPage])
+  
+    
+
       console.log(reports)
- 
+      console.log(totalElements)
   return (
     <Paper className="paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -54,6 +58,8 @@ const Report = () => {
 
                 </TableHead>
                 {<TableBody>
+                  
+              
                 </TableBody>
                 }
                 </Table>

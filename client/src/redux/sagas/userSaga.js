@@ -30,7 +30,6 @@ function* loadUser(action){
     }
 }
 
-
 const loadUserDetailAPI = (payload) =>{
     const config = {
         headers:{
@@ -38,7 +37,6 @@ const loadUserDetailAPI = (payload) =>{
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
     }
-    console.log(localStorage.getItem("token"))
     return axios.get(`/api/v1/account/${payload}`,config);
 }
 
@@ -86,14 +84,15 @@ function* UserDelete(action){
 
 
 const UserSearchAPI = (payload) =>{
+    
     const config = {
         headers:{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
+        params:payload.params
     }
-
-    return axios.get(`/api/v1/account/search`,payload);
+    return axios.get(`/api/v1/account/search`,config);
 }
 
 

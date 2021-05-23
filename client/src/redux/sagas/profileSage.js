@@ -32,9 +32,13 @@ function* loadProfile (action)
 
 const loadProfiledetailAPI = (payload) =>{
     
-    console.log(payload)
-
-    return axios.get(`/api/v1/profile/${payload}`)
+    const config = {
+        headers:{
+            "Content-Type" : "application/json",
+            "X-AUTH-TOKEN": localStorage.getItem("token")
+        }
+    }
+    return axios.get(`/api/v1/profile/${payload}`,config)
 }
 
 function* loadProfiledetail (action)

@@ -85,7 +85,6 @@ const Board = () => {
   }
 
   console.log(totalElements)
-
   return (
     <div>
       <Paper className="paper">
