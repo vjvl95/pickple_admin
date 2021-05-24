@@ -19,7 +19,20 @@ const Usertable =({users}) => {
             textAlign : 'center',
         },
     }
+const registerType = (registerType) => {
 
+    switch (registerType) {
+        case "PICKPLE":
+          return (<div>픽플</div>)
+        case "NAVER":
+          return (<div>네이버</div>)
+        case "SE":
+          return (<div>소공</div>)
+          
+      }
+  
+
+}
     return(
         <Typography color="textSecondary" align="center">
          { users.length===0
@@ -38,7 +51,7 @@ const Usertable =({users}) => {
                         <TableCell style = {styles.tableCell}>{user.accountId}</TableCell>
                         <TableCell style = {styles.tableCell}>{user.idString}</TableCell>
                         <TableCell style = {styles.tableCell}>{user.name}</TableCell>
-                        <TableCell style = {styles.tableCell}>{user.registerType}</TableCell>
+                        <TableCell style = {styles.tableCell}>{registerType(user.registerType)}</TableCell>
                     </TableRow>  
                     ))
                 }

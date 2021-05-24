@@ -37,7 +37,7 @@ const Profile = () => {
       },[currentPage])
    
   return (
-    <Paper className="profile-paper" style={{width:"60%", margin:"50px auto"}}>
+    <Paper className="profile-paper" style={{width:"45%", margin:"50px auto"}}>
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
         </Toolbar>

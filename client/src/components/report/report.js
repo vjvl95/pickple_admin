@@ -17,6 +17,19 @@ import {useDispatch, useSelector} from "react-redux"
 
 
 const Report = () => {
+
+  const styles = {
+    tableHead :{
+      textAlign : 'center',
+    },
+    tableCell : {
+      textAlign : 'center',
+      textOverflow: "ellipsis",
+      whiteSpace:"nowrap",
+      overflow:"hidden",
+      maxWidth: "100px"    },
+}
+
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage]=useState(1)
@@ -52,13 +65,25 @@ const Report = () => {
         <Typography color="textSecondary" align="center">
                 <Table>
                 <TableHead>
-                    <TableCell> 신고 번호  </TableCell>
-                    <TableCell> 신고 상태 </TableCell>
-                    <TableCell> 처리 결과</TableCell>
+                    <TableCell style = {styles.tableHead}> 신고 번호  </TableCell>
+                    <TableCell style = {styles.tableHead}> 신고 내용 </TableCell>
+                    <TableCell style = {styles.tableHead}> 신고 상태 </TableCell>
+                    <TableCell style = {styles.tableHead}> 처리 결과</TableCell>
 
                 </TableHead>
-                {<TableBody>
-                  
+                {
+                <TableBody>
+                  {reports.map((report)=>(
+              <TableRow key={report.reportId}>
+                <TableCell style={styles.tableCell}>{report.reportId}</TableCell>
+                <TableCell style={styles.tableCell}>{report.reportText}</TableCell>
+                <TableCell style={styles.tableCell}>{report.reportState}</TableCell>
+                <TableCell style={styles.tableCell}>{report.reportResult}</TableCell>
+
+              </TableRow>  
+            )             
+            )           
+}
               
                 </TableBody>
                 }

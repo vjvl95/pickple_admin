@@ -10,9 +10,10 @@ const loadReportAPI = (payload) =>{
         headers:{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
-        }
+        },
+        params:payload.params
     }
-    return axios.get("/api/v1/report",payload,config)
+    return axios.get("/api/v1/report",config)
 }
 
 function* loadReport (action)

@@ -8,9 +8,13 @@ import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
 import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
 import {useDispatch, useSelector} from "react-redux"
+import moment from 'moment';
 
 
 const Tagtable = ({tags}) =>{
+
+  const createDate = moment(tags.createDate).format('YYYY-MM-DD')
+
     const dispatch = useDispatch();
     const styles = {
         tableHead :{
@@ -41,14 +45,20 @@ const Tagtable = ({tags}) =>{
         :<Table>
         <TableHead >
             <TableCell style = {styles.tableHead}> 태그내용 </TableCell>
+            <TableCell style = {styles.tableHead}> 추가일자</TableCell>
             <TableCell style = {styles.tableHead}> 태그삭제</TableCell>
+
+
         </TableHead>
         <TableBody >
                       
             {tags.map((tag,index)=>(
               <TableRow key={index}>
                 <TableCell style = {styles.tableCell}>{tag.tagName}</TableCell>
+                <TableCell style = {styles.tableCell}>{createDate}</TableCell>
+
                 <TableCell style = {styles.tableCell}><Button variant="contained" color="secondary" onClick={()=>onDeleteClick(tag.tagId , tag.tagName)}>삭제</Button></TableCell>
+
               </TableRow>  
             )             
             )           
