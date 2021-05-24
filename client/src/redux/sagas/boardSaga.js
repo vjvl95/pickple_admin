@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BOARD_DETAIL_FAILURE, BOARD_DETAIL_SUCCESS,BOARD_DETAIL_REQUEST,BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST, BOARD_LOADING_SUCCESS,BOARD_DELETE_FAILURE,BOARD_DELETE_SUCCESS,BOARD_DELETE_REQUEST } from "../../actions/boardAction"
+import { BOARD_DETAIL_FAILURE, BOARD_DETAIL_SUCCESS,BOARD_DETAIL_REQUEST,BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST,BOARD_SEARCH_REQUEST, BOARD_LOADING_SUCCESS,BOARD_DELETE_FAILURE,BOARD_DELETE_SUCCESS,BOARD_DELETE_REQUEST, BOARD_SEARCH_SUCCESS, BOARD_SEARCH_FAILURE } from "../../actions/boardAction"
 import { call, put, takeEvery, all, fork} from "redux-saga/effects";
 import { push } from "connected-react-router";
 
@@ -87,6 +87,39 @@ function* deleteBoard(action)
 }
 
 
+const searchBoardAPI = (payload) =>{
+    console.log(payload)
+    const config = {
+        headers:{
+            "Content-Type" : "application/json",
+            "X-AUTH-TOKEN": localStorage.getItem("token")
+        },
+        params: payload.params
+    }
+    return axios.get(`/api/v1/recboard/search`,config)
+}
+
+function* searchBoard(action)
+{
+    try {
+    const result =  yield call(searchBoardAPI,action.payload)
+    console.log(result)
+    yield put({
+        type:BOARD_SEARCH_SUCCESS,
+        payload:result.data.data
+    })
+    } catch (error) {
+        yield put({
+            type:BOARD_SEARCH_FAILURE,
+            payload: error,
+          });
+    }
+}
+
+
+
+
+
 
 
 function* watchDetailBoards(){
@@ -102,9 +135,12 @@ function* watchDeleteBoards(){
 }
 
 
+function* watchSearchBoards(){
+    yield takeEvery(BOARD_SEARCH_REQUEST,searchBoard)
+}
 export default function* boardSaga() {
       
     yield all([
-        fork(watchLoadBoards),fork(watchDetailBoards),fork(watchDeleteBoards)
+        fork(watchLoadBoards),fork(watchDetailBoards),fork(watchDeleteBoards), fork(watchSearchBoards)
     ]);
   }

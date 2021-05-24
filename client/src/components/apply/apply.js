@@ -1,5 +1,8 @@
 
-import React from 'react';
+import React ,{useRef}from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,8 +25,23 @@ import { Link } from "react-router-dom"
 import ApplyModal from "./applymodal"
 import SelectInput from '@material-ui/core/Select/SelectInput';
 import Pagination from '../layout/Pagenation'
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Fragment } from 'react';
+import {Form,Input} from 'reactstrap'
 
-const Board = () => {
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+const Apply = () => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -34,6 +52,31 @@ const Board = () => {
   const { text, title, board } = useSelector((state) => state.board);
   const indexOfLastTag = currentPage * postsPerPage
   const indexOfFirstTag = indexOfLastTag - postsPerPage
+  const [isContracted, setisContracted] = React.useState('');
+  const [reviewStatetype, setreviewStatetype] = React.useState('');
+
+  const [form, setValues] = useState({keyword:""})
+  const classes = useStyles();
+  const resetValue=useRef(null)
+
+
+  const onChange= (e) => {
+    setValues(
+        {
+            ...form,
+            [e.target.name]:e.target.value
+        }
+    )
+}
+
+const handleChange = (e) => {  
+  setisContracted(e.target.value);
+};
+
+const handleChange_reviewState = (e) => {  
+  setreviewStatetype(e.target.value);
+
+};
 
   const styles = {
     tableHead: {
@@ -44,6 +87,21 @@ const Board = () => {
       height: "60px"
     },
   }
+
+
+
+  const onSubmit = async(e) => {
+    await e.preventDefault()
+    const {keyword} = form
+  
+      dispatch({
+        type: APPLY_LOADING_REQUEST,
+        payload: { params: {isContracted:isContracted , keyword:keyword, "pageRequest.direction": "ASC", "pageRequest.page": currentPage, "pageRequest.size": postsPerPage , reviewState:reviewStatetype} },
+        currentPage: currentPage
+      })
+  
+}
+
 
   const reviewState = (reviewstate) => {
 
@@ -64,20 +122,17 @@ const Board = () => {
   useEffect(() => {
     dispatch({
       type: APPLY_LOADING_REQUEST,
-      payload: { params: { direction: "ASC", page: currentPage, size: postsPerPage } },
+      payload: { params: { "pageRequest.direction": "ASC", "pageRequest.page": currentPage, "pageRequest.size": postsPerPage } },
       currentPage: currentPage
     })
   }, [currentPage])
 
   const detailLoading = (applyId) => {
-
     setOpen(true)
-
     dispatch({
       type: APPLY_DETAIL_REQUEST,
       payload: applyId
     })
-
     dispatch({
       type: BOARD_DETAIL_REQUEST,
       payload: applydetails.recruitmentBoardId
@@ -87,13 +142,42 @@ const Board = () => {
   console.log(totalElements)
   return (
     <div>
-      <Paper className="paper">
+      <Paper className="apply-paper">
         <AppBar className="searchBar" position="static" color="default" elevation={0}>
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
-              <Grid item>
-              </Grid>
               <Grid item xs>
+              <Fragment>
+              <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
+              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+              <FormControl className={classes.formControl} >
+
+            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={isContracted} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
+              <MenuItem value="0">계약 전</MenuItem>
+              <MenuItem value="1">계약 완료</MenuItem>
+              <MenuItem value="">공백</MenuItem>
+
+            </Select>
+          </FormControl>
+              
+          <FormControl className={classes.formControl} >
+
+          <Select labelId="demo-simple-select-label" id="demo-simple-select" value={reviewStatetype} onChange={handleChange_reviewState} style={{width:"140px", marginLeft:"1.5rem"}}>
+            <MenuItem value="BEFORE">리뷰 작성 전</MenuItem>
+            <MenuItem value="WAITING">리뷰 승인 대기</MenuItem>
+            <MenuItem value="ACCEPT">리뷰 승인</MenuItem>
+            <MenuItem value="REJECT">리뷰 반려</MenuItem>
+            <MenuItem value="">공백</MenuItem>
+
+          </Select>
+          </FormControl>
+  
+
+                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+              검색
+                </Button>      
+      </div>
+        </Fragment>  
               </Grid>
 
             </Grid>
@@ -135,4 +219,4 @@ const Board = () => {
   );
 }
 
-export default Board;
+export default Apply;

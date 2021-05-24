@@ -90,8 +90,7 @@ const UserSearchAPI = (payload) =>{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
-        data: {},
-        params: payload
+        params: payload.params
     }
     return axios.get(`/api/v1/account/search`,config);
 }

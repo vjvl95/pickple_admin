@@ -57,13 +57,14 @@ const initialState={
         case TAG_SEARCH_REQUEST:
             return {
                 ...state,
+                tags: [],
                 keyword:action.payload,
                 loading: true
             }
         case TAG_SEARCH_SUCCESS:
             return {
                 ...state,
-                tags: action.payload,
+                tags: [...state.tags, ...action.payload.content],
                 loading: false,
             }
         case TAG_SEARCH_FAILURE:

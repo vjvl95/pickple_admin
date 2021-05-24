@@ -3,9 +3,10 @@
   margin-top: 70px;
   width: 750px;
 }
-.paper {
+.board-paper {
   max-width: 936;
   width: 50%;
+  min-width: 612px;
   margin: 30px auto;
   overflow: "hidden";
 }

@@ -11,13 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import { USER_LOADING_REQUEST,USER_SEARCH_REQUEST} from '../../actions/userAction';
+import { USER_SEARCH_REQUEST} from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Usertable from "./usertable"
@@ -51,7 +45,7 @@ const User = () => {
   useEffect(()=>{
     dispatch({
       type:USER_SEARCH_REQUEST,
-      payload:{keyword:"", pageRequest : {direction: "ASC", page:currentPage,size:postsPerPage}  }
+      payload:{params:{keyword:"", "pageRequest.direction" : "ASC", "pageRequest.page" :currentPage,"pageRequest.size":postsPerPage  }}
   })
     },[currentPage])
 

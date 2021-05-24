@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React ,{useRef}from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,33 +16,70 @@ import TableCell from '@material-ui/core/TableCell';
 import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import { BOARD_LOADING_REQUEST } from '../../actions/boardAction';
+import { BOARD_LOADING_REQUEST,BOARD_SEARCH_REQUEST } from '../../actions/boardAction';
 import {Link} from "react-router-dom"
 import Boardtable from "./boardtable"
 import Pagination from '../layout/Pagenation'
+import { Fragment } from 'react';
+import {Form,Input} from 'reactstrap'
 
 const Board = () => {
+  const resetValue=useRef(null)
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
   const {boards,totalElements} = useSelector((state) => state.board);
+  const [form, setValues] = useState({keyword:""})
 
   console.log(totalElements)
   useEffect(()=>{
     dispatch({
-      type: BOARD_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:currentPage, size:10}},
+      type: BOARD_SEARCH_REQUEST,
+      payload:{params:{"pageRequest.direction":"ASC", "pageRequest.page":currentPage, "pageRequest.size":10}},
       currentPage:currentPage
-
     })
     },[currentPage])
    
+
+    const onChange= (e) => {
+      setValues(
+          {
+              ...form,
+              [e.target.name]:e.target.value
+          }
+      )
+  }
+
+
+  const onSubmit = async(e) => {
+    await e.preventDefault()
+    const {keyword} = form
+  
+      dispatch({
+        type: BOARD_SEARCH_REQUEST,
+        payload: {params:{keyword:keyword,"pageRequest.direction":"ASC", "pageRequest.page":1, "pageRequest.size":10}},
+        currentPage: currentPage
+      })
+}
+
   return (
-    <Paper className="paper">
+    <Paper className="board-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
-  
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs>
+          <Fragment>
+    <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
+            <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+            
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+            검색
+            </Button>      
+    </div>
+      </Fragment>  
+          </Grid>
+        </Grid>
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">

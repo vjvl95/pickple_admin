@@ -1,4 +1,4 @@
-import { BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST, BOARD_LOADING_SUCCESS, BOARD_DETAIL_REQUEST, BOARD_DETAIL_SUCCESS, BOARD_DETAIL_FAILURE, BOARD_DELETE_REQUEST, BOARD_DELETE_SUCCESS, BOARD_DELETE_FAILURE } from "../../actions/boardAction"
+import { BOARD_LOADING_FAILURE, BOARD_LOADING_REQUEST, BOARD_LOADING_SUCCESS, BOARD_DETAIL_REQUEST, BOARD_DETAIL_SUCCESS, BOARD_DETAIL_FAILURE, BOARD_DELETE_REQUEST, BOARD_DELETE_SUCCESS, BOARD_DELETE_FAILURE,BOARD_SEARCH_REQUEST,BOARD_SEARCH_SUCCESS,BOARD_SEARCH_FAILURE } from "../../actions/boardAction"
 
 const initialState = {
     isAuthenticated: null,
@@ -75,6 +75,26 @@ const boardReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+            case BOARD_SEARCH_REQUEST:
+                return {
+                    ...state,
+                    boards: [],
+
+                }
+            case BOARD_SEARCH_SUCCESS:
+                return {
+                    ...state,
+                    boards: [...state.boards, ...action.payload.content],
+                    totalElements: action.payload.totalElements
+                }
+            case BOARD_SEARCH_FAILURE:
+                return {
+                    ...state,
+                }
+
+
+
+
         default:
             return state;
     }

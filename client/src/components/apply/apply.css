@@ -10,3 +10,10 @@
 .modal-content {
   padding: 30px;
 }
+.apply-paper {
+  max-width: 936;
+  width: 50%;
+  margin: 30px auto;
+  overflow: "hidden";
+  min-width: 612px;
+}

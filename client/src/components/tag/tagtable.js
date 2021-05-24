@@ -12,9 +12,7 @@ import moment from 'moment';
 
 
 const Tagtable = ({tags}) =>{
-
   const createDate = moment(tags.createDate).format('YYYY-MM-DD')
-
     const dispatch = useDispatch();
     const styles = {
         tableHead :{
@@ -41,22 +39,18 @@ const Tagtable = ({tags}) =>{
     return(
         <Typography color="textSecondary" align="center">
         {  tags.length===0
-            ?null  
+        ?null
         :<Table>
         <TableHead >
             <TableCell style = {styles.tableHead}> 태그내용 </TableCell>
             <TableCell style = {styles.tableHead}> 추가일자</TableCell>
             <TableCell style = {styles.tableHead}> 태그삭제</TableCell>
-
-
         </TableHead>
         <TableBody >
-                      
             {tags.map((tag,index)=>(
               <TableRow key={index}>
                 <TableCell style = {styles.tableCell}>{tag.tagName}</TableCell>
-                <TableCell style = {styles.tableCell}>{createDate}</TableCell>
-
+                <TableCell style = {styles.tableCell}>{moment(tag.createDate).format('YYYY-MM-DD')}</TableCell>
                 <TableCell style = {styles.tableCell}><Button variant="contained" color="secondary" onClick={()=>onDeleteClick(tag.tagId , tag.tagName)}>삭제</Button></TableCell>
 
               </TableRow>  

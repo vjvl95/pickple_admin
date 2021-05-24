@@ -13,7 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST ,TAG_SEARCH_REQUEST} from '../../actions/tagAction';
+import { TAG_LOADING_REQUEST,TAG_SEARCH_REQUEST} from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { hot } from 'react-hot-loader'
@@ -31,7 +31,7 @@ import {Form,Input} from 'reactstrap'
 const Tag = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
-  const [form, setValues] = useState({keyword:""})
+  const [keyword, setValues] = useState("")
 
   const {tags,totalElements} = useSelector((state) => state.tag);
 
@@ -39,8 +39,8 @@ const Tag = () => {
   
   useEffect(()=>{
     dispatch({
-      type: TAG_LOADING_REQUEST,
-      payload:{params:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      type: TAG_SEARCH_REQUEST,
+      payload:{params:{keyword:keyword,"pageRequest.direction":"ASC", "pageRequest.page":currentPage, "pageRequest.size":postsPerPage}},
       currentPage:currentPage
     })
     },[currentPage])
@@ -57,7 +57,6 @@ const Tag = () => {
 
     const onSubmit = async(e) => {
       await e.preventDefault()
-      const {keyword} = form
       console.log(keyword)
       if(keyword)
       { 
@@ -75,13 +74,14 @@ const Tag = () => {
   const onChange= (e) => {
     setValues(
         {
-            ...form,
+            ...keyword,
             [e.target.name]:e.target.value
         }
     )
 }
 
     const resetValue=useRef(null)
+    console.log(tags)
   return (
 
     <Fragment>
@@ -110,6 +110,7 @@ const Tag = () => {
       </AppBar>
       <div className="contentWrapper">
       <Tagtable tags={tags}/>
+
       </div>
       <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
     </Paper>

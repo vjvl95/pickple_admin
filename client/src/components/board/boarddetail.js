@@ -72,7 +72,7 @@ const goBack = () => {
             <Typography color="textSecondary">
 
             <h2 className="board_title" >
-            <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span> {boardDetails.title}</div>
+            <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span> {boardDetails.title} {boardDetails.isDeleted===1?"(삭제된 모집글)":null}</div>
               </h2>
 
            <Divider style={{backgroundColor: "#E2E2E2"}}/>

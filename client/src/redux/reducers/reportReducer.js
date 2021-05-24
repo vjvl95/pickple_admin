@@ -1,4 +1,4 @@
-import {REPORT_LOADING_REQUEST,REPORT_LOADING_SUCCESS,REPORT_LOADING_FAILURE } from "../../actions/reportAction"
+import {REPORT_LOADING_REQUEST,REPORT_LOADING_SUCCESS,REPORT_LOADING_FAILURE,REPORT_SEARCH_FAILURE,REPORT_SEARCH_REQUEST,REPORT_SEARCH_SUCCESS } from "../../actions/reportAction"
 const initialState = {
     reports: [],
     reportdetail: [],
@@ -28,6 +28,24 @@ const reportReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+            case REPORT_SEARCH_REQUEST:
+                return {
+                    ...state,
+                    reports: [],
+                    totalElements:"",
+                    loading: true
+                }
+    
+            case REPORT_SEARCH_SUCCESS:
+                return {
+                    ...state,
+                    reports: action.payload.content,
+                    totalElements: action.payload.totalElements,
+                }
+            case REPORT_SEARCH_FAILURE:
+                return {
+                    ...state,
+                }
 
         default:
             return state;
