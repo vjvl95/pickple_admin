@@ -51,7 +51,7 @@ const User = () => {
   useEffect(()=>{
     dispatch({
       type:USER_SEARCH_REQUEST,
-      payload:{params:{keyword:"", "pageRequest.direction" : "ASC", "pageRequest.page" : currentPage, "pageRequest.size":postsPerPage}  }
+      payload:{keyword:"", pageRequest : {direction: "ASC", page:currentPage,size:postsPerPage}  }
   })
     },[currentPage])
 

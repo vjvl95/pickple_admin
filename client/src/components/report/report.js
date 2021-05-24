@@ -14,6 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { REPORT_LOADING_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import {Link} from "react-router-dom"
 
 
 const Report = () => {
@@ -74,7 +75,7 @@ const Report = () => {
                 {
                 <TableBody>
                   {reports.map((report)=>(
-              <TableRow key={report.reportId}>
+              <TableRow  component={Link} to ={`/admin/report/${report.reportId}`}key={report.reportId}>
                 <TableCell style={styles.tableCell}>{report.reportId}</TableCell>
                 <TableCell style={styles.tableCell}>{report.reportText}</TableCell>
                 <TableCell style={styles.tableCell}>{report.reportState}</TableCell>

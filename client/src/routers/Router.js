@@ -7,6 +7,7 @@ import theme from "../components/layout/theme"
 import mainpage from "../pages/mainpage"
 import tagpage from "../pages/tagpage"
 import reportpage from "../pages/reportpage"
+
 import userpage from "../pages/userpage"
 import applypage from "../pages/applypage"
 import profilepage from "../pages/profilepage"
@@ -17,6 +18,8 @@ import PrivateRoute from "./privateRouter"
 import boarddetailpage from "../components/board/boarddetail"
 import profiledetailpage from "../components/profile/profiledetail"
 import applydetailpage from "../components/apply/applydetail"
+import reportdetailpage from "../components/report/reportdetail"
+
 const Router = () => {
     return (
       <Fragment>
@@ -28,7 +31,10 @@ const Router = () => {
                             <Switch>
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 
                                         <PrivateRoute path="/admin/tag" exact component={tagpage} />
+
                                         <PrivateRoute path="/admin/report" exact component={reportpage} />   
+                                        <PrivateRoute path="/admin/report/:id" exact component={reportdetailpage} />   
+
                                         <PrivateRoute path="/admin/user" exact component={userpage} />     
                                         <PrivateRoute path='/admin/user/:id' exact component={userdetailpage} />
      
