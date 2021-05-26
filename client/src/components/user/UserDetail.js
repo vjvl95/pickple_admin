@@ -29,6 +29,7 @@ const UserDetail = (req) => {
     const dispatch = useDispatch();
     const {usersDetail} = useSelector((state) => state.user);
     const [form,setVaule]=useState({newemail:""})
+
     const history = useHistory();
 
 
@@ -117,10 +118,10 @@ const UserDetail = (req) => {
       <div className="label">
             <div className="label2">
             <div className="userbody"><span className="userspan">회원 번호</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountId}</span></div>
+            <div className="userbody"><span className="userspan">회원 타입</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountType}</span></div>
             <div className="userbody"><span className="userspan">회원 아이디</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.idString}</span></div>
             <div className="userbody"><span className="userspan">회원 이름</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.name}</span></div>
             <div className="userbody"><span className="userspan-email">이메일</span> <span  className="userspan-email2">:</span> <span className="userspan3">{usersDetail.isDeleted===0 ?<TextField className="emailinput"id="outlined-basic" label="email" name="newemail" variant="outlined" value={form.newemail} onChange={onChange}  size="small"/> :<span style={{marginTop:"7px", marginBottom:"7px"}}>{usersDetail.email}</span>}</span></div>
-            <div className="userbody"><span className="userspan">회원등급</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.accountType}</span></div>
             <div className="userbody"><span className="userspan">삭제여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isDeleted===0 ? "회원" : "탈퇴회원"}</span></div>
             <div className="userbody"><span className="userspan">인증 여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isCertified===0 ? "인증안됨" : "인증"}</span></div>
             <div className="userbody"><span className="userspan">가입경로</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.registerType}</span> </div>

@@ -14,6 +14,8 @@ const Reporttable = ({reports}) => {
     const styles = {
         tableHead :{
           textAlign : 'center',
+          fontWeight:"bold"
+
         },
         tableCell : {
             textAlign : 'center',
@@ -42,10 +44,8 @@ const Reporttable = ({reports}) => {
     <Typography color="textSecondary" align="center">
     {reports.lenth===0
     ?null
-    :
-    <Table>
+    :<Table>
     <TableHead>
-        <TableCell style = {styles.tableHead}> 신고 번호  </TableCell>
         <TableCell style = {styles.tableHead}> 신고 내용 </TableCell>
         <TableCell style = {styles.tableHead}> 신고 상태 </TableCell>
         <TableCell style = {styles.tableHead}> 처리 결과</TableCell>
@@ -56,7 +56,6 @@ const Reporttable = ({reports}) => {
       {reports.map((report)=>
       (
   <TableRow  component={Link} to ={`/admin/report/${report.reportId}`}key={report.reportId}>
-    <TableCell style={styles.tableCell}>{report.reportId}</TableCell>
     <TableCell style={styles.tableCell}>{report.reportText}</TableCell>
     <TableCell style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
     <TableCell style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>

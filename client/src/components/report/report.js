@@ -142,7 +142,7 @@ const Report = () => {
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={reportState} onChange={handleChange_reportState} style={{width:"100px", marginLeft:"1.5rem"}}>
               <MenuItem value="BEFORE">처리 전</MenuItem>
               <MenuItem value="AFTER">처리 완료</MenuItem>
-              <MenuItem value="">공백</MenuItem>
+              <MenuItem value="">전체</MenuItem>
 
             </Select>
           </FormControl>
@@ -154,7 +154,7 @@ const Report = () => {
             <MenuItem value="BOARD_MODIFIED">게시글 수정</MenuItem>
             <MenuItem value="ACCOUNT_DELETED">작성자 삭제</MenuItem>
             <MenuItem value="GIVE_WARNING">작성자 경고</MenuItem>
-            <MenuItem value="">공백</MenuItem>
+            <MenuItem value="">전체</MenuItem>
 
           </Select>
           </FormControl>

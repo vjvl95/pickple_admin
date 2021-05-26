@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import "./board.css"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from "react-router-dom";
-
+import Header from "../header/BoardHeader"
 const BoardDetail = (req) =>{
     
     const boardid=Number(req.match.params.id)
@@ -66,6 +66,7 @@ const goBack = () => {
 
     return(
         <Fragment>
+          <Header/>
         <Paper className="paper-detail" elevation={3}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">

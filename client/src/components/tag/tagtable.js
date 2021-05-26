@@ -17,6 +17,8 @@ const Tagtable = ({tags}) =>{
     const styles = {
         tableHead :{
           textAlign : 'center',
+          fontWeight:"bold"
+
         },
         tableCell : {
             textAlign : 'center',

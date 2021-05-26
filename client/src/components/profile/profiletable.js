@@ -16,6 +16,8 @@ const Profiletable = ({profiles}) =>{
     const styles = {
         tableHead :{
           textAlign : 'center',
+          fontWeight:"bold"
+
         },
         tableCell : {
             textAlign : 'center',
@@ -33,7 +35,6 @@ const Profiletable = ({profiles}) =>{
             ?null
             :<Table>
                 <TableHead>
-                    <TableCell style={styles.tableHead}> 프로필 번호  </TableCell>
                     <TableCell style={styles.tableHead}> 소개 </TableCell>
                     <TableCell style={styles.tableHead}> 사용자</TableCell>
 
@@ -41,7 +42,6 @@ const Profiletable = ({profiles}) =>{
                 {<TableBody>
                     {profiles.map((profile)=>(
                       <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.account_id}>
-                        <TableCell style={styles.tableCell}>{profile.profileId}</TableCell>
                         <TableCell style={styles.tableCell}>{profile.introduce}</TableCell>
                         <TableCell style={styles.tableCell}>{profile.userName}</TableCell>
                       </TableRow>  

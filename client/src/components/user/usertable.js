@@ -14,6 +14,8 @@ const Usertable =({users}) => {
     const styles = {
         tableHead :{
           textAlign : 'center',
+          fontWeight:"bold"
+
         },
         tableCell : {
             textAlign : 'center',
@@ -39,7 +41,6 @@ const registerType = (registerType) => {
          ?null  
          :<Table>
                 <TableHead>
-                    <TableCell style = {styles.tableHead}> 회원 번호  </TableCell>
                     <TableCell style = {styles.tableHead}> 회원 아이디 </TableCell>
                     <TableCell style = {styles.tableHead}> 회원 이름</TableCell>
                     <TableCell style = {styles.tableHead}> 소속 경로</TableCell>
@@ -48,7 +49,6 @@ const registerType = (registerType) => {
                 <TableBody>
                     {users.map((user)=>(
                     <TableRow component={Link} to ={`/admin/user/${user.idString}`} key={user.accountId}>
-                        <TableCell style = {styles.tableCell}>{user.accountId}</TableCell>
                         <TableCell style = {styles.tableCell}>{user.idString}</TableCell>
                         <TableCell style = {styles.tableCell}>{user.name}</TableCell>
                         <TableCell style = {styles.tableCell}>{registerType(user.registerType)}</TableCell>

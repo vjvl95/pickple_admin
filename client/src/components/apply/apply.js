@@ -151,7 +151,7 @@ const handleChange_reviewState = (e) => {
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={isContracted} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
               <MenuItem value="0">계약 전</MenuItem>
               <MenuItem value="1">계약 완료</MenuItem>
-              <MenuItem value="">공백</MenuItem>
+              <MenuItem value="">전체</MenuItem>
 
             </Select>
           </FormControl>
@@ -163,7 +163,7 @@ const handleChange_reviewState = (e) => {
             <MenuItem value="WAITING">리뷰 승인 대기</MenuItem>
             <MenuItem value="ACCEPT">리뷰 승인</MenuItem>
             <MenuItem value="REJECT">리뷰 반려</MenuItem>
-            <MenuItem value="">공백</MenuItem>
+            <MenuItem value="">전체</MenuItem>
           </Select>
           </FormControl>
                 <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >

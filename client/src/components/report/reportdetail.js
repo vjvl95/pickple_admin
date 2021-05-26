@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import { useHistory } from "react-router-dom";
-
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -50,38 +49,7 @@ const Reportdetail = (req) =>{
     const onSubmit = async(e) => {
       await e.preventDefault()
       console.log(reportState)
-      if(reportState==="BOARD_DELETED")
-      {
-        dispatch({
-          type: BOARD_DELETE_REQUEST,
-          payload:reportdetail.boardid
-        })
-      }
-      else if(reportState==="ACCOUNT_DELETED")
-      {
-        dispatch({
-          type:USER_DELETE_REQUEST,
-            payload:{idString:reportdetail.reportedString}
-        })
-      }
-
-      else if(reportState==="BOARD_MODIFIED")
-      {
-        /*dispatch({
-          type:USER_DELETE_REQUEST,
-            payload:{idString:reportdetail.reportedString}
-        })*/
-
-      }
-
-      else if(reportState==="GIVE_WARNING")
-      {
-       /* dispatch({
-          type:USER_DELETE_REQUEST,
-            payload:{idString:reportdetail.reportedString}
-        })
-        */
-      }
+  
     
       dispatch({
         type: REPORT_MANAGE_REQUEST,
