@@ -76,3 +76,9 @@
   bottom: 20px;
   margin-left: 3rem;
 }
+.user-paper {
+  max-width: 936;
+  width: 50%;
+  margin: 30px auto;
+  overflow: "hidden";
+}

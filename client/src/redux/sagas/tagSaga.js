@@ -122,14 +122,15 @@ function* watchDeleteTag(){
 
 
 const SearchTagAPI = (payload) =>{
+    console.log(payload)
+
     const config = {
         headers:{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
-        params:payload.params
     }
-    return axios.get(`/api/v1/tag/search/`,config);
+    return axios.post(`/api/v1/tag/search/`,payload,config);
 }
 
 function* SearchTag(action){

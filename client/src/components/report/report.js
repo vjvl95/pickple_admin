@@ -23,6 +23,7 @@ import {Form,Input} from 'reactstrap'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
+import ReportTable from "./reporttable"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -65,14 +66,11 @@ const Report = () => {
     dispatch({
       
       type: REPORT_SEARCH_REQUEST,
-      payload: {params:{"pageRequest.direction":"ASC", "pageRequest.page":1, "pageRequest.size":10, reportResult: reportResult, reportState: reportState}},
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
       currentPage:currentPage
     })
     },[currentPage])
   
-    
-
-
       const onChange= (e) => {
         setValues(
             {
@@ -90,19 +88,45 @@ const Report = () => {
       setReportState(e.target.value);
     
     };
+    
     const onSubmit = async(e) => {
       await e.preventDefault()
       const {keyword} = form
-    
+      if(reportState ==="" && reportResult==="" )
+      {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
-          payload: {params:{keyword:keyword,"pageRequest.direction":"ASC", "pageRequest.page":1, "pageRequest.size":10, reportResult: reportResult, reportState: reportState}},
+          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }},
           currentPage: currentPage
         })
+      }
+      else if(reportState ==="")
+      {
+        dispatch({
+          type: REPORT_SEARCH_REQUEST,
+          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage },reportResult: reportResult},
+          currentPage: currentPage
+        })
+      }
+   
+      else if(reportResult==="")
+      {
+        dispatch({
+          type: REPORT_SEARCH_REQUEST,
+          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }, reportState: reportState},
+          currentPage: currentPage
+        })
+      }
+      else{
+        dispatch({
+          type: REPORT_SEARCH_REQUEST,
+          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
+          currentPage: currentPage
+        })
+
+      }
   }
   
-
-
   return (
     <Paper className="report-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -134,8 +158,6 @@ const Report = () => {
 
           </Select>
           </FormControl>
-  
-
                 <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
               검색
                 </Button>      
@@ -147,36 +169,11 @@ const Report = () => {
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-        <Typography color="textSecondary" align="center">
-                <Table>
-                <TableHead>
-                    <TableCell style = {styles.tableHead}> 신고 번호  </TableCell>
-                    <TableCell style = {styles.tableHead}> 신고 내용 </TableCell>
-                    <TableCell style = {styles.tableHead}> 신고 상태 </TableCell>
-                    <TableCell style = {styles.tableHead}> 처리 결과</TableCell>
-
-                </TableHead>
-                {
-                <TableBody>
-                  {reports.map((report)=>(
-              <TableRow  component={Link} to ={`/admin/report/${report.reportId}`}key={report.reportId}>
-                <TableCell style={styles.tableCell}>{report.reportId}</TableCell>
-                <TableCell style={styles.tableCell}>{report.reportText}</TableCell>
-                <TableCell style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-                <TableCell style={styles.tableCell}>{report.reportResult}</TableCell>
-
-              </TableRow>  
-            )             
-            )           
-}
-              
-                </TableBody>
-                }
-                </Table>
-        </Typography>
+       <ReportTable reports={reports}/>
       </div>
     </Paper>
   );
 }
 
+  
 export default Report;

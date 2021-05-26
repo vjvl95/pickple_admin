@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-
 import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
@@ -101,7 +100,7 @@ const goBack = () => {
             <div className="board-body"> {boardDetails.text}</div>
             </div>
             <div className="board-delete-button" style={{textAlign:"center", marginBottom:"100px", paddingBottom:"20px" }}>
-            <Button variant="contained" onClick={() => ondelete()}>모집글 삭제</Button>
+           { boardDetails.isDeleted===1 ? "" : <Button variant="contained" onClick={() => ondelete()}>모집글 삭제</Button>}
             </div>
             </Typography>
           </div>

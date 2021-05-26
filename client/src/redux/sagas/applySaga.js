@@ -11,12 +11,9 @@ const loadApplyAPI = (payload) =>{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
-        params:payload.params
     }
     
-    return axios.get("/api/v1/apply/search",config)
-
-
+    return axios.post("/api/v1/apply/search",payload,config)
 }
 
 function* loadApplys (action)

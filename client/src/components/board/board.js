@@ -7,13 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { BOARD_LOADING_REQUEST,BOARD_SEARCH_REQUEST } from '../../actions/boardAction';
@@ -36,7 +29,7 @@ const Board = () => {
   useEffect(()=>{
     dispatch({
       type: BOARD_SEARCH_REQUEST,
-      payload:{params:{"pageRequest.direction":"ASC", "pageRequest.page":currentPage, "pageRequest.size":10}},
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
       currentPage:currentPage
     })
     },[currentPage])
@@ -58,7 +51,7 @@ const Board = () => {
   
       dispatch({
         type: BOARD_SEARCH_REQUEST,
-        payload: {params:{keyword:keyword,"pageRequest.direction":"ASC", "pageRequest.page":1, "pageRequest.size":10}},
+        payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
         currentPage: currentPage
       })
 }

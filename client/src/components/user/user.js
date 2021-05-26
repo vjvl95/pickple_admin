@@ -45,7 +45,7 @@ const User = () => {
   useEffect(()=>{
     dispatch({
       type:USER_SEARCH_REQUEST,
-      payload:{params:{keyword:"", "pageRequest.direction" : "ASC", "pageRequest.page" :currentPage,"pageRequest.size":postsPerPage  }}
+      payload:{keyword:"",pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
   })
     },[currentPage])
 
@@ -70,14 +70,14 @@ const onSubmit = async(e) => {
     if(type!=="ALL"){
       dispatch({
         type:USER_SEARCH_REQUEST,
-        payload:{params:{keyword:keyword, "pageRequest.direction" : "ASC", "pageRequest.page" : 1, "pageRequest.size":10,type:type}  }
+        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
     })
     }
     else{
       dispatch({
       type:USER_SEARCH_REQUEST,
-      payload:{params:{keyword:keyword, "pageRequest.direction" : "ASC", "pageRequest.page" : 1, "pageRequest.size":10}  }
-  })
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+    })
 }
 }
 
@@ -88,7 +88,7 @@ const resetValue=useRef(null)
    
   return (
     <Fragment>
-    <Paper className="paper">
+    <Paper className="user-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar>
         <Grid container spacing={2} alignItems="center">

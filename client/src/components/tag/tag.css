@@ -1,11 +1,12 @@
 .main {
   background-color: #eaeff1;
 }
-.paper {
+.tag-paper {
   max-width: 936;
-  width: 70%;
+  width: 50%;
   margin: 30px auto;
   overflow: "hidden";
+  min-width: 587px;
 }
 .tag_add_button {
   margin-bottom: 10px;
@@ -19,6 +20,7 @@
   width: 50%;
   margin: 30px auto;
   margin-bottom: 50px;
+  min-width: 587px;
 }
 .searchBar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);

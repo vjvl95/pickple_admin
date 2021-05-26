@@ -29,7 +29,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Fragment } from 'react';
 import {Form,Input} from 'reactstrap'
-
+import Applytable from './applytable'
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -48,7 +48,7 @@ const Apply = () => {
   const [postsPerPage, setTagsPerPage] = useState(10);
   const [open, setOpen] = useState(false)
   const [applyId] = useState("")
-  const { applys, applydetails, totalElements } = useSelector((state) => state.apply);
+  const { applys, totalElements } = useSelector((state) => state.apply);
   const { text, title, board } = useSelector((state) => state.board);
   const indexOfLastTag = currentPage * postsPerPage
   const indexOfFirstTag = indexOfLastTag - postsPerPage
@@ -88,56 +88,52 @@ const handleChange_reviewState = (e) => {
     },
   }
 
-
-
   const onSubmit = async(e) => {
     await e.preventDefault()
     const {keyword} = form
-  
+    
+    if(reviewStatetype===""&&isContracted==="")
+    {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload: { params: {isContracted:isContracted , keyword:keyword, "pageRequest.direction": "ASC", "pageRequest.page": currentPage, "pageRequest.size": postsPerPage , reviewState:reviewStatetype} },
+        payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
         currentPage: currentPage
       })
-  
+    }
+    else if(reviewStatetype==="")
+    {
+      dispatch({
+        type: APPLY_LOADING_REQUEST,
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        currentPage: currentPage
+      })
+    }
+    else if(isContracted==="")
+    {
+      dispatch({
+        type: APPLY_LOADING_REQUEST,
+        payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        currentPage: currentPage
+      })
+    }
+    else{
+      dispatch({
+        type: APPLY_LOADING_REQUEST,
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        currentPage: currentPage
+      })
+    }
 }
 
 
-  const reviewState = (reviewstate) => {
-
-    console.log(reviewstate)
-    switch (reviewstate) {
-      case "BEFORE":
-        return (<div>리뷰 작성 전</div>)
-      case "WAITING":
-        return (<div>리뷰 승인 대기</div>)
-      case "ACCEPT":
-        return (<div>리뷰 승인</div>)
-      case "REJECT":
-        return (<div>리뷰 반려</div>)
-        
-    }
-
-  }
   useEffect(() => {
     dispatch({
       type: APPLY_LOADING_REQUEST,
-      payload: { params: { "pageRequest.direction": "ASC", "pageRequest.page": currentPage, "pageRequest.size": postsPerPage } },
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
       currentPage: currentPage
     })
   }, [currentPage])
 
-  const detailLoading = (applyId) => {
-    setOpen(true)
-    dispatch({
-      type: APPLY_DETAIL_REQUEST,
-      payload: applyId
-    })
-    dispatch({
-      type: BOARD_DETAIL_REQUEST,
-      payload: applydetails.recruitmentBoardId
-    })
-  }
 
   console.log(totalElements)
   return (
@@ -168,50 +164,23 @@ const handleChange_reviewState = (e) => {
             <MenuItem value="ACCEPT">리뷰 승인</MenuItem>
             <MenuItem value="REJECT">리뷰 반려</MenuItem>
             <MenuItem value="">공백</MenuItem>
-
           </Select>
           </FormControl>
-  
-
                 <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
               검색
                 </Button>      
       </div>
         </Fragment>  
               </Grid>
-
             </Grid>
           </Toolbar>
         </AppBar>
         <div className="contentWrapper">
-          <Typography color="textSecondary" align="center">
-            <Table>
-              <TableHead>
-                <TableCell style={styles.tableHead}> 지원번호  </TableCell>
-                <TableCell style={styles.tableHead}> 계약여부  </TableCell>
-                <TableCell style={styles.tableHead}> 리뷰      </TableCell>
-                <TableCell style={styles.tableHead}> 리뷰상태 </TableCell>
-                <TableCell style={styles.tableHead}> 상세보기 </TableCell>
-              </TableHead>
-              <TableBody>
-                {applys.map((apply) => (
-                  <TableRow  /*component={Link} to ={`/admin/apply/${apply.applyId}`} key={apply.applyId}*/>
-                    <TableCell style={styles.tableCell} >{apply.applyId}</TableCell>
-                    <TableCell style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
-                    <TableCell style={styles.tableCell}>{apply.review === null ? "리뷰 작성 전" : apply.review}</TableCell>
-                    <TableCell style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
-                    <TableCell style={styles.tableCell}>{apply.reviewState !== "WAITING" ? "" : <Button color="primary" onClick={() => detailLoading(apply.applyId)} style={{ height: "0px" }}>리뷰처리</Button>}</TableCell>
-                  </TableRow>
-                ))
-                }
-              </TableBody>
-            </Table>
-          </Typography>
+          <Applytable applys={applys}/>
         </div>
         <Pagination postsPerPage={postsPerPage} totalPosts={totalElements} paginate={setCurrentPage} />
 
       </Paper>
-      <ApplyModal useOpen={[open, setOpen]} applyId={applyId} applydetails={applydetails} text={text} title={title} />
 
     </div>
 

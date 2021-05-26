@@ -94,9 +94,8 @@ const searchBoardAPI = (payload) =>{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
-        params: payload.params
     }
-    return axios.get(`/api/v1/recboard/search`,config)
+    return axios.post(`/api/v1/recboard/search`,payload,config)
 }
 
 function* searchBoard(action)

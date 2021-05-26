@@ -40,7 +40,7 @@ const Tag = () => {
   useEffect(()=>{
     dispatch({
       type: TAG_SEARCH_REQUEST,
-      payload:{params:{keyword:keyword,"pageRequest.direction":"ASC", "pageRequest.page":currentPage, "pageRequest.size":postsPerPage}},
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
       currentPage:currentPage
     })
     },[currentPage])
@@ -87,7 +87,7 @@ const Tag = () => {
     <Fragment>
     <Tagadd/>
 
-    <Paper className="paper">
+    <Paper className="tag-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Grid container spacing={2} alignItems="center">
             <Grid item xs>     
