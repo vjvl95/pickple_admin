@@ -2,20 +2,13 @@
 import React ,{useRef}from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+
 import { APPLY_LOADING_REQUEST, APPLY_DETAIL_REQUEST } from '../../actions/applyAction';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
@@ -23,6 +16,8 @@ import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Fragment } from 'react';
+import Table from "../layout/table"
+
 import {Input} from 'reactstrap'
 import Applytable from './applytable'
 import InputLabel from '@material-ui/core/InputLabel';
@@ -44,7 +39,7 @@ const Apply = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setTagsPerPage] = useState(10);
   const [open, setOpen] = useState(false)
-  const { applys, totalElements } = useSelector((state) => state.apply);
+  const { applys, totalElements,loading } = useSelector((state) => state.apply);
   const indexOfLastTag = currentPage * postsPerPage
   const indexOfFirstTag = indexOfLastTag - postsPerPage
   const [isContracted, setisContracted] = React.useState('ALL');
@@ -54,7 +49,11 @@ const Apply = () => {
   const classes = useStyles();
   const resetValue=useRef(null)
   const {keyword} = form
-
+  useEffect(() => {
+    
+    onSubmit()
+    
+}, [currentPage])
 
   const onChange= (e) => {
     setValues(
@@ -74,9 +73,7 @@ const handleChange_reviewState = (e) => {
 
 };
 
-useEffect(() => {
-    onSubmit()
-}, [currentPage])
+
 
   console.log(reviewStatetype)
   console.log(isContracted)
@@ -116,8 +113,9 @@ useEffect(() => {
 
 
 
-
+  console.log(applys)
   console.log(totalElements)
+  console.log(loading)
   return (
     <div>
       <Paper className="apply-paper">
@@ -159,7 +157,8 @@ useEffect(() => {
           </Toolbar>
         </AppBar>
         <div className="contentWrapper">
-          <Applytable applys={applys}/>
+       <Applytable applys={applys}/>
+       {/*   <Table applys={applys} tablenum={1}/>*/}
         </div>
         <Pagination postsPerPage={postsPerPage} totalPosts={totalElements} paginate={setCurrentPage} />
 

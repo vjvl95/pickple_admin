@@ -19,6 +19,7 @@ import UserSearch from "./userSearch"
 import { Fragment } from 'react';
 import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -89,18 +90,19 @@ const resetValue=useRef(null)
     <Fragment>
     <Paper className="user-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
-        <Toolbar>
+        <Toolbar  style={{paddingTop:"15px"}}>
         <Grid container spacing={2} alignItems="center">
       <Grid item xs>     
             <Fragment>
         <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
                 <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
-                <FormControl className={classes.formControl} >
+                <FormControl className={classes.formControl} style={{bottom:"15px"}}>
+                <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>멤버 타입</InputLabel>
 
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={type} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
-              <MenuItem value="ADMIN">ADMIN</MenuItem>
-              <MenuItem value="MEMBER">MEMBER</MenuItem>
-              <MenuItem value="ALL">ALL</MenuItem>
+              <MenuItem value="ADMIN">관리자</MenuItem>
+              <MenuItem value="MEMBER">멤버</MenuItem>
+              <MenuItem value="ALL">전체</MenuItem>
             </Select>
           </FormControl>
               

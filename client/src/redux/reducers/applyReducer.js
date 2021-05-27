@@ -19,6 +19,7 @@ const applyReducer = (state=initialState,action) =>{
                 ...state,
                 applys:[],
                 isAuthenticated: null,
+                loading : true,
 
             }
      case  APPLY_LOADING_SUCCESS:
@@ -27,11 +28,14 @@ const applyReducer = (state=initialState,action) =>{
                 applys:[...state.applys,...action.payload.content],
                 totalElements:action.payload.totalElements,
                 isAuthenticated: null,
+                loading : false,
 
             }
      case  APPLY_LOADING_FAILURE:
                 return{
                     ...state,
+                    loading : false,
+
                 }
 
                 case APPLY_DETAIL_REQUEST:
