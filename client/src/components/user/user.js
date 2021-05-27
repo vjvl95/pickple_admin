@@ -36,17 +36,16 @@ const User = () => {
   
   const dispatch=useDispatch()
   const [form, setValues] = useState({keyword:""})
-  const [type, setType] = React.useState('');
+  const [type, setType] = React.useState('ALL');
   const classes = useStyles();
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
   const {users,totalElements} = useSelector((state) => state.user);
   useEffect(()=>{
-    dispatch({
-      type:USER_SEARCH_REQUEST,
-      payload:{keyword:"",pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-  })
+    
+    onSubmit()
+
     },[currentPage])
 
   const onChange= (e) => {
@@ -59,12 +58,12 @@ const User = () => {
 }
 
 
+console.log(totalElements)
 const handleChange = (e) => {  
   setType(e.target.value);
 };
 
 const onSubmit = async(e) => {
-    await e.preventDefault()
     const {keyword} = form
     console.log(type)
     if(type!=="ALL"){

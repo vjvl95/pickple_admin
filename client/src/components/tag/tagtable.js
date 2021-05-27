@@ -12,7 +12,6 @@ import moment from 'moment';
 
 
 const Tagtable = ({tags}) =>{
-  const createDate = moment(tags.createDate).format('YYYY-MM-DD')
     const dispatch = useDispatch();
     const styles = {
         tableHead :{
@@ -40,7 +39,7 @@ const Tagtable = ({tags}) =>{
       
     return(
         <Typography color="textSecondary" align="center">
-        {  tags.length===0
+        {  tags.length===0 
         ?null
         :<Table>
         <TableHead >

@@ -12,7 +12,6 @@ const loadApplyAPI = (payload) =>{
             "X-AUTH-TOKEN": localStorage.getItem("token")
         },
     }
-    
     return axios.post("/api/v1/apply/search",payload,config)
 }
 
@@ -36,7 +35,6 @@ function* loadApplys (action)
 }
 
 const loadApplyDetailsAPI = (payload) =>{
-    
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -72,9 +70,7 @@ const reviewAcceptAPI = (payload) =>{
             "X-AUTH-TOKEN": localStorage.getItem("token")
         }
     }
-
     return axios.put("/api/v1/apply/manage",payload,config)
-    
 }
 
 function* reviewAccept (action)

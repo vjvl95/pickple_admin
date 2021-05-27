@@ -147,7 +147,6 @@ function* SearchTag(action){
             type: TAG_SEARCH_FAILURE,
             payload:e
         })
-        yield put(push("/admin/tag"))
     }
 }
 function* watchSearchTag(){

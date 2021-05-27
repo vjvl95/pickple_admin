@@ -17,24 +17,21 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { APPLY_LOADING_REQUEST, APPLY_DETAIL_REQUEST } from '../../actions/applyAction';
-import { BOARD_DETAIL_REQUEST } from "../../actions/boardAction"
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import Modal from '@material-ui/core/Modal';
-import { Link } from "react-router-dom"
-import ApplyModal from "./applymodal"
-import SelectInput from '@material-ui/core/Select/SelectInput';
 import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Fragment } from 'react';
-import {Form,Input} from 'reactstrap'
+import {Input} from 'reactstrap'
 import Applytable from './applytable'
+import InputLabel from '@material-ui/core/InputLabel';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
-    
+    minWidth: 120,  
+
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -47,17 +44,16 @@ const Apply = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setTagsPerPage] = useState(10);
   const [open, setOpen] = useState(false)
-  const [applyId] = useState("")
   const { applys, totalElements } = useSelector((state) => state.apply);
-  const { text, title, board } = useSelector((state) => state.board);
   const indexOfLastTag = currentPage * postsPerPage
   const indexOfFirstTag = indexOfLastTag - postsPerPage
-  const [isContracted, setisContracted] = React.useState('');
-  const [reviewStatetype, setreviewStatetype] = React.useState('');
+  const [isContracted, setisContracted] = React.useState('ALL');
+  const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
 
   const [form, setValues] = useState({keyword:""})
   const classes = useStyles();
   const resetValue=useRef(null)
+  const {keyword} = form
 
 
   const onChange= (e) => {
@@ -78,61 +74,47 @@ const handleChange_reviewState = (e) => {
 
 };
 
-  const styles = {
-    tableHead: {
-      textAlign: 'center',
-    },
-    tableCell: {
-      textAlign: 'center',
-      height: "60px"
-    },
-  }
+useEffect(() => {
+    onSubmit()
+}, [currentPage])
+
+  console.log(reviewStatetype)
+  console.log(isContracted)
+
 
   const onSubmit = async(e) => {
-    await e.preventDefault()
     const {keyword} = form
     
-    if(reviewStatetype===""&&isContracted==="")
+    if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-        currentPage: currentPage
       })
     }
-    else if(reviewStatetype==="")
+    else if(reviewStatetype==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-        currentPage: currentPage
       })
     }
-    else if(isContracted==="")
+    else if(isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
-        currentPage: currentPage
       })
     }
     else{
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
-        currentPage: currentPage
       })
     }
 }
 
 
-  useEffect(() => {
-    dispatch({
-      type: APPLY_LOADING_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-      currentPage: currentPage
-    })
-  }, [currentPage])
 
 
   console.log(totalElements)
@@ -140,30 +122,31 @@ const handleChange_reviewState = (e) => {
     <div>
       <Paper className="apply-paper">
         <AppBar className="searchBar" position="static" color="default" elevation={0}>
-          <Toolbar>
+          <Toolbar style={{paddingTop:"15px"}}>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs>
               <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
               <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
-              <FormControl className={classes.formControl} >
+              <FormControl className={classes.formControl} style={{bottom:"15px"}} >
+              <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>계약 여부</InputLabel>
 
-            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={isContracted} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
+              <Select labelId="demo-simple-select-label" id="demo-simple-select" value={isContracted} onChange={handleChange} style={{width:"100px", marginLeft:"1.5rem"}}>
               <MenuItem value="0">계약 전</MenuItem>
               <MenuItem value="1">계약 완료</MenuItem>
-              <MenuItem value="">전체</MenuItem>
+              <MenuItem value="ALL">전체</MenuItem>
 
             </Select>
           </FormControl>
               
-          <FormControl className={classes.formControl} >
-
+          <FormControl className={classes.formControl}  style={{bottom:"15px"}}>
+          <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>리뷰 상태</InputLabel>
           <Select labelId="demo-simple-select-label" id="demo-simple-select" value={reviewStatetype} onChange={handleChange_reviewState} style={{width:"140px", marginLeft:"1.5rem"}}>
             <MenuItem value="BEFORE">리뷰 작성 전</MenuItem>
             <MenuItem value="WAITING">리뷰 승인 대기</MenuItem>
             <MenuItem value="ACCEPT">리뷰 승인</MenuItem>
             <MenuItem value="REJECT">리뷰 반려</MenuItem>
-            <MenuItem value="">전체</MenuItem>
+            <MenuItem value="ALL">전체</MenuItem>
           </Select>
           </FormControl>
                 <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >

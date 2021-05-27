@@ -31,9 +31,10 @@ const reviewState = (reviewstate) =>
 }
 
 const Applytable = ({applys}) => {
+
     return(
         <Typography color="textSecondary" align="center">
-           {applys.lenth===0
+           {applys.length===0 || applys===undefined
            ?null
            : <Table>
               <TableHead>

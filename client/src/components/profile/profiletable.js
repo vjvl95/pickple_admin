@@ -41,7 +41,7 @@ const Profiletable = ({profiles}) =>{
                 </TableHead>
                 {<TableBody>
                     {profiles.map((profile)=>(
-                      <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.account_id}>
+                      <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.profileId}>
                         <TableCell style={styles.tableCell}>{profile.introduce}</TableCell>
                         <TableCell style={styles.tableCell}>{profile.userName}</TableCell>
                       </TableRow>  

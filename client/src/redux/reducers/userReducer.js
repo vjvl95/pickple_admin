@@ -92,6 +92,7 @@ const userReducer = (state = initialState, action) => {
                         return {
                             ...state,
                             users:[...state.users, ...action.payload.content],
+                            totalElements:action.payload.totalElements,
                             loading: false,
                         }
             

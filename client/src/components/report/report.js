@@ -24,6 +24,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
 import ReportTable from "./reporttable"
+import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -58,17 +59,14 @@ const Report = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
   const {reports,totalElements} = useSelector((state) => state.report);
-  const [reportResult, setReportResult] = React.useState('');
-  const [reportState, setReportState] = React.useState('');
+  const [reportResult, setReportResult] = React.useState('ALL');
+  const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
 
   useEffect(()=>{
-    dispatch({
+     
+     onSubmit()
       
-      type: REPORT_SEARCH_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-      currentPage:currentPage
-    })
     },[currentPage])
   
       const onChange= (e) => {
@@ -90,9 +88,8 @@ const Report = () => {
     };
     
     const onSubmit = async(e) => {
-      await e.preventDefault()
       const {keyword} = form
-      if(reportState ==="" && reportResult==="" )
+      if(reportState ==="ALL" && reportResult==="ALL" )
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
@@ -100,7 +97,7 @@ const Report = () => {
           currentPage: currentPage
         })
       }
-      else if(reportState ==="")
+      else if(reportState ==="ALL")
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
@@ -109,7 +106,7 @@ const Report = () => {
         })
       }
    
-      else if(reportResult==="")
+      else if(reportResult==="ALL")
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
@@ -130,31 +127,33 @@ const Report = () => {
   return (
     <Paper className="report-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
-        <Toolbar>
+        <Toolbar  style={{paddingTop:"15px"}}>
           <Grid container spacing={2} alignItems="center">
           
             <Grid item xs>
             <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
               <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
-              <FormControl className={classes.formControl} >
+              <FormControl className={classes.formControl} style={{bottom:"15px"}}>
+              <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>처리 상태</InputLabel>
 
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={reportState} onChange={handleChange_reportState} style={{width:"100px", marginLeft:"1.5rem"}}>
               <MenuItem value="BEFORE">처리 전</MenuItem>
               <MenuItem value="AFTER">처리 완료</MenuItem>
-              <MenuItem value="">전체</MenuItem>
+              <MenuItem value="ALL">전체</MenuItem>
 
             </Select>
           </FormControl>
               
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl} style={{bottom:"15px"}}>
+          <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>처리 결과</InputLabel>
 
           <Select labelId="demo-simple-select-label" id="demo-simple-select" value={reportResult} onChange={handleChange_reportResult } style={{width:"140px", marginLeft:"1.5rem"}}>
             <MenuItem value="BOARD_DELETED">게시글 삭제</MenuItem>
             <MenuItem value="BOARD_MODIFIED">게시글 수정</MenuItem>
             <MenuItem value="ACCOUNT_DELETED">작성자 삭제</MenuItem>
             <MenuItem value="GIVE_WARNING">작성자 경고</MenuItem>
-            <MenuItem value="">전체</MenuItem>
+            <MenuItem value="ALL">전체</MenuItem>
 
           </Select>
           </FormControl>

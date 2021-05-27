@@ -25,7 +25,6 @@ const Board = () => {
   const {boards,totalElements} = useSelector((state) => state.board);
   const [form, setValues] = useState({keyword:""})
 
-  console.log(totalElements)
   useEffect(()=>{
     dispatch({
       type: BOARD_SEARCH_REQUEST,

@@ -7,7 +7,7 @@ import {APPLY_DETAIL_REQUEST, REVIEW_ACCEPT_REQUEST,REVIEW_REJECT_REQUEST} from 
 import { BOARD_DETAIL_REQUEST } from "../../actions/boardAction";
 import "./apply.css"
 import Button from '@material-ui/core/Button';
-
+import Header from "../header/ReviewHeader"
 const Applydetail = (req) => {
     const applyId=Number(req.match.params.id)
     const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Applydetail = (req) => {
           {
             dispatch({
               type:REVIEW_ACCEPT_REQUEST,
-              payload:{params:{applyId:applydetails.applyId, reviewState:"ACCEPT"}},
+              payload:{applyId:applydetails.applyId, reviewState:"ACCEPT"},
             },[])
             }  
           }
@@ -55,7 +55,7 @@ const Applydetail = (req) => {
           {
             dispatch({
               type:REVIEW_REJECT_REQUEST,
-              payload:{params:{applyId:applydetails.applyId, reviewState:"REJECT"}},
+              payload:{applyId:applydetails.applyId, reviewState:"REJECT"},
             },[])
             }  
           }
@@ -70,6 +70,7 @@ const Applydetail = (req) => {
 
     return(
         <Fragment>
+          <Header/>
         <Paper className="apply-paper-detail" elevation={3} style={{padding:"20px"}}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">

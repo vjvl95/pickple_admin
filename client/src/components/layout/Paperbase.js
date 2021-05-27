@@ -17,7 +17,7 @@ import TextField from '@material-ui/core/TextField';
 import {  useEffect,useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { REPORT_SEARCH_REQUEST } from '../../actions/reportAction';
-import { APPLY_SEARCH_REQUEST } from '../../actions/applyAction';
+import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
 
 import {useDispatch, useSelector} from "react-redux"
 import { Fragment } from 'react';
@@ -38,20 +38,18 @@ function Paperbase(props) {
     dispatch({
       type: REPORT_SEARCH_REQUEST,
       payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage},  reportState: "BEFORE" },
-      currentPage:currentPage
     })
-    },[currentPage]
+    dispatch({
+      type: APPLY_LOADING_REQUEST,
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:"WAITING"},
+    })
+  
+    },[currentPage],
     
+    
+
     )
-    useEffect(()=>{
-      dispatch({
-        type: APPLY_SEARCH_REQUEST,
-        payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:"ACCEPT"},
-        currentPage:currentPage
-      })
-      },[currentPage]
-      
-      )
+   
 
       console.log(applys)
       console.log(reports)
@@ -80,7 +78,7 @@ function Paperbase(props) {
     </AppBar>
     <div className="contentWrapper">
       <Typography color="textSecondary" align="center">
-     {applys.length===0 ?<h1>처리 대기중인 리뷰가 없습니다</h1>:<Applytable reports={reports}/>}
+     {applys.length===0 ?<h1>처리 대기중인 리뷰가 없습니다</h1>:<Applytable applys={applys}/>}
       </Typography>
     </div>
     {applys.length===0 ?null :<Pagination postsPerPage={postsPerPage} totalPosts = {totalElements_apply} paginate={setCurrentPage} />}
