@@ -157,8 +157,9 @@ const handleChange_reviewState = (e) => {
           </Toolbar>
         </AppBar>
         <div className="contentWrapper">
-       <Applytable applys={applys}/>
-       {/*   <Table applys={applys} tablenum={1}/>*/}
+      {/*  <Applytable applys={applys}/>*/}
+
+      <Table applys={applys} tablenum={1}/>
         </div>
         <Pagination postsPerPage={postsPerPage} totalPosts={totalElements} paginate={setCurrentPage} />
 

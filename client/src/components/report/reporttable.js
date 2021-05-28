@@ -42,7 +42,7 @@ const Reporttable = ({reports}) => {
     }
     return(
     <Typography color="textSecondary" align="center">
-    {reports.lenth===0
+    {reports.length===0
     ?null
     :<Table>
     <TableHead>

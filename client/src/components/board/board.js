@@ -15,6 +15,7 @@ import Boardtable from "./boardtable"
 import Pagination from '../layout/Pagenation'
 import { Fragment } from 'react';
 import {Form,Input} from 'reactstrap'
+import Table from "../layout/table"
 
 const Board = () => {
   const resetValue=useRef(null)
@@ -75,7 +76,7 @@ const Board = () => {
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-       <Boardtable boards={boards}/>
+      <Table boards={boards} tablenum={2}/>
       </div>
       <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
 

@@ -3,7 +3,6 @@ import Select from '@material-ui/core/Select';
 import React , {useRef} from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Form,Input} from 'reactstrap'
-
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,13 +13,12 @@ import Button from '@material-ui/core/Button';
 import { USER_SEARCH_REQUEST} from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import Usertable from "./usertable"
 import UserSearch from "./userSearch"
 import { Fragment } from 'react';
 import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-
+import Table from "../layout/table"
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -116,7 +114,7 @@ const resetValue=useRef(null)
           </Grid>        </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-        <Usertable users={users}/>
+        <Table users={users} tablenum={6}/>
       </div>
       <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
 

@@ -8,11 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import Table from '../layout/table';
 import { REPORT_LOADING_REQUEST,REPORT_SEARCH_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
@@ -168,7 +164,7 @@ const Report = () => {
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">
-       <ReportTable reports={reports}/>
+       <Table reports={reports} tablenum={4}/>
       </div>
     </Paper>
   );
