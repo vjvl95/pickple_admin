@@ -14,7 +14,7 @@ import Pagination from '../layout/Pagenation'
 import Tagadd from "./tagadd"
 import { Fragment } from 'react';
 import Tagsearch from "./tagsearch"
-import Tagtable from "./tagtable"
+import Table from "../layout/table"
 import {Form,Input} from 'reactstrap'
 
 
@@ -101,7 +101,7 @@ const Tag = () => {
 
       </AppBar>
       <div className="contentWrapper">
-      <Tagtable tags={tags}/>
+      <Table tags={tags} tablenum={5}/>
 
       </div>
       <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
