@@ -97,13 +97,15 @@ const UserSearchAPI = (payload) =>{
 
 function* UserSearch(action){
     try{
+        console.log(action.accounttype)
         console.log(action.payload)
         const result= yield call(UserSearchAPI,action.payload)
         console.log(result, "UserSearch");
 
         yield put({
             type:USER_SEARCH_SUCCESS,
-            payload:result.data.data
+            payload:result.data.data,
+            accounttype:action.accounttype
         })
     } catch(e){
         yield put({

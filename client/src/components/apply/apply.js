@@ -17,9 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Fragment } from 'react';
 import Table from "../layout/table"
-
 import {Input} from 'reactstrap'
-import Applytable from './applytable'
 import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +37,7 @@ const Apply = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setTagsPerPage] = useState(10);
   const [open, setOpen] = useState(false)
-  const { applys, totalElements,loading } = useSelector((state) => state.apply);
+  const { applys, totalElements,loading,pre_reviewStatetype,pre_isContracted,pre_keyword} = useSelector((state) => state.apply);
   const indexOfLastTag = currentPage * postsPerPage
   const indexOfFirstTag = indexOfLastTag - postsPerPage
   const [isContracted, setisContracted] = React.useState('ALL');
@@ -81,12 +79,22 @@ const handleChange_reviewState = (e) => {
 
   const onSubmit = async(e) => {
     const {keyword} = form
-    
+    console.log(pre_reviewStatetype)
+    console.log(pre_isContracted)
+    console.log(pre_keyword)
+    if(pre_reviewStatetype!== reviewStatetype || pre_isContracted!== isContracted  )
+    {
+      setCurrentPage(1)
+    }
+
     if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        reviewStatetype:reviewStatetype,
+        isContracted:isContracted,
+        keyword:keyword
       })
     }
     else if(reviewStatetype==="ALL")
@@ -94,6 +102,8 @@ const handleChange_reviewState = (e) => {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        reviewStatetype:reviewStatetype,
+        isContracted:isContracted
       })
     }
     else if(isContracted==="ALL")
@@ -101,12 +111,16 @@ const handleChange_reviewState = (e) => {
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        reviewStatetype:reviewStatetype,
+        isContracted:isContracted
       })
     }
     else{
       dispatch({
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        reviewStatetype:reviewStatetype,
+        isContracted:isContracted
       })
     }
 }
@@ -157,11 +171,10 @@ const handleChange_reviewState = (e) => {
           </Toolbar>
         </AppBar>
         <div className="contentWrapper">
-      {/*  <Applytable applys={applys}/>*/}
 
       <Table applys={applys} tablenum={1}/>
         </div>
-        <Pagination postsPerPage={postsPerPage} totalPosts={totalElements} paginate={setCurrentPage} />
+        <Pagination postsPerPage={postsPerPage} totalPosts={totalElements} paginate={setCurrentPage} page={currentPage}/>
 
       </Paper>
 

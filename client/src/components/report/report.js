@@ -5,22 +5,20 @@ import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Table from '../layout/table';
-import { REPORT_LOADING_REQUEST,REPORT_SEARCH_REQUEST } from '../../actions/reportAction';
+import { REPORT_SEARCH_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Link} from "react-router-dom"
 import { Fragment } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import {Form,Input} from 'reactstrap'
+import {Input} from 'reactstrap'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
-import ReportTable from "./reporttable"
 import InputLabel from '@material-ui/core/InputLabel';
+import Pagination from '../layout/Pagenation'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -166,6 +164,8 @@ const Report = () => {
       <div className="contentWrapper">
        <Table reports={reports} tablenum={4}/>
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage}  page={currentPage}/>
+
     </Paper>
   );
 }

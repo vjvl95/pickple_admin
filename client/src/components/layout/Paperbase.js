@@ -21,9 +21,8 @@ import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
 
 import {useDispatch, useSelector} from "react-redux"
 import { Fragment } from 'react';
-import Reporttable from "../report/reporttable"
-import Applytable from "../apply/applytable"
 import Pagination from "./Pagenation"
+import Table from "./table"
 
 function Paperbase(props) {
   const [contents,setContents]=useState("")
@@ -64,10 +63,10 @@ function Paperbase(props) {
     </AppBar>
     <div className="contentWrapper">
       <Typography color="textSecondary" align="center">
-     {reports.length===0 ?"처리 대기중인 신고가 없습니다":<Reporttable reports={reports}/>}
+     {reports.length===0 ?"처리 대기중인 신고가 없습니다":<Table reports={reports} tablenum={4}/>}
       </Typography>
     </div>
-    {reports.length===0 ?null :<Pagination postsPerPage={postsPerPage} totalPosts = {totalElements_report} paginate={setCurrentPage} />}
+    {reports.length===0 ?null :<Pagination postsPerPage={postsPerPage} totalPosts = {totalElements_report} paginate={setCurrentPage} page={currentPage}/>}
 
   </Paper>
 
@@ -78,10 +77,10 @@ function Paperbase(props) {
     </AppBar>
     <div className="contentWrapper">
       <Typography color="textSecondary" align="center">
-     {applys.length===0 ?<h1>처리 대기중인 리뷰가 없습니다</h1>:<Applytable applys={applys}/>}
+     {applys.length===0 ?<h1>처리 대기중인 리뷰가 없습니다</h1>:<Table applys={applys} tablenum={1}/>}
       </Typography>
     </div>
-    {applys.length===0 ?null :<Pagination postsPerPage={postsPerPage} totalPosts = {totalElements_apply} paginate={setCurrentPage} />}
+    {applys.length===0 ?null :<Pagination postsPerPage={postsPerPage} totalPosts = {totalElements_apply} paginate={setCurrentPage}  page={currentPage}/>}
     
   </Paper>
 

@@ -5,10 +5,14 @@ const initialState={
     loading : false,
     applys:[],
     applydetails:[],
+    pre_reviewStatetype:"",
+    pre_isContracted:"",
+    pre_keyword:"",
     sucessMsg:"",
     errorMsg:"",
     totalElements:"",
     totalPages:"",
+    
 };
 
 const applyReducer = (state=initialState,action) =>{
@@ -20,13 +24,15 @@ const applyReducer = (state=initialState,action) =>{
                 applys:[],
                 isAuthenticated: null,
                 loading : true,
-
             }
      case  APPLY_LOADING_SUCCESS:
             return{
                 ...state,
-                applys:[...state.applys,...action.payload.content],
+                applys:action.payload.content,
                 totalElements:action.payload.totalElements,
+                pre_reviewStatetype:action.reviewStatetype,
+                pre_isContracted:action.isContracted,
+                pre_keyword:action.keyword,
                 isAuthenticated: null,
                 loading : false,
 

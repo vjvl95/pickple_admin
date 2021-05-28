@@ -2,23 +2,21 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import React , {useRef} from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
-import {Form,Input} from 'reactstrap'
-import PropTypes from 'prop-types';
+import {Input} from 'reactstrap'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { USER_SEARCH_REQUEST} from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import UserSearch from "./userSearch"
 import { Fragment } from 'react';
 import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Table from "../layout/table"
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -40,7 +38,8 @@ const User = () => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
-  const {users,totalElements} = useSelector((state) => state.user);
+  const {users,totalElements,previous_type} = useSelector((state) => state.user);
+  const [dispatchindex, setDispatchindex]= useState("")
   useEffect(()=>{
     
     onSubmit()
@@ -64,17 +63,27 @@ const handleChange = (e) => {
 
 const onSubmit = async(e) => {
     const {keyword} = form
-    console.log(type)
+    console.log(dispatchindex)
+
+    console.log(previous_type)
+    if(previous_type!==type)
+    {
+      setCurrentPage(1)
+    }
+    
     if(type!=="ALL"){
       dispatch({
         type:USER_SEARCH_REQUEST,
         payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        accounttype:type
     })
     }
     else{
-      dispatch({
+      dispatch({ 
       type:USER_SEARCH_REQUEST,
       payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      accounttype:type
+
     })
 }
 }
@@ -111,12 +120,13 @@ const resetValue=useRef(null)
       </div>
         </Fragment>  
             </Grid>
-          </Grid>        </Toolbar>
+          </Grid>        
+        </Toolbar>
       </AppBar>
       <div className="contentWrapper">
         <Table users={users} tablenum={6}/>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} page={currentPage} />
 
     </Paper>
     </Fragment>

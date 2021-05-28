@@ -23,7 +23,10 @@ function* loadApplys (action)
     console.log(result)
     yield put({
         type:APPLY_LOADING_SUCCESS,
-        payload: result.data.data
+        payload: result.data.data,
+        reviewStatetype:action.reviewStatetype,
+        isContracted:action.isContracted,
+        keyword:action.keyword
     })
     } catch (error) {
         yield put({

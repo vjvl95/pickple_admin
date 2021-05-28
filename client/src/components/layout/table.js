@@ -19,6 +19,13 @@ const styles = {
     tableCell : {
         textAlign : 'center',
     },
+    tableCell_long : {
+      textAlign : 'center',
+      textOverflow: "ellipsis",
+      whiteSpace:"nowrap",
+      overflow:"hidden",
+      maxWidth: "100px"
+    }
 }
 
 const reviewState = (reviewstate) => 
@@ -105,66 +112,68 @@ const Tablelayout = (props)=> {
             )
             else if(props.tablenum===2)
             return(
-        <Table>
-        <TableHead>
-            <TableCell style = {styles.tableHead}> 제목 </TableCell>
-            <TableCell style = {styles.tableHead}> 작성자</TableCell>
-        </TableHead>
-        <TableBody>
-            {props.boards.map((board,index)=>(
-            <TableRow component={Link} to ={`/admin/board/${board.boardId}`} key={board.boardId}>
-                <TableCell style = {styles.tableCell}>{board.title}</TableCell>
-                <TableCell style = {styles.tableCell}>{board.idString}</TableCell>
-            </TableRow>  
-            ))
-        }
-          </TableBody>
-        </Table>
+                        <Table>
+                        <TableHead>
+                            <TableCell style = {styles.tableHead}> 제목 </TableCell>
+                            <TableCell style = {styles.tableHead}> 작성자</TableCell>
+                        </TableHead>
+                        <TableBody>
+                            {props.boards.map((board,index)=>(
+                            <TableRow component={Link} to ={`/admin/board/${board.boardId}`} key={board.boardId}>
+                                <TableCell style = {styles.tableCell}>{board.title}</TableCell>
+                                <TableCell style = {styles.tableCell}>{board.idString}</TableCell>
+                            </TableRow>  
+                            ))
+                        }
+                          </TableBody>
+                        </Table>
             )
             else if(props.tablenum===3)
             return(
-            <Table>
-                <TableHead>
-                    <TableCell style={styles.tableHead}> 소개 </TableCell>
-                    <TableCell style={styles.tableHead}> 사용자</TableCell>
+                      <Table>
+                          <TableHead>
+                              <TableCell style={styles.tableHead}> 소개 </TableCell>
+                              <TableCell style={styles.tableHead}> 사용자</TableCell>
 
-                </TableHead>
-                {<TableBody>
-                    {props.profiles.map((profile)=>(
-                      <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.profileId}>
-                        <TableCell style={styles.tableCell}>{profile.introduce}</TableCell>
-                        <TableCell style={styles.tableCell}>{profile.userName}</TableCell>
-                      </TableRow>  
-                    ))}
-                </TableBody>
-                    }
-                </Table>
-            )
+                          </TableHead>
+                          {<TableBody>
+                              {props.profiles.map((profile)=>(
+                                <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.profileId}>
+                                  <TableCell style={styles.tableCell_long}>{profile.introduce}</TableCell>
+                                  <TableCell style={styles.tableCell_long}>{profile.userName}</TableCell>
+                                </TableRow>  
+                              ))}
+                          </TableBody>
+                              }
+                        </Table>
+                    )
+            
             else if(props.tablenum===4)
             return(
-    <Table>
-    <TableHead>
-        <TableCell style = {styles.tableHead}> 신고 내용 </TableCell>
-        <TableCell style = {styles.tableHead}> 신고 상태 </TableCell>
-        <TableCell style = {styles.tableHead}> 처리 결과</TableCell>
-    </TableHead>
-    
-    <TableBody>
-      {props.reports.map((report)=>
-      (
-  <TableRow  component={Link} to ={`/admin/report/${report.reportId}`}key={report.reportId}>
-    <TableCell style={styles.tableCell}>{report.reportText}</TableCell>
-    <TableCell style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-    <TableCell style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
+                      <Table>
+                          <TableHead>
+                              <TableCell style={styles.tableHead}>
+                                  신고 내용
+                              </TableCell>
+                              <TableCell style={styles.tableHead}>
+                                  신고 상태
+                              </TableCell>
+                              <TableCell style={styles.tableHead}>
+                                  처리 결과</TableCell>
+                          </TableHead>
 
-  </TableRow>  
-      ))           
-    }
-  
-    </TableBody>
-    
-    </Table>
-            )
+                          <TableBody>
+                              {props.reports.map((report)=> (
+                              <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
+                                  <TableCell style={styles.tableCell_long}>{report.reportText}</TableCell>
+                                  <TableCell style={styles.tableCell_long}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
+                                  <TableCell style={styles.tableCell_long}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
+                              </TableRow>
+                              )) }
+
+                          </TableBody>
+                      </Table>
+                   )
 
             else if(props.tablenum===5)
             return(
@@ -191,24 +200,26 @@ const Tablelayout = (props)=> {
             else if(props.tablenum===6)
             return(
 <Table>
-                <TableHead>
-                    <TableCell style = {styles.tableHead}> 회원 아이디 </TableCell>
-                    <TableCell style = {styles.tableHead}> 회원 이름</TableCell>
-                    <TableCell style = {styles.tableHead}> 소속 경로</TableCell>
-                </TableHead>
+    <TableHead>
+        <TableCell style={styles.tableHead}>
+            회원 아이디
+        </TableCell>
+        <TableCell style={styles.tableHead}>
+            회원 이름</TableCell>
+        <TableCell style={styles.tableHead}>
+            소속 경로</TableCell>
+    </TableHead>
 
-                <TableBody>
-                    {props.users.map((user)=>(
-                    <TableRow component={Link} to ={`/admin/user/${user.idString}`} key={user.accountId}>
-                        <TableCell style = {styles.tableCell}>{user.idString}</TableCell>
-                        <TableCell style = {styles.tableCell}>{user.name}</TableCell>
-                        <TableCell style = {styles.tableCell}>{registerType(user.registerType)}</TableCell>
-                    </TableRow>  
-                    ))
-                }
-                  </TableBody>
-                
-                </Table>
+    <TableBody>
+        {props.users.map((user)=>(
+        <TableRow component={Link} to={`/admin/user/${user.idString}`} key={user.accountId}>
+            <TableCell style={styles.tableCell}>{user.idString}</TableCell>
+            <TableCell style={styles.tableCell}>{user.name}</TableCell>
+            <TableCell style={styles.tableCell}>{registerType(user.registerType)}</TableCell>
+        </TableRow>
+        )) }
+    </TableBody>
+</Table>
             )
           })()
 

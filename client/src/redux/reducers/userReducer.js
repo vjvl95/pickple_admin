@@ -18,6 +18,7 @@ const initialState={
     is_deleted:"",
     error:"",
     searchBy:"",
+    previous_type:"",
     searchResult:""
 };
 
@@ -91,14 +92,16 @@ const userReducer = (state = initialState, action) => {
                     case USER_SEARCH_SUCCESS:
                         return {
                             ...state,
-                            users:[...state.users, ...action.payload.content],
+                            users:action.payload.content,
                             totalElements:action.payload.totalElements,
+                            previous_type:action.accounttype,
                             loading: false,
                         }
             
                     case USER_SEARCH_FAILURE:
                         return {
                             ...state,
+                            users:[],
                             loading: false,
                         }
                         case USER_UPLOAD_REQUEST:

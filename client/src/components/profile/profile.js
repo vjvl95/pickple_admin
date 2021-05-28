@@ -39,7 +39,7 @@ const Profile = () => {
       <div className="contentWrapper">
         <Table profiles={profiles} tablenum={3}/>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} page={currentPage} />
 
     </Paper>
   );

@@ -57,6 +57,21 @@ const Reportdetail = (req) =>{
       })
   }
 
+  const reportresult = (result) =>{
+    console.log(result)
+    switch (result) {
+      case "BOARD_DELETED":
+        return (<div>게시글 삭제</div>)
+      case "BOARD_MODIFIED":
+        return (<div>게시글 수정</div>)
+      case "ACCOUNT_DELETED":
+        return (<div>회원 삭제</div>)
+      case "GIVE_WARNING":
+        return (<div>경고 조치</div>)
+      case "NONE":
+         return (<div>문제 없음</div>)
+    }
+}
 
 
     return (
@@ -65,6 +80,12 @@ const Reportdetail = (req) =>{
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">
                 <h2 style={{fontWeight:"bold", textAlign:"center"}}><span style={{ color: "#007bff"}}>{reportdetail.boardTitle}</span>에 대한 신고</h2>
+                <div className="upside">
+            <div className="workdate"><span className="textlabel">신고인</span><span style={{marginTop:"10px"}}>{reportdetail.reporterString}</span></div>
+            <div className="worknumber"><span className="textlabel">모집글 글쓴이</span>  <span style={{marginTop:"10px"}}>{reportdetail.reportedString}</span></div>
+            <div className="workstart"><span className="textlabel">신고 날짜</span>  <span style={{marginTop:"10px"}}>2020-05-21</span> </div>
+           </div>
+           
             <div className="apply-board-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>
                 모집글 내용
             </div>
@@ -93,7 +114,9 @@ const Reportdetail = (req) =>{
           처리
         </Button> 
         </div>     
-        :<div className="select-div"></div>
+        :<div className="select-div" style={{    fontSize: "25px"}}>
+          <span style={{marginRight:"20px", fontSize:"25px"}}>처리 결과 </span> : <span style={{marginLeft:"20px", fontSize:"25px" , color:"rgb(0, 123, 255)"}}> {reportresult(reportdetail.reportResult)}</span>
+        </div>
         }
           </Typography>
       </div>

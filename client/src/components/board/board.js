@@ -1,20 +1,16 @@
 
 import React ,{useRef}from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import { BOARD_LOADING_REQUEST,BOARD_SEARCH_REQUEST } from '../../actions/boardAction';
-import {Link} from "react-router-dom"
-import Boardtable from "./boardtable"
+import { BOARD_SEARCH_REQUEST } from '../../actions/boardAction';
 import Pagination from '../layout/Pagenation'
 import { Fragment } from 'react';
-import {Form,Input} from 'reactstrap'
+import {Input} from 'reactstrap'
 import Table from "../layout/table"
 
 const Board = () => {
@@ -78,7 +74,7 @@ const Board = () => {
       <div className="contentWrapper">
       <Table boards={boards} tablenum={2}/>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage}  page={currentPage}/>
 
     </Paper>
   );

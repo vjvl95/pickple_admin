@@ -1,21 +1,17 @@
 import './tag.css';
 import React ,{useRef} from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { TAG_LOADING_REQUEST,TAG_SEARCH_REQUEST} from '../../actions/tagAction';
+import { TAG_SEARCH_REQUEST} from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Pagination from '../layout/Pagenation'
 import Tagadd from "./tagadd"
 import { Fragment } from 'react';
-import Tagsearch from "./tagsearch"
 import Table from "../layout/table"
-import {Form,Input} from 'reactstrap'
+import {Input} from 'reactstrap'
 
 
 
@@ -104,7 +100,7 @@ const Tag = () => {
       <Table tags={tags} tablenum={5}/>
 
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} />
+      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage} page={currentPage} />
     </Paper>
     </Fragment>
   );
