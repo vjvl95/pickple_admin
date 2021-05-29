@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import theme from "../components/layout/theme"
 import mainpage from "../pages/mainpage"
 import tagpage from "../pages/tagpage"
-import reportpage from "../pages/reportpage"
+import reportpage from "../components/report/report"
 
 import userpage from "../pages/userpage"
 import applypage from "../pages/applypage"
@@ -32,7 +32,7 @@ const Router = () => {
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 
                                         <PrivateRoute path="/admin/tag" exact component={tagpage} />
 
-                                        <PrivateRoute path="/admin/report" exact component={reportpage} />   
+                                        <PrivateRoute path="/admin/report" component={reportpage} />   
                                         <PrivateRoute path="/admin/report/:id" exact component={reportdetailpage} />   
 
                                         <PrivateRoute path="/admin/user" exact component={userpage} />     

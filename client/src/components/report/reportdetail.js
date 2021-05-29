@@ -1,36 +1,27 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+
 import { REPORT_DETAIL_REQUEST,REPORT_MANAGE_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { Link } from "react-router-dom";
-import {RouteComponentProps} from "react-router"
-import theme from '../layout/theme'
-import styles from '../layout/style'
-import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Header from '../header/ReportHeader'
 import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { BOARD_DELETE_REQUEST } from '../../actions/boardAction';
-import {USER_DELETE_REQUEST} from "../../actions/userAction"
+
+
 const Reportdetail = (req) =>{
 
     const dispatch = useDispatch();
     const {reportdetail} = useSelector((state) => state.report);
     const history = useHistory();
     const [reportState,setreportState]=React.useState('');
+  console.log(req)
     const handleChange = (e) => {  
       setreportState(e.target.value);
     };
@@ -79,11 +70,15 @@ const Reportdetail = (req) =>{
         <Paper className="apply-paper-detail" elevation={3} style={{padding:"20px"}}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">
-                <h2 style={{fontWeight:"bold", textAlign:"center"}}><span style={{ color: "#007bff"}}>{reportdetail.boardTitle}</span>에 대한 신고</h2>
-                <div className="upside">
-            <div className="workdate"><span className="textlabel">신고인</span><span style={{marginTop:"10px"}}>{reportdetail.reporterString}</span></div>
-            <div className="worknumber"><span className="textlabel">모집글 글쓴이</span>  <span style={{marginTop:"10px"}}>{reportdetail.reportedString}</span></div>
-            <div className="workstart"><span className="textlabel">신고 날짜</span>  <span style={{marginTop:"10px"}}>2020-05-21</span> </div>
+                <h2 style={{fontWeight:"bold", textAlign:"center"}}>
+                <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span>                  </div>
+
+                  <span style={{ color: "#007bff"}}>{reportdetail.boardTitle}</span>에 대한 신고
+                </h2>
+                <div className="report-upside">
+            <div className="report-div"><span className="textlabel" style={{marginBottom:"10px"}}>신고인</span> <Link to = {`/admin/user/${reportdetail.reporterString}`}><span>{reportdetail.reporterString}</span></Link></div>
+            <div className="reported-div"><span className="textlabel" style={{marginBottom:"10px"}}>모집글 글쓴이</span>  <Link to = {`/admin/user/${reportdetail.reportedString}`}><span >{reportdetail.reportedString}</span></Link></div>
+            <div className="reportdate"><span className="textlabel" style={{marginBottom:"10px"}}>신고 날짜</span>  <span >2020-05-21</span> </div>
            </div>
            
             <div className="apply-board-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>

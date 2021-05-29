@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import {APPLY_DETAIL_REQUEST, REVIEW_ACCEPT_REQUEST,REVIEW_REJECT_REQUEST} from "../../actions/applyAction"
 import { BOARD_DETAIL_REQUEST } from "../../actions/boardAction";
 import "./apply.css"
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import Button from '@material-ui/core/Button';
 import Header from "../header/ReviewHeader"
 const Applydetail = (req) => {
@@ -15,7 +17,9 @@ const Applydetail = (req) => {
     const {text,title} = useSelector((state) => state.board);
     const history = useHistory();
 
-
+    const goBack = () => {
+      history.goBack();
+     };
     useEffect(()=>{
        dispatch({
           type: APPLY_DETAIL_REQUEST,
@@ -74,7 +78,10 @@ const Applydetail = (req) => {
         <Paper className="apply-paper-detail" elevation={3} style={{padding:"20px"}}>
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">
-                <h2 style={{fontWeight:"bold", textAlign:"center"}}><span style={{ color: "#007bff"}}>{title}</span>에 대한 후기</h2>
+                <h2 style={{fontWeight:"bold", textAlign:"center"}}>
+                <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span></div>
+                <span style={{ color: "#007bff"}}>{title}</span>에 대한 후기
+                </h2>
         
             <div className="apply-review-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>
                 리뷰 내용

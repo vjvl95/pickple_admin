@@ -19,6 +19,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
 import InputLabel from '@material-ui/core/InputLabel';
 import Pagination from '../layout/Pagenation'
+import queryString from "query-string"
+import { createBrowserHistory } from "history";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -32,8 +34,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Report = () => {
+const Report = (req) => {
+
+  const history = createBrowserHistory();
   const resetValue=useRef(null)
+  console.log(req)
+  const query= queryString.parse(req.location.search)
+  console.log(query)
 
   const styles = {
     tableHead :{
@@ -53,10 +60,10 @@ const Report = () => {
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage, setTagsPerPage]=useState(10);
   const {reports,totalElements} = useSelector((state) => state.report);
+
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
-
   useEffect(()=>{
      
      onSubmit()
@@ -83,6 +90,7 @@ const Report = () => {
     
     const onSubmit = async(e) => {
       const {keyword} = form
+   
       if(reportState ==="ALL" && reportResult==="ALL" )
       {
         dispatch({

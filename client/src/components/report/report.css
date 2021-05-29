@@ -11,3 +11,40 @@
   margin-top: 50px;
   margin-bottom: 20px;
 }
+.report-upside {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 20px;
+}
+.report-div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: rgb(226, 226, 226);
+  width: 33%;
+  padding: 20px 10px 20px 0px;
+}
+.reported-div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: rgb(226, 226, 226);
+  width: 33%;
+  padding: 20px 10px 20px 0px;
+}
+.reportdate {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 33%;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: rgb(226, 226, 226);
+  padding: 20px 10px 20px 0px;
+}
