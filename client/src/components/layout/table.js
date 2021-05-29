@@ -21,7 +21,6 @@ const styles = {
     },
     tableCell_long : {
       textAlign : 'center',
-      
       textOverflow: "ellipsis",
       whiteSpace:"nowrap",
       overflow:"hidden",

@@ -30,7 +30,7 @@ const Profile = () => {
     useEffect(()=>{
       dispatch({
         type: PROFILE_SEARCH_REQUEST,
-        payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        payload:{pageRequest:{direction:"DESC", page:currentPage, size:postsPerPage}},
         currentPage:currentPage
       })
       },[currentPage])
