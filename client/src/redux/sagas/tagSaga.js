@@ -26,10 +26,14 @@ function* loadTag(action){
             type:TAG_LOADING_SUCCESS,
             payload: result.data.data
         })
-    } catch(e){
+    } catch(error){
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type: TAG_LOADING_FAILURE,
-            payload:e
+            payload:error
         })
     }
 }
@@ -62,6 +66,11 @@ function* uploadTag(action){
         window.location.reload()
 
     } catch(e){
+        
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         if(e.response.data.code==="TG02")
         {
             alert("이미 해당 태그가 존재합니다.")
@@ -108,6 +117,11 @@ function* deleteTag(action){
         window.location.reload()
 
     } catch(e){
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         yield put({
             type: TAG_DELETE_FAILURE,
             payload:e,
@@ -143,6 +157,11 @@ function* SearchTag(action){
             payload: result.data.data
         })
     } catch(e){
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         yield put({
             type: TAG_SEARCH_FAILURE,
             payload:e

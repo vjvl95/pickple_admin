@@ -21,18 +21,20 @@ import applydetailpage from "../components/apply/applydetail"
 import reportdetailpage from "../components/report/reportdetail"
 
 const Router = () => {
+  const token=localStorage.getItem("token")
+
     return (
       <Fragment>
 
           <ThemeProvider theme={theme}>
           <Header/>                              
-          <Navigator  className="Navigator" PaperProps={{ style: { width: "20%"} }}/>
+          {token?<Navigator  className="Navigator" PaperProps={{ style: { width: "20%"} }}/> :null  }
           <Route path="/" exact component={loginpage}/>                              
                             <Switch>
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 
                                         <PrivateRoute path="/admin/tag" exact component={tagpage} />
 
-                                        <PrivateRoute path="/admin/report" component={reportpage} />   
+                                        <PrivateRoute path="/admin/report" exact component={reportpage} />   
                                         <PrivateRoute path="/admin/report/:id" exact component={reportdetailpage} />   
 
                                         <PrivateRoute path="/admin/user" exact component={userpage} />     

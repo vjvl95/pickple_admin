@@ -23,6 +23,11 @@ function* loadUser(action){
             payload: result.data.data
         })
     } catch(e){
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         yield put({
             type: USER_LOADING_FAILURE,
             payload:e
@@ -49,6 +54,11 @@ function* loadUserDetail(action){
             payload: result.data.data
         })
     } catch(e){
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         yield put({
             type: USER_DETAIL_FAILURE,
             payload:e
@@ -75,6 +85,11 @@ function* UserDelete(action){
         alert(action.payload.name+"님이 삭제되었습니다.")
         yield put(push("/admin/user"))
     } catch(e){
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
         yield put({
             type: USER_DELETE_FAILURE,
             payload:e
@@ -108,6 +123,12 @@ function* UserSearch(action){
             accounttype:action.accounttype
         })
     } catch(e){
+ 
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
+
         yield put({
             type: USER_SEARCH_FAILURE,
             payload:e
@@ -140,6 +161,13 @@ function* UserUpload(action){
 
         yield put(push("/admin/user"))
     } catch(e){
+
+         
+        if(e.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }      
+
         yield put({
             type: USER_UPLOAD_FAILURE,
             payload:e

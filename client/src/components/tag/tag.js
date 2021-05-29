@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { TAG_SEARCH_REQUEST} from '../../actions/tagAction';
+import { TAG_SEARCH_REQUEST,TAG_UPLOADING_REQUEST} from '../../actions/tagAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Pagination from '../layout/Pagenation'
@@ -68,12 +68,32 @@ const Tag = () => {
         }
     )
 }
+const onuploadClick = () => {
+
+  const {keyword} = form
+
+  var answer = window.confirm(keyword+"을 추가하시겠습니까?");
+  if(keyword){
+
+  if (answer) {
+    dispatch({
+      type:TAG_UPLOADING_REQUEST,
+      payload:{tagName:keyword},
+    },[])
+    }
+    
+  }
+  else{
+    alert("검색어를 입력하십시요.")
+
+  }  
+
+}
 
     const resetValue=useRef(null)
   return (
 
     <Fragment>
-    <Tagadd/>
 
     <Paper className="tag-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -81,14 +101,19 @@ const Tag = () => {
             <Grid item xs>     
             <Fragment>
             <div className="searchdiv">
-            <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginBottom:"5px",width: "35%",  marginLeft: "7rem"}}/>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{    marginLeft: "6rem"}} >
+            <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginBottom:"5px" , marginTop:"10px",width: "35%",  marginLeft: "4rem"}}/>
+            <div className="buttondiv" style={{marginTop:"10px"}}>
+
+            <Button className="tag_button" variant="contained" color="primary"  onClick={onSubmit} style={{marginLeft:"30px",marginRight:"10px"}} >
           검색
             </Button>
-
-            <Button className="reset" variant="contained" onClick={onReset} style={{    marginLeft: "2rem"}}>
+            <Button className="tag_button" variant="contained" color="primary" onClick={onuploadClick}  style={{marginLeft:"10px",marginRight:"10px"}}  >
+        등록
+        </Button>
+            <Button className="tag_button" variant="contained" onClick={onReset}   style={{marginLeft:"10px",marginRight:"10px"}} >
           초기화
             </Button>
+            </div>
             </div>
         </Fragment>  
             </Grid>

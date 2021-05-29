@@ -9,19 +9,22 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
 import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import PublicIcon from '@material-ui/icons/Public';
 import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
 import SettingsInputComponentIcon from '@material-ui/icons/SettingsInputComponent';
 import HomeIcon from '@material-ui/icons/Home';
 import {Link} from "react-router-dom"
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import ReportIcon from '@material-ui/icons/Report';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import TitleIcon from '@material-ui/icons/Title';
 const categories = [
   {
     id: '관리',
     children: [
       { id: '태그 관리', icon: <SettingsEthernetIcon />},
-      { id: '모집글 관리', icon: <DnsRoundedIcon /> },
+      { id: '모집글 관리', icon: <BorderColorIcon /> },
       { id: '신고 관리', icon: <PermMediaOutlinedIcon /> },
       { id: '지원 관리', icon: <PublicIcon /> },
       { id: '사용자 관리', icon: <PeopleIcon /> },
@@ -111,7 +114,7 @@ const Navigator = (props) => {
                     <ListItem
                           button
                           className={clsx(classes.item, classes.itemActiveItem)}>
-                          <ListItemIcon className={classes.itemIcon}><SettingsEthernetIcon /></ListItemIcon>
+                          <ListItemIcon className={classes.itemIcon}><TitleIcon/></ListItemIcon>
                             <ListItemText classes={{primary: classes.itemPrimary}}>
                             {"태그 관리"}
                           </ListItemText> 
@@ -120,7 +123,7 @@ const Navigator = (props) => {
 
                 <Link to="/admin/board">
                           <ListItem button className={clsx(classes.item, classes.itemActiveItem)}>
-                                  <ListItemIcon className={classes.itemIcon}><DnsRoundedIcon /></ListItemIcon>
+                                  <ListItemIcon className={classes.itemIcon}><BorderColorIcon /></ListItemIcon>
                                     <ListItemText  classes={{primary: classes.itemPrimary }}>
                                     {"모집글 관리"}
                                   </ListItemText> 
@@ -129,7 +132,7 @@ const Navigator = (props) => {
                 
                 <Link to="/admin/report">
                 <ListItem button className={clsx(classes.item, classes.itemActiveItem)}>
-                    <ListItemIcon className={classes.itemIcon}><PermMediaOutlinedIcon /></ListItemIcon>
+                    <ListItemIcon className={classes.itemIcon}><ReportIcon /></ListItemIcon>
                       <ListItemText classes={{primary: classes.itemPrimary}}>
                       {"신고 관리"}
                     </ListItemText> 
@@ -158,7 +161,7 @@ const Navigator = (props) => {
                 <ListItem
                     button
                     className={clsx(classes.item, classes.itemActiveItem)}>
-                    <ListItemIcon className={classes.itemIcon}><SettingsInputComponentIcon /></ListItemIcon>
+                    <ListItemIcon className={classes.itemIcon}><AssignmentIndIcon /></ListItemIcon>
                       <ListItemText classes={{primary: classes.itemPrimary}}>
                       {"프로필 관리"}
                     </ListItemText> 

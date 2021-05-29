@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-
+import moment from 'moment';
 
 const Reportdetail = (req) =>{
 
@@ -78,7 +78,7 @@ const Reportdetail = (req) =>{
                 <div className="report-upside">
             <div className="report-div"><span className="textlabel" style={{marginBottom:"10px"}}>신고인</span> <Link to = {`/admin/user/${reportdetail.reporterString}`}><span>{reportdetail.reporterString}</span></Link></div>
             <div className="reported-div"><span className="textlabel" style={{marginBottom:"10px"}}>모집글 글쓴이</span>  <Link to = {`/admin/user/${reportdetail.reportedString}`}><span >{reportdetail.reportedString}</span></Link></div>
-            <div className="reportdate"><span className="textlabel" style={{marginBottom:"10px"}}>신고 날짜</span>  <span >2020-05-21</span> </div>
+            <div className="reportdate"><span className="textlabel" style={{marginBottom:"10px"}}>신고 날짜</span>  <span >{moment(reportdetail.createDate).format('YYYY-MM-DD')}</span> </div>
            </div>
            
             <div className="apply-board-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>
@@ -109,8 +109,8 @@ const Reportdetail = (req) =>{
           처리
         </Button> 
         </div>     
-        :<div className="select-div" style={{    fontSize: "25px"}}>
-          <span style={{marginRight:"20px", fontSize:"25px"}}>처리 결과 </span> : <span style={{marginLeft:"20px", fontSize:"25px" , color:"rgb(0, 123, 255)"}}> {reportresult(reportdetail.reportResult)}</span>
+        :<div className="select-div" style={{    fontSize: "17px"}}>
+          <span style={{marginRight:"20px", fontSize:"17px"}}>처리 결과 </span> : <span style={{marginLeft:"20px", fontSize:"17px" , color:"rgb(0, 123, 255)"}}> {reportresult(reportdetail.reportResult)}</span>
         </div>
         }
           </Typography>

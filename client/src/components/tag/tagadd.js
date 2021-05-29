@@ -25,21 +25,7 @@ const Tagadd = () => {
     const [contents,setContents]=useState("")
     const dispatch = useDispatch();
 
-    const onuploadClick = (contents) => {
-      try{
-        var answer = window.confirm(contents+"을 추가하시겠습니까?");
-
-      if (answer) {
-        dispatch({
-          type:TAG_UPLOADING_REQUEST,
-          payload:{tagName:contents},
-        },[])
-        }  
-      }
-    catch(e){
-        console.log(e)
-    }
-  }
+   
 
   return (
     <Paper className="paper_tagadd">
@@ -50,9 +36,7 @@ const Tagadd = () => {
       <div className="contentWrapper">
         <Typography color="textSecondary" align="center">
         <TextField id="standard-basic" label="태그등록" onChange={(e) => {setContents(e.target.value)}} value={contents} />
-        <Button className="tag_add_button" variant="contained" color="primary" onClick={()=>onuploadClick(contents)}>
-        등록
-        </Button>
+       
         </Typography>
       </div>
     </Paper>

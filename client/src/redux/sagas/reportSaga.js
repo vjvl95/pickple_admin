@@ -26,6 +26,10 @@ function* loadReport (action)
         payload:result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:REPORT_LOADING_FAILURE,
             payload: error,
@@ -56,6 +60,10 @@ function* searchReport (action)
         payload:result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:REPORT_SEARCH_FAILURE,
             payload: error,
@@ -89,6 +97,10 @@ function* loadDetailReport (action)
         payload:result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:REPORT_DETAIL_FAILURE,
             payload: error,
@@ -118,7 +130,12 @@ function* manageReport (action)
         type:REPORT_MANAGE_SUCCESS,
         payload:result.data.data
     })
-    } catch (error) {
+    window.location.reload()
+} catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:REPORT_MANAGE_FAILURE,
             payload: error,

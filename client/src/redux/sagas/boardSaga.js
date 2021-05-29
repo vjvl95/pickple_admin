@@ -21,6 +21,10 @@ function* loadBoards (action)
         payload:result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:BOARD_LOADING_FAILURE,
             payload: error,
@@ -51,6 +55,10 @@ function* loadBoardDetail (action)
         payload:result.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:BOARD_DETAIL_FAILURE,
             payload: error,
@@ -79,6 +87,10 @@ function* deleteBoard(action)
     alert("모집글이 삭제되었습니다.")
     yield put(push("/admin/board"))
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:BOARD_DELETE_FAILURE,
             payload: error,
@@ -108,6 +120,10 @@ function* searchBoard(action)
         payload:result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:BOARD_SEARCH_FAILURE,
             payload: error,

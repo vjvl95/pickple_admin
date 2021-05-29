@@ -73,7 +73,7 @@ const goBack = () => {
             <Typography color="textSecondary">
 
             <h2 className="board_title" >
-            <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span> {boardDetails.title} {boardDetails.isDeleted===1?"(삭제된 모집글)":null}</div>
+            <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span> <span style={{fontSize:"21px"}}> {boardDetails.title} </span> <span style={{position:"relative", fontSize:"15px", top:"10px", left:"260px", color:"#CD5C5C"}}>{boardDetails.isDeleted===1?"삭제된 모집글":null}</span></div>
               </h2>
 
            <Divider style={{backgroundColor: "#E2E2E2"}}/>
@@ -102,7 +102,7 @@ const goBack = () => {
 
             <div className="board-body"> {boardDetails.text}</div>
             </div>
-            <div className="board-delete-button" style={{textAlign:"center", marginBottom:"100px", paddingBottom:"20px" }}>
+            <div className="board-delete-button" style={{textAlign:"center", marginBottom:"100px", paddingBottom:"20px" ,marginTop:"20px"}}>
            { boardDetails.isDeleted===1 ? "" : <Button variant="contained" onClick={() => ondelete()}>모집글 삭제</Button>}
             </div>
             </Typography>

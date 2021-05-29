@@ -1,4 +1,4 @@
-import { PROFILE_LOADING_FAILURE, PROFILE_LOADING_REQUEST, PROFILE_LOADING_SUCCESS, PROFILE_DETAIL_REQUEST, PROFILE_DETAIL_FAILURE, PROFILE_DETAIL_SUCCESS } from "../../actions/profileAction"
+import { PROFILE_LOADING_FAILURE, PROFILE_LOADING_REQUEST, PROFILE_LOADING_SUCCESS, PROFILE_DETAIL_REQUEST, PROFILE_DETAIL_FAILURE, PROFILE_DETAIL_SUCCESS, PROFILE_SEARCH_FAILURE,PROFILE_SEARCH_REQUEST,PROFILE_SEARCH_SUCCESS } from "../../actions/profileAction"
 
 const initialState = {
 
@@ -38,7 +38,26 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 loading: true
             }
-
+            case PROFILE_SEARCH_REQUEST:
+                return {
+                    ...state,
+                    profiles: [],
+                    loading: true
+                }
+    
+            case PROFILE_SEARCH_SUCCESS:
+                return {
+                    ...state,
+                    profiles: action.payload.content,
+                    totalElements: action.payload.totalElements,
+    
+                    loading: true
+                }
+            case PROFILE_SEARCH_FAILURE:
+                return {
+                    ...state,
+                    loading: true
+                }
         case PROFILE_DETAIL_REQUEST:
             return {
                 ...state,

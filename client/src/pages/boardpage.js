@@ -3,9 +3,8 @@ import BoardHeader from "../components/header/BoardHeader"
 import Board from "../components/board/board"
 
 const BoardPage = () =>{
- 
-
-      return(<div>
+      return(
+      <div>
           <BoardHeader/>
           <Board/>
       </div>)
