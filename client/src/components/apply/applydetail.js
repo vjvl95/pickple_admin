@@ -27,12 +27,6 @@ const Applydetail = (req) => {
         })
         },[])
     
-        useEffect(()=>{
-            dispatch({
-              type: BOARD_DETAIL_REQUEST,
-              payload: applydetails.recruitmentBoardId
-            })
-        },[applydetails])
 
 
     const onaccept = () =>{
@@ -69,9 +63,6 @@ const Applydetail = (req) => {
         }
     }
 
-    console.log(applydetails.recruitmentBoardId)
-
-
     return(
         <Fragment>
           <Header/>
@@ -80,7 +71,7 @@ const Applydetail = (req) => {
             <Typography color="textSecondary">
                 <h2 style={{fontWeight:"bold", textAlign:"center"}}>
                 <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span></div>
-                <span style={{ color: "#007bff"}}>{title}</span>에 대한 후기
+                <span style={{ color: "#007bff"}}>{applydetails.applierName}</span>에 대한 후기
                 </h2>
         
             <div className="apply-review-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>

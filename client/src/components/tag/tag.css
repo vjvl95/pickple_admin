@@ -8,12 +8,7 @@
   overflow: "hidden";
   min-width: 587px;
 }
-.tag_add_button {
-  margin-bottom: 10px;
-  position: relative;
-  top: 10px;
-  left: 10px;
-}
+
 .paper_tagadd {
   padding-bottom: 10px;
   max-width: 936;
@@ -36,4 +31,7 @@
   display: flex;
   margin: 10px 0px;
   justify-content: center;
+}
+.tag_button{
+  margin-left:"20px"
 }

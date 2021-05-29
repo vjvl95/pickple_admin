@@ -21,11 +21,13 @@ const styles = {
     },
     tableCell_long : {
       textAlign : 'center',
+      
       textOverflow: "ellipsis",
       whiteSpace:"nowrap",
       overflow:"hidden",
       maxWidth: "100px"
     }
+
 }
 
 const reviewState = (reviewstate) => 
@@ -166,8 +168,8 @@ const Tablelayout = (props)=> {
                               {props.reports.map((report)=> (
                               <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
                                   <TableCell style={styles.tableCell_long}>{report.reportText}</TableCell>
-                                  <TableCell style={styles.tableCell_long}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-                                  <TableCell style={styles.tableCell_long}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
+                                  <TableCell style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
+                                  <TableCell style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
                               </TableRow>
                               )) }
 

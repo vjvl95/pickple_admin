@@ -6,7 +6,6 @@ import { push } from "connected-react-router";
 
 const loadApplyAPI = (payload) =>{
     const config = {
-
         headers:{
             "Content-Type" : "application/json",
             "X-AUTH-TOKEN": localStorage.getItem("token")
@@ -29,6 +28,11 @@ function* loadApplys (action)
         keyword:action.keyword
     })
     } catch (error) {
+
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        }         
         yield put({
             type:APPLY_LOADING_FAILURE,
             payload: error,
@@ -58,6 +62,11 @@ function* loadApplysDetails (action)
         payload: result.data.data
     })
     } catch (error) {
+        if(error.response.status===403) 
+        {
+      
+            localStorage.removeItem("token");
+        } 
         yield put({
             type:APPLY_DETAIL_FAILURE,
             payload: error,
@@ -88,6 +97,10 @@ function* reviewAccept (action)
     alert("리뷰를 승인하였습니다.")
     window.location.reload()
     } catch (error) {
+        if(error.response.status===403) 
+        {
+            localStorage.removeItem("token");
+        } 
         yield put({
             type:REVIEW_ACCEPT_FAILURE,
           });

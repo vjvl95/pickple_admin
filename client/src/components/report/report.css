@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-width: 0px 1px 1px 1px;
+  border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
   width: 33%;
@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-width: 0px 1px 1px 1px;
+  border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
   width: 33%;
@@ -43,7 +43,7 @@
   flex-direction: column;
   text-align: center;
   width: 33%;
-  border-width: 0px 1px 1px 1px;
+  border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: rgb(226, 226, 226);
   padding: 20px 10px 20px 0px;

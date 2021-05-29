@@ -24,20 +24,35 @@ import Header from '../header/UserHeader'
 import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "./user.css"
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,  
+
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const UserDetail = (req) => {
     const dispatch = useDispatch();
+    const classes = useStyles();
+
     const {usersDetail} = useSelector((state) => state.user);
-    const [form,setVaule]=useState({newemail:""})
+    const [form,setVaule]=useState({newemail:"",accountType:"",newStudentId:""})
 
     const history = useHistory();
-
 
     const goBack = () => {
       history.goBack();
      };
-
-
 
     useEffect(()=>{
       dispatch({
@@ -49,19 +64,33 @@ const UserDetail = (req) => {
       },[dispatch])
 
       useEffect(()=>{
-        setVaule({
-          newemail:usersDetail.email
-        })
+        if(usersDetail.studentId===undefined)
+          {
+            setVaule({
+              newemail:usersDetail.email,
+              accountType:usersDetail.accountType,
+              newStudentId:""
+            })
+          }
+        else{
+          setVaule({
+            newemail:usersDetail.email,
+            accountType:usersDetail.accountType,
+            newStudentId:usersDetail.studentId
+          })
+        }
       },[usersDetail.email])
 
       const onupdate = () => {
+        console.log(form.accountType)
+        console.log(form.newemail)
         try{
             var answer = window.confirm("회원정보를 수정하시겠습니까?")
         if(answer)
         {
             dispatch({
                 type:USER_UPLOAD_REQUEST,
-                payload:{accountId:usersDetail.accountId,accountType:usersDetail.accountType, newEmail:form.newemail,newStudentId:"20513532"},
+                payload:{accountId:usersDetail.accountId,accountType:form.accountType, newEmail:form.newemail,newStudentId:form.newStudentId},
             },[])
             }  
         }
@@ -90,7 +119,8 @@ const UserDetail = (req) => {
           console.log(e)
       }
    }
-
+  
+  
       const onChange=(e)=>
       {
         setVaule({
@@ -118,9 +148,19 @@ const UserDetail = (req) => {
       <div className="label">
             <div className="label2">
             <div className="userbody"><span className="userspan">회원 번호</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountId}</span></div>
-            <div className="userbody"><span className="userspan">회원 타입</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountType}</span></div>
+            <div className="userbody"><span className="userspan" style={{marginTop:"25px"}}>회원 타입</span> <span  className="userspan2" style={{marginTop:"25px"}}>:</span> 
+            <FormControl className={classes.formControl} style={{bottom:"15px", position:"relative",left:"-30px",bottom:"3px"}} >
+                <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>회원타입</InputLabel>
+                  <Select labelId="demo-simple-select-label" id="demo-simple-select" value={form.accountType}  name="accountType" onChange={onChange} style={{width:"100px", marginLeft:"1.5rem"}}>
+                  <MenuItem value="MEMBER">멤버</MenuItem>
+                  <MenuItem value="ADMIN">관리자</MenuItem>
+                </Select>
+            </FormControl>
+            </div>
+            <div className="userbody"><span className="userspan">회원 학번</span> <span  className="userspan2">:</span> <span className="userspan3"> <TextField className="emailinput"id="outlined-basic" label="학번" name="newStudentId" variant="outlined" value={form.newStudentId} onChange={onChange}  size="small" style={{top:"-5px"}}/></span></div>
+
             <div className="userbody"><span className="userspan">회원 아이디</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.idString}</span></div>
-            <div className="userbody"><span className="userspan">회원 이름</span> <span  className="userspan2">:</span> <span className="userspan3"> {usersDetail.name}</span></div>
+            <div className="userbody"><span className="userspan" >회원 이름</span> <span  className="userspan2" >:</span> <span className="userspan3"> {usersDetail.name}</span></div>
             <div className="userbody"><span className="userspan-email">이메일</span> <span  className="userspan-email2">:</span> <span className="userspan3">{usersDetail.isDeleted===0 ?<TextField className="emailinput"id="outlined-basic" label="email" name="newemail" variant="outlined" value={form.newemail} onChange={onChange}  size="small"/> :<span style={{marginTop:"7px", marginBottom:"7px"}}>{usersDetail.email}</span>}</span></div>
             <div className="userbody"><span className="userspan">삭제여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isDeleted===0 ? "회원" : "탈퇴회원"}</span></div>
             <div className="userbody"><span className="userspan">인증 여부</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.isCertified===0 ? "인증안됨" : "인증"}</span></div>
