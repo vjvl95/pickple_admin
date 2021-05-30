@@ -105,7 +105,7 @@ const Tablelayout = (props)=> {
            </TableHead>
            <TableBody>
              {props.applys.map((apply) => (
-               <TableRow  component="a" href ={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
+               <TableRow component={Link} to={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
                  <TableCell width="17.5%" style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
                  <TableCell width="65%" style={styles.tableCell}>{apply.review === null ? "-" : apply.review}</TableCell>
                  <TableCell width="17.5%"style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
@@ -169,7 +169,7 @@ const Tablelayout = (props)=> {
 
                           <TableBody>
                               {props.reports.map((report)=> (
-                              <TableRow component="a" href={`/admin/report/${report.reportId}`} key={report.reportId}>
+                              <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
                                   <TableCell width="70%" style={styles.tableCell_long}>{report.reportText}</TableCell>
                                   <TableCell width="15%" style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
                                   <TableCell width="15%" style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
