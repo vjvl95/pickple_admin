@@ -19,7 +19,10 @@ import { Fragment } from 'react';
 import Table from "../layout/table"
 import {Input} from 'reactstrap'
 import InputLabel from '@material-ui/core/InputLabel';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -42,7 +45,7 @@ const Apply = () => {
   const indexOfFirstTag = indexOfLastTag - postsPerPage
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
-
+  const [direction,setDirection]=useState("ASC")
   const [form, setValues] = useState({keyword:""})
   const classes = useStyles();
   const resetValue=useRef(null)
@@ -70,7 +73,10 @@ const handleChange_reviewState = (e) => {
   setreviewStatetype(e.target.value);
 };
 
-
+const handleChange_direction = (event) => {
+  setDirection(event.target.value);
+  console.log(direction)
+};
 
   console.log(reviewStatetype)
   console.log(isContracted)
@@ -90,7 +96,7 @@ const handleChange_reviewState = (e) => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
         keyword:keyword
@@ -100,7 +106,7 @@ const handleChange_reviewState = (e) => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
@@ -109,7 +115,7 @@ const handleChange_reviewState = (e) => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
@@ -117,25 +123,28 @@ const handleChange_reviewState = (e) => {
     else{
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
     }
 }
 
-
-
-  console.log(applys)
-  console.log(totalElements)
-  console.log(loading)
   return (
     <div>
       <Paper className="apply-paper">
         <AppBar className="searchBar" position="static" color="default" elevation={0}>
-          <Toolbar style={{paddingTop:"15px"}}>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs>
+          <Toolbar style={{paddingTop:"15px", justifyContent:"center"}}>
+            
+          <FormControl component="fieldset">
+       <FormLabel component="legend" style={{fontWeight:"bold", marginLeft:"35%",color: "rgba(0, 0, 0, 0.54)"}}>정렬</FormLabel>
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange_direction} style={{flexDirection:"unset"}}>
+                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+           </RadioGroup>
+    </FormControl>
+
+
               <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
               <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
@@ -165,8 +174,7 @@ const handleChange_reviewState = (e) => {
                 </Button>      
       </div>
         </Fragment>  
-              </Grid>
-            </Grid>
+     
           </Toolbar>
         </AppBar>
         <div className="contentWrapper">

@@ -19,7 +19,7 @@ import boarddetailpage from "../components/board/boarddetail"
 import profiledetailpage from "../components/profile/profiledetail"
 import applydetailpage from "../components/apply/applydetail"
 import reportdetailpage from "../components/report/reportdetail"
-
+import NoneNavigator from "../components/layout/NoneNavigator"
 const Router = () => {
   const token=localStorage.getItem("token")
 
@@ -28,7 +28,7 @@ const Router = () => {
 
           <ThemeProvider theme={theme}>
           <Header/>                              
-          {token?<Navigator  className="Navigator" PaperProps={{ style: { width: "20%"} }}/> :null  }
+          {token?<Navigator  className="Navigator" PaperProps={{ style: { width: "241px"} }}/> :  <NoneNavigator className="Navigator" PaperProps={{ style: { width: "241px"} }}/>}
           <Route path="/" exact component={loginpage}/>                              
                             <Switch>
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 

@@ -21,6 +21,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Pagination from '../layout/Pagenation'
 import queryString from "query-string"
 import { createBrowserHistory } from "history";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -38,9 +42,15 @@ const Report = (req) => {
 
   const history = createBrowserHistory();
   const resetValue=useRef(null)
-  console.log(req)
-  const query= queryString.parse(req.location.search)
-  console.log(query)
+  
+
+
+ 
+
+
+
+
+
 
   const styles = {
     tableHead :{
@@ -64,6 +74,7 @@ const Report = (req) => {
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
+  const [direction,setDirection]=useState("ASC")
   useEffect(()=>{
      
      onSubmit()
@@ -95,7 +106,7 @@ const Report = (req) => {
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }},
+          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }},
           currentPage: currentPage
         })
       }
@@ -103,7 +114,7 @@ const Report = (req) => {
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage },reportResult: reportResult},
+          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage },reportResult: reportResult},
           currentPage: currentPage
         })
       }
@@ -112,27 +123,38 @@ const Report = (req) => {
       {
         dispatch({
           type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }, reportState: reportState},
+          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportState: reportState},
           currentPage: currentPage
         })
       }
       else{
         dispatch({
           type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
+          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
           currentPage: currentPage
         })
 
       }
   }
-  
+  const handleChange = (event) => {
+    setDirection(event.target.value);
+    console.log(direction)
+  };
   return (
     <Paper className="report-paper">
-      <AppBar className="searchBar" position="static" color="default" elevation={0}>
-        <Toolbar  style={{paddingTop:"15px"}}>
-          <Grid container spacing={2} alignItems="center">
-          
-            <Grid item xs>
+      <AppBar className="searchBar" position="static" color="default" elevation={0} style={{justifyContent:"center"}}>
+        <Toolbar  style={{paddingTop:"15px", justifyContent:"center"}}>
+        
+
+        <FormControl component="fieldset">
+       <FormLabel component="legend" style={{fontWeight:"bold", marginLeft:"35%",color: "rgba(0, 0, 0, 0.54)"}}>정렬</FormLabel>
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset"}}>
+                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+           </RadioGroup>
+    </FormControl>
+
+
             <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
               <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
@@ -164,9 +186,7 @@ const Report = (req) => {
                 </Button>      
       </div>
         </Fragment>  
-            </Grid>
-
-          </Grid>
+  
         </Toolbar>
       </AppBar>
       <div className="contentWrapper">

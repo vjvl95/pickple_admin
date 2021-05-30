@@ -1,8 +1,7 @@
 .report-paper {
-  max-width: 936;
-  width: 50%;
+  width: 60%;
   margin: 30px auto;
-  min-width: 672px;
+  min-width: 860px;
   overflow: "hidden";
 }
 .select-div {

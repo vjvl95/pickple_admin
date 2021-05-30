@@ -102,9 +102,9 @@ const Tablelayout = (props)=> {
            <TableBody>
              {props.applys.map((apply) => (
                <TableRow  component={Link} to ={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
-                 <TableCell style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
-                 <TableCell style={styles.tableCell}>{apply.review === null ? "-" : apply.review}</TableCell>
-                 <TableCell style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
+                 <TableCell width="17.5%" style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
+                 <TableCell width="65%" style={styles.tableCell}>{apply.review === null ? "-" : apply.review}</TableCell>
+                 <TableCell width="17.5%"style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
                </TableRow>
              ))
              }
@@ -140,8 +140,8 @@ const Tablelayout = (props)=> {
                           {<TableBody>
                               {props.profiles.map((profile)=>(
                                 <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.profileId}>
-                                  <TableCell style={styles.tableCell_long}>{profile.introduce}</TableCell>
-                                  <TableCell style={styles.tableCell_long}>{profile.userName}</TableCell>
+                                  <TableCell width="70%" style={styles.tableCell_long}>{profile.introduce}</TableCell>
+                                  <TableCell width="30%" style={styles.tableCell}>{profile.userName}</TableCell>
                                 </TableRow>  
                               ))}
                           </TableBody>
@@ -166,9 +166,9 @@ const Tablelayout = (props)=> {
                           <TableBody>
                               {props.reports.map((report)=> (
                               <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
-                                  <TableCell style={styles.tableCell_long}>{report.reportText}</TableCell>
-                                  <TableCell style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-                                  <TableCell style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
+                                  <TableCell width="70%" style={styles.tableCell_long}>{report.reportText}</TableCell>
+                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
+                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
                               </TableRow>
                               )) }
 
