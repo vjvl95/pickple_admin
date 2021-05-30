@@ -10,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import "./Header.css";
 import styles from '../layout/style'
 
-const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 function MainHeader(props) {
   const { classes } = props;

@@ -2,16 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import User from '../user/user'
-import styles from '../layout/style'
-const lightColor = 'rgba(255, 255, 255, 0.7)';
 
-const Tagheader =(props) => {
+const UserHeader =(props) => {
 
   const { classes } = props;
 
@@ -44,8 +39,8 @@ const Tagheader =(props) => {
 }
 
 
-Tagheader.propTypes = {
+UserHeader.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Tagheader);
+export default (UserHeader);

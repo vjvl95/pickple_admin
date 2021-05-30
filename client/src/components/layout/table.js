@@ -1,4 +1,4 @@
-import React ,{useRef}from 'react';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,10 +6,11 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 import { Link } from "react-router-dom"
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import { TAG_DELETE_REQUEST } from '../../actions/tagAction';
+import TableContainer from '@material-ui/core/TableContainer';
 
 const styles = {
     tableHead :{
@@ -90,14 +91,17 @@ const Tablelayout = (props)=> {
     console.log(props.tablenum)
     return(
         <Typography color="textSecondary" align="center">
+        <TableContainer>
         {
           (function(){
             if(props.tablenum===1) return(
               <Table>
            <TableHead>
-             <TableCell style={styles.tableHead}> 계약여부  </TableCell>
-             <TableCell style={styles.tableHead}> 리뷰      </TableCell>
-             <TableCell style={styles.tableHead}> 리뷰상태 </TableCell>
+             <TableRow>
+                <TableCell style={styles.tableHead}> 계약여부  </TableCell>
+                <TableCell style={styles.tableHead}> 리뷰      </TableCell>
+                <TableCell style={styles.tableHead}> 리뷰상태 </TableCell>
+             </TableRow>
            </TableHead>
            <TableBody>
              {props.applys.map((apply) => (
@@ -222,10 +226,13 @@ const Tablelayout = (props)=> {
     </TableBody>
 </Table>
             )
+            else
+              return(null)
           })()
 
     
             }
+    </TableContainer>
 
           </Typography>
     )

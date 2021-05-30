@@ -1,15 +1,10 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
+
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { USER_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/userAction';
-import {  useEffect,useState } from 'react'
+import {  useEffect } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import { Link } from "react-router-dom";
-import {RouteComponentProps} from "react-router"
-import theme from '../layout/theme'
-import styles from '../layout/style'
+
 import Divider from '@material-ui/core/Divider';
 import { BOARD_DETAIL_REQUEST,BOARD_DELETE_REQUEST } from '../../actions/boardAction';
 import moment from 'moment';

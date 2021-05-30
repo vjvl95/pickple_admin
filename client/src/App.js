@@ -4,7 +4,6 @@ import { ConnectedRouter } from "connected-react-router";
 import store, { history } from "./store/store";
 import Router from "./routers/Router";
 import "bootstrap/dist/css/bootstrap.min.css"
-import { hot } from 'react-hot-loader'
 import "./assets/img/reset.css"
 const App = () => {
   return (
@@ -16,4 +15,4 @@ const App = () => {
   )
 }
 
-export default hot(module)(App);
+export default (App);

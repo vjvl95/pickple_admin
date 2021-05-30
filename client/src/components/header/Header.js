@@ -1,20 +1,16 @@
 import React , {useEffect}from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {useDispatch } from "react-redux";
 
 import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import "./Header.css";
 import styles from '../layout/style'
 import {LOGOUT_REQUEST} from "../../actions/loginAction"
 
-const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 
 

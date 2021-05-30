@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{ useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {} from "reactstrap"
 import { LOGIN_REQUEST } from "../../actions/loginAction";
@@ -12,8 +12,6 @@ const Login = () =>{
     const [id,setId]=  useState("") 
     const [password,setPassword]=  useState("") 
     const dispatch=useDispatch()
-
-    const {errorMsg} =useSelector((state)=>state.login)
     
     const onChange= (e) =>{
         setValues({

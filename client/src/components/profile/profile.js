@@ -1,9 +1,7 @@
 
 import React ,{useRef}from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
@@ -12,7 +10,6 @@ import Pagination from '../layout/Pagenation'
 import Table from "../layout/table"
 import Button from '@material-ui/core/Button';
 import {Input} from 'reactstrap'
-import Grid from '@material-ui/core/Grid';
 import { Fragment } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -24,7 +21,7 @@ import "./profile.css"
 
 const Profile = () => {
   const [currentPage, setCurrentPage]=useState(1)
-  const [postsPerPage, setTagsPerPage]=useState(10);
+  const [postsPerPage]=useState(10);
   const resetValue=useRef(null)
   const [form, setValues] = useState({keyword:""})
   const [direction,setDirection]=useState("ASC")

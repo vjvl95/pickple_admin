@@ -2,11 +2,9 @@
 import React ,{useRef}from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Table from '../layout/table';
 import { REPORT_SEARCH_REQUEST } from '../../actions/reportAction';
 import {  useEffect,useState } from 'react'
@@ -19,8 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
 import InputLabel from '@material-ui/core/InputLabel';
 import Pagination from '../layout/Pagenation'
-import queryString from "query-string"
-import { createBrowserHistory } from "history";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -39,13 +35,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Report = (req) => {
-
-  const history = createBrowserHistory();
   const resetValue=useRef(null)
   
 
 
- 
+
 
 
 
@@ -68,15 +62,16 @@ const Report = (req) => {
   const classes = useStyles();
 
   const [currentPage, setCurrentPage]=useState(1)
-  const [postsPerPage, setTagsPerPage]=useState(10);
+  const [postsPerPage]=useState(10);
   const {reports,totalElements} = useSelector((state) => state.report);
 
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
   const [direction,setDirection]=useState("ASC")
+
   useEffect(()=>{
-     
+
      onSubmit()
       
     },[currentPage])

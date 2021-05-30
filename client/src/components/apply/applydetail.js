@@ -1,10 +1,9 @@
-import React,{useEffect,useState,Fragment} from "react"
+import React,{useEffect,Fragment} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from "react-router-dom";
 import {APPLY_DETAIL_REQUEST, REVIEW_ACCEPT_REQUEST,REVIEW_REJECT_REQUEST} from "../../actions/applyAction"
-import { BOARD_DETAIL_REQUEST } from "../../actions/boardAction";
 import "./apply.css"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -14,7 +13,6 @@ const Applydetail = (req) => {
     const applyId=Number(req.match.params.id)
     const dispatch = useDispatch();
     const {applydetails} = useSelector((state) => state.apply);
-    const {text,title} = useSelector((state) => state.board);
     const history = useHistory();
 
     const goBack = () => {

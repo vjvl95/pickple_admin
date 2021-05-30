@@ -4,12 +4,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
-import { APPLY_LOADING_REQUEST, APPLY_DETAIL_REQUEST } from '../../actions/applyAction';
+import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import Pagination from '../layout/Pagenation'
@@ -38,18 +35,14 @@ const Apply = () => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setTagsPerPage] = useState(10);
-  const [open, setOpen] = useState(false)
-  const { applys, totalElements,loading,pre_reviewStatetype,pre_isContracted,pre_keyword} = useSelector((state) => state.apply);
-  const indexOfLastTag = currentPage * postsPerPage
-  const indexOfFirstTag = indexOfLastTag - postsPerPage
+  const [postsPerPage] = useState(10);
+  const { applys, totalElements,pre_reviewStatetype,pre_isContracted,pre_keyword} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("ASC")
   const [form, setValues] = useState({keyword:""})
   const classes = useStyles();
   const resetValue=useRef(null)
-  const {keyword} = form
   useEffect(() => {
     
     onSubmit()

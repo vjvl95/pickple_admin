@@ -8,7 +8,6 @@ import { TAG_SEARCH_REQUEST,TAG_UPLOADING_REQUEST} from '../../actions/tagAction
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import Pagination from '../layout/Pagenation'
-import Tagadd from "./tagadd"
 import { Fragment } from 'react';
 import Table from "../layout/table"
 import {Input} from 'reactstrap'
@@ -18,7 +17,7 @@ import {Input} from 'reactstrap'
 
 const Tag = () => {
   const [currentPage, setCurrentPage]=useState(1)
-  const [postsPerPage, setTagsPerPage]=useState(10);
+  const [postsPerPage]=useState(10);
   const [form, setValues] = useState({keyword:""})
 
   const {tags,totalElements} = useSelector((state) => state.tag);

@@ -1,16 +1,12 @@
 import React from 'react'
-import { useEffect,useState} from 'react';
-import { PaginationItem } from 'reactstrap';
+
 import { useLocation } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
 import "./login.css"
 import Pagination from '@material-ui/lab/Pagination';;
 
 const Paginations = ({postsPerPage,totalPosts,paginate,page}) =>{
     
     const pageNumbers=[];
-    const { pathname } = useLocation();
-    const pages=page;
     const handleOnclick=(event, value)=>{
         paginate(value)
       }

@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Apply from '../apply/apply'
 import styles from '../layout/style'
 
 const BoardHeader =(props) => {
@@ -40,20 +38,6 @@ const BoardHeader =(props) => {
       
     </React.Fragment>
   );
-}
-
-function TabPanel(props)
-{
-  const {children, value,index}=props;
-  return (
-    <div>
-     {
-       value==index&&(
-         <h1>{children}</h1>
-       )
-     }
-    </div>
-  )
 }
 
 BoardHeader.propTypes = {

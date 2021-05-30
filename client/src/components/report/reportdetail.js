@@ -4,12 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 import { REPORT_DETAIL_REQUEST,REPORT_MANAGE_REQUEST } from '../../actions/reportAction';
-import {  useEffect,useState } from 'react'
+import {  useEffect } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import Header from '../header/ReportHeader'
-import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';

@@ -2,20 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Tag from '../tag/tag'
-import Tagadd from '../tag/tagadd'
-import styles from '../layout/style'
-import {  useEffect,useState } from 'react'
-import {useDispatch, useSelector} from "react-redux"
-import { TAG_LOADING_REQUEST,TAG_DELETE_REQUEST } from '../../actions/tagAction';
-import {Link} from "react-router-dom"
 
-const lightColor = 'rgba(255, 255, 255, 0.7)';
+import styles from '../layout/style'
+
+
 
 const Tagheader =(props) => {
   const { classes } = props;
