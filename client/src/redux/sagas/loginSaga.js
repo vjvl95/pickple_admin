@@ -24,23 +24,8 @@ function* loginUser(action)
             payload:result.data
         })
         yield put(push(`/admin/`))
-        window.location.reload()
-
     }
     catch(e){
-        if(e.response.data.code==="GE01")
-        {
-            alert("아이디의 글자수는 4글자 이상이여야 합니다.")
-        }
-        else if(e.response.data.code==="ME01")
-        {
-            alert("아이디 및 비밀번호를 확인하시기 바랍니다.")
-        }
-        yield put({
-            type:LOGIN_FAILURE,
-            payload:e
-        })
-        window.location.reload()
     }
 }
 

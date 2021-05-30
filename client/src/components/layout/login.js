@@ -38,6 +38,7 @@ const Login = () =>{
         <div className="LoginWapper">
 
                 <div className="loginform">
+                    <h1 className="LoginTitle">PICKPLE 관리자 로그인</h1>
                     <div className="ID">
                     <TextField  id="standard-basic" label="ID" onChange={(e) => {setId(e.target.value)}} value={id} />
                     </div>
