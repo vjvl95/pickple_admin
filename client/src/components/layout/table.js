@@ -4,7 +4,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import Typography from '@material-ui/core/Typography';
 import { Link } from "react-router-dom"
 import {useDispatch} from "react-redux"
 import moment from 'moment';
@@ -124,14 +123,16 @@ const Tablelayout = (props)=> {
             return(
                         <Table>
                         <TableHead>
-                            <TableCell style = {styles.tableHead}> 제목 </TableCell>
-                            <TableCell style = {styles.tableHead}> 작성자</TableCell>
+                            <TableRow>
+                                <TableCell style = {styles.tableHead}> 제목 </TableCell>
+                                <TableCell style = {styles.tableHead}> 작성자</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {props.boards.map((board)=>(
-                            <TableRow component={Link} to ={`/admin/board/${board.boardId}`} key={board.boardId}>
-                                <TableCell width="65%" style = {styles.tableCell_long}>{board.title}</TableCell>
-                                <TableCell width="35%" style = {styles.tableCell_long}>{board.idString}</TableCell>
+                            <TableRow key={board.boardId}>
+                                <TableCell width="65%" style = {styles.tableCell_long}><Link to ={`/admin/board/${board.boardId}`} style={{ textDecoration: 'none', color: 'black' }}>{board.title} </Link> </TableCell>
+                                <TableCell width="35%" style = {styles.tableCell_long}><Link to ={`/admin/board/${board.boardId}`} style={{ textDecoration: 'none', color: 'black' }}>{board.idString} </Link></TableCell>
                             </TableRow>  
                             ))
                             }
@@ -164,6 +165,8 @@ const Tablelayout = (props)=> {
             return(
                       <Table>
                           <TableHead>
+                          <TableRow>
+
                               <TableCell style={styles.tableHead}>
                                   신고 내용
                               </TableCell>
@@ -172,21 +175,21 @@ const Tablelayout = (props)=> {
                               </TableCell>
                               <TableCell style={styles.tableHead}>
                                   처리 결과</TableCell>
+                         </TableRow>
+
                           </TableHead>
 
                           <TableBody>
                               {props.reports.map((report)=> (
-                              <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
-                                  <TableCell width="70%" style={styles.tableCell_long}>{report.reportText}</TableCell>
-                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="BEFORE"?"-":reportresult(report.reportResult)}</TableCell>
+                              <TableRow key={report.reportId}>
+                                  <TableCell width="70%" style={styles.tableCell_long} ><Link to={`/admin/report/${report.reportId}`} style={{ textDecoration: 'none', color: 'black' }}>{report.reportText}</Link></TableCell>
+                                  <TableCell width="15%" style={styles.tableCell}><Link to={`/admin/report/${report.reportId}`} style={{ textDecoration: 'none', color: 'black' }}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</Link></TableCell>
+                                  <TableCell width="15%" style={styles.tableCell}><Link to={`/admin/report/${report.reportId}`} style={{ textDecoration: 'none', color: 'black' }}>{report.reportState==="BEFORE"?"-":reportresult(report.reportResult)}</Link></TableCell>
                               </TableRow>
                               )) }
-
                           </TableBody>
                       </Table>
                    )
-
             else if(props.tablenum===5)
             return(
               <Table>
@@ -227,10 +230,10 @@ const Tablelayout = (props)=> {
 
     <TableBody>
         {props.users.map((user)=>(
-        <TableRow component={Link} to={`/admin/user/${user.idString}`} key={user.accountId}>
-            <TableCell style={styles.tableCell}>{user.idString}</TableCell>
-            <TableCell style={styles.tableCell}>{user.name}</TableCell>
-            <TableCell style={styles.tableCell}>{registerType(user.registerType)}</TableCell>
+        <TableRow   key={user.accountId}>
+            <TableCell style={styles.tableCell}><Link to={`/admin/user/${user.idString}`} style={{ textDecoration: 'none', color: 'black' }}>{user.idString}</Link></TableCell>
+            <TableCell style={styles.tableCell}><Link to={`/admin/user/${user.idString}`} style={{ textDecoration: 'none', color: 'black' }}>{user.name}</Link></TableCell>
+            <TableCell style={styles.tableCell}><Link to={`/admin/user/${user.idString}`} style={{ textDecoration: 'none', color: 'black' }}>{registerType(user.registerType)}</Link></TableCell>
         </TableRow>
         )) }
     </TableBody>

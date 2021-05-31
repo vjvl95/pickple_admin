@@ -64,7 +64,7 @@ const initialState={
         case TAG_SEARCH_SUCCESS:
             return {
                 ...state,
-                tags: [...state.tags, ...action.payload.content],
+                tags: action.payload.content,
                 totalElements:action.payload.totalElements,
                 loading: false,
             }

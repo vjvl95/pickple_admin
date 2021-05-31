@@ -98,7 +98,7 @@ const onSubmit = async(e) => {
   setCurrentPage(1)
   dispatch({
   type: APPLY_LOADING_REQUEST,
-  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  payload:{keyword:keyword,isContracted:isContracted,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
   currentPage:currentPage
   })
 
@@ -140,8 +140,8 @@ const handleChange_direction = (event) => {
             
           <FormControl component="fieldset" >
           <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange_direction} style={{flexDirection:"unset",flexWrap:"unset"}}>
-                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+                <FormControlLabel value="DESC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="최신순" />
+                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="등록순" />
            </RadioGroup>
     </FormControl>
 

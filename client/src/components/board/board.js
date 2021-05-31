@@ -57,7 +57,7 @@ const onSubmit = async(e) => {
   setCurrentPage(1)
   dispatch({
   type: BOARD_SEARCH_REQUEST,
-  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
   currentPage:currentPage
   })
 }
@@ -68,8 +68,8 @@ const onSubmit = async(e) => {
         
     <FormControl component="fieldset">
           <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={(e)=>handleChange(e)} style={{flexDirection:"unset"}}>
-                <FormControlLabel value="ASC"  control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+                <FormControlLabel value="DESC"  control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="최신순" />
+                <FormControlLabel value="ASC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="등록순" />
            </RadioGroup>
     </FormControl>
 

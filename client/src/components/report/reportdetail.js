@@ -12,6 +12,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const Reportdetail = (req) =>{
 
@@ -49,6 +50,7 @@ const Reportdetail = (req) =>{
   }
   catch(e)
   {
+    alert("신고 처리에 실패하였습니다")
   }
   }
 
@@ -76,7 +78,7 @@ const Reportdetail = (req) =>{
           <div className="contentWrapper-detail">
             <Typography color="textSecondary">
                 <h2 style={{fontWeight:"bold", textAlign:"center"}}>
-                <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span>                  </div>
+                <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span></div>
 
                   <span style={{ color: "#007bff"}}>{reportdetail.boardTitle}</span>에 대한 신고
                 </h2>

@@ -110,7 +110,7 @@ const Report = () => {
       setCurrentPage(1)
       dispatch({
       type: REPORT_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }, reportResult: reportResult, reportState: reportState},
       currentPage:currentPage
       })
     }
@@ -127,8 +127,8 @@ const Report = () => {
 
         <FormControl component="fieldset">
           <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset", flexWrap:"unset"}}>
-                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC"  style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+                <FormControlLabel value="DESC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="최신순" />
+                <FormControlLabel value="ASC"  style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="등록순" />
            </RadioGroup>
     </FormControl>
 

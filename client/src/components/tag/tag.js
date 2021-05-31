@@ -24,9 +24,11 @@ const Tag = () => {
 
   const dispatch = useDispatch();
     useEffect(()=>{
+      const {keyword} = form
+
     dispatch({
       type: TAG_SEARCH_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
       currentPage:currentPage
     })
     },[dispatch,currentPage])
@@ -62,9 +64,7 @@ const onuploadClick = () => {
 }
 const onSubmit = async(e) => {
   const {keyword} = form
-
   setCurrentPage(1)
-
   dispatch({
   type: TAG_SEARCH_REQUEST,
   payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},

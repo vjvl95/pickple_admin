@@ -11,12 +11,18 @@ import "./Header.css";
 import styles from '../layout/style'
 
 
+const printHeader = () => 
+{
+
+}
+
+
 function MainHeader(props) {
   const { classes } = props;
   return (
     <React.Fragment>
       <div className={classes.header}>
-      
+  
       <AppBar
         component="div"
         className={classes.secondaryBar}
@@ -27,9 +33,7 @@ function MainHeader(props) {
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
-                홈
-              </Typography>
+              
             </Grid>
           </Grid>
         </Toolbar>
