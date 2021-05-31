@@ -60,12 +60,9 @@ const ProfileDetail = (req) => {
       <Header/>
       <Paper className="paper-detail" elevation={3} style={{margin:"auto",marginTop:"70px",width:"65",borderRadius:"0px",    padding: "10px 30px 10px 10px",    marginBottom: "100px"}}>
       <div className="contentWrapper-detail">
-        <Typography color="textSecondary">
-       <h2 className="profiletitle">
-       <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span>  <span className="titlename" style = {{marginLeft:"130px"}}>{profileDetail.userName}</span>  님의 프로필<span style={{float:"right", fontSize:"12px", position:"relative",top:"10px", left:"15px"}}>프로필 공개 여부: {profileDetail.isOpen===1 ?<span style={{color:"blue"}}>공개</span> : <span style={{color:"red"}}>비공개</span>}</span></div>
+       <div style={{textAlign: "center"}}> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span>  <span className="titlename" style = {{marginLeft:"130px"}}>{profileDetail.userName}</span>  님의 프로필 <span style={{fontWeight:"bold" , float:"right", fontSize:"12px", position:"relative",top:"10px", left:"15px"}}>프로필 공개 여부: {profileDetail.isOpen===1 ?<span style={{color:"blue"}}>공개</span> : <span style={{color:"red"}}>비공개</span>}</span></div>
          
-       </h2>
-    <div style={{display:"flex"}}>
+      <div style={{display:"flex", marginTop:"15px", marginLeft:"10px"}}>
        <div className="info-div">
           <div className="profile-box">
           <span className="profile-label">blog</span>  <span className="profile-colon"> : </span> <span className="profile-blog-value">{profileDetail.blog}</span>
@@ -92,14 +89,13 @@ const ProfileDetail = (req) => {
 
         
         <div className="introduce-div">
-        <span   style={{marginLeft: "15px", fontWeight:"bold", marginTop:"20px"}}>자기 소개</span>
+        <span   style={{marginLeft: "15px", fontWeight:"bold", marginTop:"30px", marginBottom:"10px"}}>자기 소개</span>
         <span className="introduce-detail">{profileDetail.introduce}</span>
         </div>
         
         <div className="profile-visibility-button" style={{textAlign:"center", marginBottom:"10px", paddingBottom:"20px" ,marginTop:"20px"}}>
            { profileDetail.isOpen===1 ? <Button variant="contained" color="secondary" onClick={ ()=> closeprofile()}>프로필 비공개</Button> : <Button variant="contained"   color="primary" onClick={() => openprofile()}>프로필 공개</Button>}
             </div>
-        </Typography>
       </div>
 
 

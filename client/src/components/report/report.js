@@ -19,7 +19,7 @@ import Pagination from '../layout/Pagenation'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Report = (req) => {
+const Report = () => {
   const resetValue=useRef(null)
 
   const dispatch = useDispatch();
@@ -41,18 +41,15 @@ const Report = (req) => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {reports,totalElements,pre_page} = useSelector((state) => state.report);
+  const {reports,totalElements} = useSelector((state) => state.report);
 
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
   const [direction,setDirection]=useState("DESC")
 
-  console.log(pre_page)
   useEffect(()=>{
-
     const {keyword} = form
-    
     if(reportState ==="ALL" && reportResult==="ALL" )
     {
       dispatch({
@@ -85,7 +82,7 @@ const Report = (req) => {
         currentPage: currentPage
       })
     }      
-    },[dispatch,form,currentPage,direction,reportResult,reportState,form.keyword])
+    },[dispatch,currentPage,direction,reportResult,reportState])
   
       const onChange= (e) => {
         setValues(
@@ -106,10 +103,17 @@ const Report = (req) => {
     const handleChange_reportState = (e) => {  
       setReportState(e.target.value);
       setCurrentPage(1)
-
-    
     };
-    
+    const onSubmit = async(e) => {
+
+      const {keyword} = form
+      setCurrentPage(1)
+      dispatch({
+      type: REPORT_SEARCH_REQUEST,
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      currentPage:currentPage
+      })
+    }
     
   const handleChange = (event) => {
     setDirection(event.target.value);
@@ -122,20 +126,16 @@ const Report = (req) => {
         
 
         <FormControl component="fieldset">
-       <FormLabel component="legend" style={{fontWeight:"bold", marginLeft:"35%",color: "rgba(0, 0, 0, 0.54)"}}>정렬</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset"}}>
-                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset", flexWrap:"unset"}}>
+                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="DESC"  style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
            </RadioGroup>
     </FormControl>
 
 
             <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-              <div style={{display:"flex", flexDirection:"column"}}>
-              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
-              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 내용,신고자ID</span>
-            </div>
+             
               <FormControl className={classes.formControl} style={{bottom:"15px"}}>
               <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>처리 상태</InputLabel>
 
@@ -160,6 +160,13 @@ const Report = (req) => {
 
           </Select>
           </FormControl>
+          <div style={{display:"flex", flexDirection:"column"}}>
+              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
+              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 내용,신고자ID</span>
+            </div>
+          <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
+              검색
+            </Button> 
                  
       </div>
         </Fragment>  

@@ -16,22 +16,27 @@ function MainHeader(props) {
   return (
     <React.Fragment>
       <div className={classes.header}>
-      <AppBar color="primary" position="sticky" elevation={0}>
-        <Toolbar>
-        </Toolbar>
-      </AppBar>
-      <AppBar component="div" className={classes.secondaryBar} color="primary" position="static" elevation={0}>
+      
+      <AppBar
+        component="div"
+        className={classes.secondaryBar}
+        color="primary"
+        position="static"
+        elevation={0}
+      >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                홈 
+                홈
               </Typography>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
+      
       </div>
+      
     </React.Fragment>
   );
 }

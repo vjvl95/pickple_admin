@@ -15,6 +15,7 @@ import Pagination from '../layout/Pagenation'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Table from "../layout/table"
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -57,7 +58,7 @@ const User = () => {
 
     })
   }
-    },[dispatch,form,currentPage,type,form.keyword])
+    },[dispatch,currentPage,type])
 
   const onChange= (e) => {
     setValues(
@@ -66,7 +67,6 @@ const User = () => {
             [e.target.name]:e.target.value
         }
     )
-    setCurrentPage(1)
 }
 
 
@@ -80,7 +80,17 @@ const handleChange = (e) => {
 
 const resetValue=useRef(null)
 
+const onSubmit = async(e) => {
 
+  const {keyword} = form
+  setCurrentPage(1)
+
+  dispatch({
+  type: USER_SEARCH_REQUEST,
+  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  currentPage:currentPage
+  })
+}
 
    
   return (
@@ -92,10 +102,7 @@ const resetValue=useRef(null)
       <Grid item xs>     
             <Fragment>
         <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-                <div style={{display:"flex", flexDirection:"column"}}>
-                <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"85%"}}/>
-                <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 이름,사용자ID</span>
-                 </div>
+               
                 <FormControl className={classes.formControl} style={{bottom:"15px"}}>
                 <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>멤버 타입</InputLabel>
 
@@ -105,6 +112,14 @@ const resetValue=useRef(null)
               <MenuItem value="ALL">전체</MenuItem>
             </Select>
           </FormControl>
+          <div style={{display:"flex", flexDirection:"column"}}>
+                <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"85%"}}/>
+                <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 이름,사용자ID</span>
+                 </div>
+          <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginTop:"5px" }} >
+              검색
+            </Button> 
+                 
                 
       </div>
         </Fragment>  

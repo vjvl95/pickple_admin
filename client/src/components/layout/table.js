@@ -27,7 +27,6 @@ const styles = {
       overflow:"hidden",
       maxWidth: "100px"
     }
-
 }
 
 const reviewState = (reviewstate) => 
@@ -58,6 +57,8 @@ const reportresult = (result) =>{
         return (<div>경고 조치</div>)
       case "NO_PROBLEM":
           return (<div>문제 없음</div>)
+      case "NONE":
+          return(<div></div>)
       default :
           return null
     }
@@ -92,12 +93,12 @@ const Tablelayout = (props)=> {
     }     
   }
     return(
-        <Typography color="textSecondary" align="center">
-        <TableContainer>
+      <div>
+      <TableContainer>
         {
           (function(){
             if(props.tablenum===1) return(
-              <Table>
+        <Table>
            <TableHead>
              <TableRow>
                 <TableCell style={styles.tableHead}> 계약여부  </TableCell>
@@ -105,12 +106,14 @@ const Tablelayout = (props)=> {
                 <TableCell style={styles.tableHead}> 리뷰상태 </TableCell>
              </TableRow>
            </TableHead>
+          
            <TableBody>
+
              {props.applys.map((apply) => (
-               <TableRow component={Link} to={`/admin/apply/${apply.applyId}`} key={apply.applyId}>
-                 <TableCell width="17.5%" style={styles.tableCell}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</TableCell>
-                 <TableCell width="65%" style={styles.tableCell}>{apply.review === null ? "-" : apply.review}</TableCell>
-                 <TableCell width="17.5%"style={styles.tableCell}>{reviewState(apply.reviewState)}</TableCell>
+               <TableRow  key={apply.applyId}>
+                 <TableCell width="17.5%" style={styles.tableCell}><Link to={`/admin/apply/${apply.applyId}`} style={{ textDecoration: 'none', color: 'black' }}>{apply.isContracted === 1 ? "계약 완료" : "계약 전"}</Link></TableCell>
+                 <TableCell width="65%" style={styles.tableCell}><Link to={`/admin/apply/${apply.applyId}`} style={{ textDecoration: 'none', color: 'black' }}>{apply.review === null ? "-" : apply.review}</Link></TableCell>
+                 <TableCell width="17.5%"style={styles.tableCell}><Link to={`/admin/apply/${apply.applyId}`} style={{ textDecoration: 'none', color: 'black' }}>{reviewState(apply.reviewState)}</Link></TableCell>
                </TableRow>
              ))
              }
@@ -125,13 +128,13 @@ const Tablelayout = (props)=> {
                             <TableCell style = {styles.tableHead}> 작성자</TableCell>
                         </TableHead>
                         <TableBody>
-                            {props.boards.map((board,index)=>(
+                            {props.boards.map((board)=>(
                             <TableRow component={Link} to ={`/admin/board/${board.boardId}`} key={board.boardId}>
-                                <TableCell style = {styles.tableCell}>{board.title}</TableCell>
-                                <TableCell style = {styles.tableCell}>{board.idString}</TableCell>
+                                <TableCell width="65%" style = {styles.tableCell_long}>{board.title}</TableCell>
+                                <TableCell width="35%" style = {styles.tableCell_long}>{board.idString}</TableCell>
                             </TableRow>  
                             ))
-                        }
+                            }
                           </TableBody>
                         </Table>
             )
@@ -139,15 +142,17 @@ const Tablelayout = (props)=> {
             return(
                       <Table>
                           <TableHead>
+                            <TableRow>
                               <TableCell style={styles.tableHead}> 소개 </TableCell>
                               <TableCell style={styles.tableHead}> 사용자</TableCell>
-
+                             </TableRow>
                           </TableHead>
+
                           {<TableBody>
                               {props.profiles.map((profile)=>(
-                                <TableRow component={Link} to ={`/admin/profile/${profile.profileId}`} key={profile.profileId}>
-                                  <TableCell width="70%" style={styles.tableCell_long}>{profile.introduce}</TableCell>
-                                  <TableCell width="30%" style={styles.tableCell}>{profile.userName}</TableCell>
+                                <TableRow key={profile.profileId}>
+                                  <TableCell  width="70%" style={styles.tableCell_long}><Link to ={`/admin/profile/${profile.profileId}`} style={{ textDecoration: 'none', color: 'black' }}>{profile.introduce}</Link></TableCell>
+                                  <TableCell  width="30%" style={styles.tableCell}><Link to ={`/admin/profile/${profile.profileId}`} style={{ textDecoration: 'none', color: 'black' }}>{profile.userName}</Link></TableCell>
                                 </TableRow>  
                               ))}
                           </TableBody>
@@ -174,7 +179,7 @@ const Tablelayout = (props)=> {
                               <TableRow component={Link} to={`/admin/report/${report.reportId}`} key={report.reportId}>
                                   <TableCell width="70%" style={styles.tableCell_long}>{report.reportText}</TableCell>
                                   <TableCell width="15%" style={styles.tableCell}>{report.reportState==="AFTER"?"처리 완료":"처리 전"}</TableCell>
-                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="BEFORE"?"":reportresult(report.reportResult)}</TableCell>
+                                  <TableCell width="15%" style={styles.tableCell}>{report.reportState==="BEFORE"?"-":reportresult(report.reportResult)}</TableCell>
                               </TableRow>
                               )) }
 
@@ -186,10 +191,14 @@ const Tablelayout = (props)=> {
             return(
               <Table>
         <TableHead >
+        <TableRow>
+
             <TableCell style = {styles.tableHead}> 태그내용 </TableCell>
             <TableCell style = {styles.tableHead}> 추가일자</TableCell>
             <TableCell style = {styles.tableHead}> 태그삭제</TableCell>
-        </TableHead>
+            </TableRow>
+
+       </TableHead>
         <TableBody >
             {props.tags.map((tag,index)=>(
               <TableRow key={index}>
@@ -208,13 +217,12 @@ const Tablelayout = (props)=> {
             return(
 <Table>
     <TableHead>
-        <TableCell style={styles.tableHead}>
-            회원 아이디
-        </TableCell>
-        <TableCell style={styles.tableHead}>
-            회원 이름</TableCell>
-        <TableCell style={styles.tableHead}>
-            소속 경로</TableCell>
+    <TableRow>
+        <TableCell style={styles.tableHead}>  회원 아이디 </TableCell>
+        <TableCell style={styles.tableHead}>  회원 이름</TableCell>
+        <TableCell style={styles.tableHead}>  소속 경로</TableCell>
+      
+      </TableRow>
     </TableHead>
 
     <TableBody>
@@ -236,8 +244,8 @@ const Tablelayout = (props)=> {
             }
     </TableContainer>
 
-          </Typography>
-    )
+    </div>
+        )
 }
 
 

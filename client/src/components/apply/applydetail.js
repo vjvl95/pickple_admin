@@ -64,17 +64,14 @@ const Applydetail = (req) => {
           <Header/>
         <Paper className="apply-paper-detail" elevation={3} style={{padding:"20px"}}>
           <div className="contentWrapper-detail">
-            <Typography color="textSecondary">
-                <h2 style={{fontWeight:"bold", textAlign:"center"}}>
                 <div> <span style={{float:"left", marginLeft:"10px"}}><ArrowBackIcon onClick={()=>goBack()}/></span></div>
-                <span style={{ color: "#007bff"}}>{applydetails.applierName}</span>에 대한 후기
-                </h2>
+                <div style={{textAlign:"center"}}><span style={{ fontWeight:"bold",color: "#007bff"}}>{applydetails.applierName}</span>에 대한 후기</div>
         
             <div className="apply-review-detail-name" style= {{fontWeight:"bold", marginTop:"20px", padding:"5px"}}>
                 리뷰 내용
             </div>
 
-            <div className="apply-review-detail-box" style={{  borderColor: "#e2e2e2",border:"1px solid", borderRadius:"0.5rem" ,padding: "5px"}}>
+            <div className="apply-review-detail-box" style={{  borderColor: "#e2e2e2",border:"1px solid", borderRadius:"0.5rem" ,padding: "5px",marginTop:"10px"}}>
                 {applydetails.review===null ? "아직 리뷰가 작성되지 않았습니다." : applydetails.review }
             </div>
 
@@ -89,7 +86,6 @@ const Applydetail = (req) => {
 }
             
             
-            </Typography>
           </div>
         </Paper>
         </Fragment>

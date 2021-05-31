@@ -14,6 +14,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+
 const Board = () => {
   const resetValue=useRef(null)
 
@@ -30,9 +32,8 @@ const Board = () => {
       type: BOARD_SEARCH_REQUEST,
       payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
       currentPage: currentPage,
-      pre_direction:direction
     })
-    },[currentPage,direction,form.keyword,form,dispatch])
+    },[currentPage,direction,dispatch])
    
 
     const onChange= (e) => {
@@ -49,6 +50,17 @@ const handleChange = (event) => {
   setDirection(event.target.value)
   setCurrentPage(1)
 };
+
+const onSubmit = async(e) => {
+
+  const {keyword} = form
+  setCurrentPage(1)
+  dispatch({
+  type: BOARD_SEARCH_REQUEST,
+  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  currentPage:currentPage
+  })
+}
   return (
     <Paper className="board-paper">
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
@@ -56,7 +68,7 @@ const handleChange = (event) => {
         
     <FormControl component="fieldset">
           <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={(e)=>handleChange(e)} style={{flexDirection:"unset"}}>
-                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="ASC"  control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
                 <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
            </RadioGroup>
     </FormControl>
@@ -67,7 +79,9 @@ const handleChange = (event) => {
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
             <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:제목,내용</span>
             </div>
-           
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"40px", marginTop:"5px" }} >
+              검색
+            </Button> 
            </div>
       </Fragment>  
          

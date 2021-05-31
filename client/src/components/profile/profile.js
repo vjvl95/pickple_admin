@@ -14,6 +14,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
 
 import "./profile.css"
 
@@ -33,7 +34,7 @@ const Profile = () => {
         payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
         currentPage: currentPage
       })
-      },[dispatch,form,currentPage,direction,form.keyword])
+      },[dispatch,currentPage,direction])
    
       const onChange= (e) => {
         setValues(
@@ -42,12 +43,20 @@ const Profile = () => {
                 [e.target.name]:e.target.value
             }
         )
-        setCurrentPage(1)
-
     }
   
   
+    const onSubmit = async(e) => {
 
+      const {keyword} = form
+      setCurrentPage(1)
+    
+      dispatch({
+      type: PROFILE_SEARCH_REQUEST,
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      currentPage:currentPage
+      })
+    }
 
   const handleChange = (event) => {
     setDirection(event.target.value);
@@ -59,9 +68,9 @@ const Profile = () => {
       <AppBar className="searchBar" position="static" color="default" elevation={0}>
         <Toolbar style={{paddingTop:"10px", paddingBottom: "10px",justifyContent:"center"}}>
         <FormControl component="fieldset">
-          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset"}}>
-                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset", flexWrap:"nowrap"}}>
+                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}}control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="DESC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
            </RadioGroup>
     </FormControl>
 
@@ -71,7 +80,10 @@ const Profile = () => {
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
             <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:아이디,카카오ID,사용자이름</span>
             </div>
-       
+
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"40px", marginTop:"5px" }} >
+              검색
+            </Button> 
     </div>
       </Fragment>  
          

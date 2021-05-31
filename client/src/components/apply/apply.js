@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
+import { APPLY_LOADING_REQUEST, APPLY_SEARCH_REQUEST } from '../../actions/applyAction';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import Pagination from '../layout/Pagenation'
@@ -18,6 +18,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -42,19 +44,17 @@ const Apply = () => {
   const classes = useStyles();
   const resetValue=useRef(null)
   
-
+  
   useEffect(() => {
-    
-    const {keyword} = form  
+    const {keyword} = form
 
     if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
+        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
-        keyword:keyword,
         currentPage:currentPage
       })
     }
@@ -62,7 +62,7 @@ const Apply = () => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
+        payload:{keyword:keyword,isContracted:isContracted,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
         currentPage:currentPage
@@ -73,7 +73,7 @@ const Apply = () => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
+        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,       
         currentPage:currentPage
@@ -82,15 +82,27 @@ const Apply = () => {
     else{
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
+        payload:{keyword:keyword,isContracted:isContracted,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
         currentPage:currentPage
       })
     }   
     
-}, [dispatch,currentPage,direction,isContracted,reviewStatetype,form.keyword,form])
+}, [dispatch,currentPage,direction,isContracted,reviewStatetype])
 
+const onSubmit = async(e) => {
+
+  const {keyword} = form
+
+  setCurrentPage(1)
+  dispatch({
+  type: APPLY_LOADING_REQUEST,
+  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  currentPage:currentPage
+  })
+
+}
   const onChange= (e) => {
     setValues(
         {
@@ -126,21 +138,17 @@ const handleChange_direction = (event) => {
         <AppBar className="searchBar" position="static" color="default" elevation={0}>
           <Toolbar style={{paddingTop:"15px", justifyContent:"center"}}>
             
-          <FormControl component="fieldset">
-          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange_direction} style={{flexDirection:"unset"}}>
-                <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
-                <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
+          <FormControl component="fieldset" >
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange_direction} style={{flexDirection:"unset",flexWrap:"unset"}}>
+                <FormControlLabel value="ASC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
+                <FormControlLabel value="DESC" style={{whiteSpace:"nowrap"}} control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
            </RadioGroup>
     </FormControl>
 
 
               <Fragment>
-              <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-              <div style={{display:"flex", flexDirection:"column"}}>
-
-              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
-              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:리뷰내용, 모집글 작성자</span>
-              </div>
+             
+             
 
               <FormControl className={classes.formControl} style={{bottom:"15px"}} >
               <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>계약 여부</InputLabel>
@@ -163,6 +171,15 @@ const handleChange_direction = (event) => {
             <MenuItem value="ALL">전체</MenuItem>
           </Select>
           </FormControl>
+          <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
+              <div style={{display:"flex", flexDirection:"column"}}>
+
+           <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
+              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:리뷰내용, 모집글 작성자</span>
+              </div>
+          <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
+              검색
+            </Button>  
       </div>
         </Fragment>  
      

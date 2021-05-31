@@ -24,14 +24,12 @@ const Tag = () => {
 
   const dispatch = useDispatch();
     useEffect(()=>{
-    const {keyword} = form
-
     dispatch({
       type: TAG_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:10}},
       currentPage:currentPage
     })
-    },[dispatch,currentPage,form.keyword,form])
+    },[dispatch,currentPage])
 
   const onChange= (e) => {
     setValues(
@@ -40,7 +38,6 @@ const Tag = () => {
             [e.target.name]:e.target.value
         }
     )
-    setCurrentPage(1)
 }
 const onuploadClick = () => {
 
@@ -63,6 +60,18 @@ const onuploadClick = () => {
   }  
 
 }
+const onSubmit = async(e) => {
+  const {keyword} = form
+
+  setCurrentPage(1)
+
+  dispatch({
+  type: TAG_SEARCH_REQUEST,
+  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+  currentPage:currentPage
+  })
+
+}
 
     const resetValue=useRef(null)
   return (
@@ -76,12 +85,14 @@ const onuploadClick = () => {
             <Fragment>
             <div className="searchdiv">
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginBottom:"5px" , marginTop:"10px",width: "35%",  marginLeft: "4rem"}}/>
-            <div className="buttondiv" style={{marginTop:"10px"}}>
+            <div className="buttondiv" style={{marginTop:"13px", display:"flex", height:"33px"}}>
 
-            <Button className="tag_button" variant="contained" color="primary" onClick={onuploadClick}  style={{marginLeft:"10px",marginRight:"10px"}}  >
+            <Button className="tag_button" variant="contained" color="primary" onClick={onuploadClick}  style={{marginLeft:"30px",marginRight:"10px"}}  >
             등록
             </Button>
-          
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{marginLeft:"15px"}} >
+              검색
+            </Button>  
             </div>
             </div>
         </Fragment>  

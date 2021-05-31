@@ -38,7 +38,6 @@ function Paperbase(props) {
     )
   return (
     <Fragment>
-    <Header/>
 
     <Paper className="paper_tagadd"  style={{minWidth:"624px"}}>
     <AppBar className="searchBar" position="static" color="default" elevation={0}>
