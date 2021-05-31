@@ -52,7 +52,8 @@ function* searchReport (action)
     const result =  yield call(searchReportAPI,action.payload)
     yield put({
         type:REPORT_SEARCH_SUCCESS,
-        payload:result.data.data
+        payload:result.data.data,
+        currentPage:action.currentPage
     })
     } catch (error) {
         if(error.response.status===403) 

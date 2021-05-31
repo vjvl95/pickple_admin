@@ -12,6 +12,7 @@ const initialState={
     errorMsg:"",
     totalElements:"",
     totalPages:"",
+    pre_page:"",
     
 };
 
@@ -33,6 +34,7 @@ const applyReducer = (state=initialState,action) =>{
                 pre_reviewStatetype:action.reviewStatetype,
                 pre_isContracted:action.isContracted,
                 pre_keyword:action.keyword,
+                pre_page:action.currentPage,
                 isAuthenticated: null,
                 loading : false,
 

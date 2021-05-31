@@ -34,16 +34,24 @@ const Apply = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10);
-  const { applys, totalElements} = useSelector((state) => state.apply);
+  const { applys, totalElements,pre_page} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("DESC")
   const [form, setValues] = useState({keyword:""})
   const classes = useStyles();
   const resetValue=useRef(null)
-  useEffect(() => {
-    const {keyword} = form
+  
 
+  useEffect(() => {
+    if(pre_page!==currentPage)
+    {
+
+    }
+    else{
+      setCurrentPage(1)
+    } 
+    const {keyword} = form  
 
     if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
@@ -52,7 +60,8 @@ const Apply = () => {
         payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
-        keyword:keyword
+        keyword:keyword,
+        currentPage:currentPage
       })
     }
     else if(reviewStatetype==="ALL")
@@ -61,7 +70,9 @@ const Apply = () => {
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
-        isContracted:isContracted
+        isContracted:isContracted,
+        currentPage:currentPage
+
       })
     }
     else if(isContracted==="ALL")
@@ -70,7 +81,8 @@ const Apply = () => {
         type: APPLY_LOADING_REQUEST,
         payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
-        isContracted:isContracted
+        isContracted:isContracted,       
+        currentPage:currentPage
       })
     }
     else{
@@ -78,9 +90,11 @@ const Apply = () => {
         type: APPLY_LOADING_REQUEST,
         payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
-        isContracted:isContracted
+        isContracted:isContracted,
+        currentPage:currentPage
       })
-    }    
+    }   
+    
 }, [dispatch,currentPage,direction,isContracted,reviewStatetype,form.keyword,form])
 
   const onChange= (e) => {

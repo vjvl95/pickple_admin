@@ -2,6 +2,7 @@ import {REPORT_LOADING_REQUEST,REPORT_LOADING_SUCCESS,REPORT_LOADING_FAILURE,REP
 const initialState = {
     reports: [],
     reportdetail: [],
+    pre_page:"",
     totalElements:"",
     errorMsg: "",
     successMsg: "",
@@ -41,6 +42,7 @@ const reportReducer = (state = initialState, action) => {
                     ...state,
                     reports: action.payload.content,
                     totalElements: action.payload.totalElements,
+                    pre_page:action.currentPage
                 }
             case REPORT_SEARCH_FAILURE:
                 return {

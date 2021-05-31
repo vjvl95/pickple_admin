@@ -41,17 +41,18 @@ const Report = (req) => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {reports,totalElements} = useSelector((state) => state.report);
+  const {reports,totalElements,pre_page} = useSelector((state) => state.report);
 
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
   const [direction,setDirection]=useState("DESC")
 
+  console.log(pre_page)
   useEffect(()=>{
 
     const {keyword} = form
-   
+    
     if(reportState ==="ALL" && reportResult==="ALL" )
     {
       dispatch({
@@ -83,7 +84,6 @@ const Report = (req) => {
         payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }, reportResult: reportResult, reportState: reportState},
         currentPage: currentPage
       })
-
     }      
     },[dispatch,form,currentPage,direction,reportResult,reportState,form.keyword])
   

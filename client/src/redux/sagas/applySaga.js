@@ -21,7 +21,8 @@ function* loadApplys (action)
         payload: result.data.data,
         reviewStatetype:action.reviewStatetype,
         isContracted:action.isContracted,
-        keyword:action.keyword
+        keyword:action.keyword,
+        currentPage:action.currentPage
     })
     } catch (error) {
 
