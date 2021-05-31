@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux"
 import { PROFILE_SEARCH_REQUEST } from '../../actions/profileAction';
 import Pagination from '../layout/Pagenation'
 import Table from "../layout/table"
-import Button from '@material-ui/core/Button';
 import {Input} from 'reactstrap'
 import { Fragment } from 'react';
 import Radio from '@material-ui/core/Radio';
@@ -26,7 +25,6 @@ const Profile = () => {
   const [direction,setDirection]=useState("DESC")
     const dispatch = useDispatch();
     const {profiles,totalElements} = useSelector((state) => state.profile);
-    console.log(totalElements)
     useEffect(()=>{
       const {keyword} = form
 

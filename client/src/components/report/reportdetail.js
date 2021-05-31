@@ -19,7 +19,6 @@ const Reportdetail = (req) =>{
     const {reportdetail} = useSelector((state) => state.report);
     const history = useHistory();
     const [reportState,setreportState]=React.useState('');
-  console.log(req)
     const handleChange = (e) => {  
       setreportState(e.target.value);
     };
@@ -50,12 +49,10 @@ const Reportdetail = (req) =>{
   }
   catch(e)
   {
-      console.log(e)
   }
   }
 
   const reportresult = (result) =>{
-    console.log(result)
     switch (result) {
       case "BOARD_DELETED":
         return (<div>게시글 삭제</div>)

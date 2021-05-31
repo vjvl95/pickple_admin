@@ -16,7 +16,6 @@ const loadUserAPI = (payload) =>{
 function* loadUser(action){
     try{
         const result= yield call(loadUserAPI,action.payload)
-        console.log(result, "loadUser");
 
         yield put({
             type:USER_LOADING_SUCCESS,
@@ -48,7 +47,6 @@ const loadUserDetailAPI = (payload) =>{
 function* loadUserDetail(action){
     try{
         const result= yield call(loadUserDetailAPI,action.payload)
-        console.log(result, "loadUserDetail");
         yield put({
             type:USER_DETAIL_SUCCESS,
             payload: result.data.data
@@ -69,7 +67,6 @@ function* loadUserDetail(action){
 
 
 const UserDeleteAPI = (payload) =>{
-    console.log(payload)
     return axios.delete("/api/v1/account",{ headers:{"X-AUTH-TOKEN":localStorage.getItem("token"),"Content-Type" : "application/json"} , data:{idString: payload.idString}});
 }
 
@@ -77,7 +74,6 @@ const UserDeleteAPI = (payload) =>{
 function* UserDelete(action){
     try{
         const result= yield call(UserDeleteAPI,action.payload)
-        console.log(result, "UserDelete");
 
         yield put({
             type:USER_DELETE_SUCCESS,
@@ -99,7 +95,6 @@ function* UserDelete(action){
 
 
 const UserSearchAPI = (payload) =>{
-    console.log(payload)
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -112,10 +107,8 @@ const UserSearchAPI = (payload) =>{
 
 function* UserSearch(action){
     try{
-        console.log(action.accounttype)
-        console.log(action.payload)
+        
         const result= yield call(UserSearchAPI,action.payload)
-        console.log(result, "UserSearch");
 
         yield put({
             type:USER_SEARCH_SUCCESS,
@@ -149,10 +142,8 @@ const UserUploadAPI = (payload) =>{
 
 
 function* UserUpload(action){
-    console.log(action.payload)
     try{
         const result= yield call(UserUploadAPI,action.payload)
-        console.log(result, "UserUpload");
 
         yield put({
             type:USER_UPLOAD_SUCCESS,

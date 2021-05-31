@@ -5,17 +5,14 @@ import { push } from "connected-react-router";
 
 const loadBoardAPI = (payload) =>{
     
-    console.log(payload)
 
     return axios.get("/api/v1/recboard",payload)
 }
 
 function* loadBoards (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadBoardAPI,action.payload)
-    console.log(result)
     yield put({
         type:BOARD_LOADING_SUCCESS,
         payload:result.data.data
@@ -92,7 +89,6 @@ function* deleteBoard(action)
 
 
 const searchBoardAPI = (payload) =>{
-    console.log(payload)
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -104,11 +100,9 @@ const searchBoardAPI = (payload) =>{
 
 function* searchBoard(action)
 {
-    console.log(action.pre_direction)
 
     try {
     const result =  yield call(searchBoardAPI,action.payload)
-    console.log(result)
     yield put({
         type:BOARD_SEARCH_SUCCESS,
         payload:result.data.data,

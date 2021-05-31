@@ -12,15 +12,12 @@ const loadTagAPI = (payload) =>
         },
         params:payload.params
     }
-    console.log(payload)
     return axios.get("/api/v1/tag",config);
 }
 
 function* loadTag(action){
     try{    
-        console.log(action.payload)
         const result= yield call(loadTagAPI,action.payload)
-        console.log(result)
         yield put({
             type:TAG_LOADING_SUCCESS,
             payload: result.data.data
@@ -55,9 +52,7 @@ const uploadTagAPI = (payload) =>
 
 function* uploadTag(action){
     try{
-        console.log(action)
         const result= yield call(uploadTagAPI,action.payload)
-        console.log(result)
         yield put({
             type:TAG_UPLOADING_SUCCESS,
         })
@@ -106,9 +101,7 @@ const deleteTagAPI = (payload) =>
 
 function* deleteTag(action){
     try{
-        console.log(action.payload)
         const result= yield call(deleteTagAPI, action.payload)
-       console.log(result)
         yield put({
             type:TAG_DELETE_SUCCESS,
         })
@@ -135,7 +128,6 @@ function* watchDeleteTag(){
 
 
 const SearchTagAPI = (payload) =>{
-    console.log(payload)
 
     const config = {
         headers:{
@@ -148,9 +140,7 @@ const SearchTagAPI = (payload) =>{
 
 function* SearchTag(action){
     try{
-        console.log(action)
         const result= yield call(SearchTagAPI, action.payload)
-        console.log(result)
         yield put({
             type:TAG_SEARCH_SUCCESS,
             payload: result.data.data

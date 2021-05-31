@@ -24,7 +24,6 @@ function Paperbase(props) {
   const {reports,totalElements_report} = useSelector((state) => state.report);
   const { applys, totalElements_apply } = useSelector((state) => state.apply);
 
-   console.log(reports)
   useEffect(()=>{
     dispatch({
       type: REPORT_SEARCH_REQUEST,

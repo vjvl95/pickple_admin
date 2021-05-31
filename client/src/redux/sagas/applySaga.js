@@ -14,10 +14,8 @@ const loadApplyAPI = (payload) =>{
 
 function* loadApplys (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadApplyAPI,action.payload)
-    console.log(result)
     yield put({
         type:APPLY_LOADING_SUCCESS,
         payload: result.data.data,
@@ -51,10 +49,8 @@ const loadApplyDetailsAPI = (payload) =>{
 
 function* loadApplysDetails (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadApplyDetailsAPI,action.payload)
-    console.log(result)
     yield put({
         type:APPLY_DETAIL_SUCCESS,
         payload: result.data.data
@@ -85,10 +81,8 @@ const reviewAcceptAPI = (payload) =>{
 
 function* reviewAccept (action)
 {
-    console.log(action.payload)
     try {
     const result =  yield call(reviewAcceptAPI,action.payload)
-    console.log(result)
     yield put({
         type:REVIEW_ACCEPT_SUCCESS,
     })
@@ -118,10 +112,8 @@ const reviewRejectAPI = (payload) =>{
 
 function* reviewReject (action)
 {
-    console.log(action)
     try {
     const result =  yield call(reviewRejectAPI,action.payload)
-    console.log(result)
     yield put({
         type:REVIEW_REJECT_SUCCESS,
     })

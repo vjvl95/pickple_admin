@@ -23,7 +23,9 @@
   color: white;
   font-size: 13px;
   margin-right: 15px;
+  margin-top: 10px;
 }
+
 .workdate {
   display: flex;
   flex-direction: column;
@@ -61,7 +63,6 @@
 
 .reqireskile {
   width: 80%;
-  display: flex;
   margin: 40px 0px 0px 55px;
 }
 .workbody {
@@ -96,7 +97,9 @@
   margin: auto;
 }
 .board_tag_div {
-  margin-left: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
 }
 .board-detail-item {
   margin-top: 10px;

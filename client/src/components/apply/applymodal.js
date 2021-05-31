@@ -35,7 +35,6 @@ const ApplyModal = (props) => {
           }
         catch(e)
         {
-            console.log(e)
         }
     }
 
@@ -52,7 +51,6 @@ const ApplyModal = (props) => {
           }
         catch(e)
         {
-            console.log(e)
         }
     }
 

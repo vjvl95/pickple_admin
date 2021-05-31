@@ -55,7 +55,6 @@ const ProfileDetail = (req) => {
         }  
     }
 
-        console.log(profileDetail)
     return(
         <Fragment>
       <Header/>

@@ -79,7 +79,6 @@ const Tablelayout = (props)=> {
 
   const onDeleteClick = (id,name) => {
     var answer = window.confirm(name+"을 삭제하시겠습니까?");
-    console.log(id)
     if (answer) {
       dispatch({
         type:TAG_DELETE_REQUEST,
@@ -87,8 +86,6 @@ const Tablelayout = (props)=> {
       })
     }     
   }
-
-    console.log(props.tablenum)
     return(
         <Typography color="textSecondary" align="center">
         <TableContainer>

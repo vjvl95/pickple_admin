@@ -13,8 +13,6 @@ const Login = () =>{
     const dispatch=useDispatch()
 
     const onSubmit = (id,password) => {
-        console.log(id)
-        console.log(password)
 
         try{
         dispatch({
@@ -23,7 +21,6 @@ const Login = () =>{
         })
     }
     catch(e){
-        console.log(e.response)
     }
     }
     return(

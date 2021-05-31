@@ -17,10 +17,8 @@ const searchProfileAPI = (payload) =>{
 
 function* searchProfile (action)
 {
-    console.log(action)
     try {
     const result =  yield call(searchProfileAPI,action.payload)
-    console.log(result)
     yield put({
         type:PROFILE_SEARCH_SUCCESS,
         payload:result.data.data
@@ -51,10 +49,8 @@ const openProfileAPI = (payload) =>{
 
 function* openProfile (action)
 {
-    console.log(action)
     try {
     const result =  yield call(openProfileAPI,action.payload)
-    console.log(result)
     yield put({
         type:PROFILE_OPEN_SUCCESS,
     })    
@@ -86,10 +82,8 @@ const closeProfileAPI = (payload) =>{
 
 function* closeProfile (action)
 {
-    console.log(action)
     try {
     const result =  yield call(closeProfileAPI,action.payload)
-    console.log(result)
     yield put({
         type:PROFILE_CLOSE_SUCCESS,
     })
@@ -126,10 +120,8 @@ const loadProfiledetailAPI = (payload) =>{
 
 function* loadProfiledetail (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadProfiledetailAPI,action.payload)
-    console.log(result)
     yield put({
         type:PROFILE_DETAIL_SUCCESS,
         payload:result.data.data

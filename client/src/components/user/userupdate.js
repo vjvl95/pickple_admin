@@ -53,7 +53,7 @@ const UserDetailEdit = (req) => {
                 }
                 catch(e)
                 {
-                    console.log(e)
+                    alert("회원정보 수정에 실패하였습니다.")
                 }
                 }
         

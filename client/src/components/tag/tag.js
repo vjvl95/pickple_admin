@@ -23,9 +23,7 @@ const Tag = () => {
   const {tags,totalElements} = useSelector((state) => state.tag);
 
   const dispatch = useDispatch();
-  
-  console.log(totalElements)
-  useEffect(()=>{
+    useEffect(()=>{
     const {keyword} = form
 
     dispatch({
@@ -34,19 +32,6 @@ const Tag = () => {
       currentPage:currentPage
     })
     },[dispatch,currentPage,form.keyword])
-
-    const onReset = () =>
-    {
-      setCurrentPage(1)
-      setValues("")
-        resetValue.current.value=""
-        dispatch({
-          type: TAG_SEARCH_REQUEST,
-          payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }},
-          currentPage:currentPage
-        })
-    }
-
 
   const onChange= (e) => {
     setValues(

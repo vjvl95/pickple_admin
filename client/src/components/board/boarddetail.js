@@ -17,7 +17,6 @@ import Header from "../header/BoardHeader"
 const BoardDetail = (req) =>{
     
     const boardid=Number(req.match.params.id)
-    console.log(req.match.params.id)
     const dispatch = useDispatch();
     const {boardDetails} = useSelector((state) => state.board);
     const recEndDate = moment(boardDetails.recEndDate).format('YYYY-MM-DD')
@@ -55,7 +54,6 @@ const goBack = () => {
       }
     catch(e)
     {
-        console.log(e)
     }
 
     }
@@ -82,14 +80,16 @@ const goBack = () => {
             <div className="payment"><span className="textlabel">모집글 작성일</span>  <span style={{marginTop:"10px"}}>{moment(boardDetails.createDate).format('YYYY-MM-DD')}</span></div>
 
       </div>
-            <div className="reqireskile"><span className="textlabel2">필요기술 </span>  <div className="board_tag_div">   {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
+            <div className="reqireskile"><span className="textlabel2">필요기술 </span>  
+            
+            <div className="board_tag_div">   {Array.isArray(boardDetails.recruitmentBoardTagList) ? boardDetails.recruitmentBoardTagList.map(({tagName}) =>{
                                         return(
                                                
                                             <span className="board_tag">{tagName}</span>
                                           
                                             )
                                         }) :""}
-                                          </div>
+            </div>
                         
             </div>
             <br/>

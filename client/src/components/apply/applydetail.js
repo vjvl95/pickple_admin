@@ -40,7 +40,6 @@ const Applydetail = (req) => {
           }
         catch(e)
         {
-            console.log(e)
         }
     }
 
@@ -57,7 +56,6 @@ const Applydetail = (req) => {
           }
         catch(e)
         {
-            console.log(e)
         }
     }
 

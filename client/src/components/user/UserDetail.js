@@ -92,7 +92,6 @@ const UserDetail = (req) => {
         
         try{
             var answer = window.confirm("회원정보를 수정하시겠습니까?")
-            console.log()
         if(answer)
         {
           if(!checkEmail(form.newemail)){
@@ -112,9 +111,9 @@ const UserDetail = (req) => {
         }
         catch(e)
         {
-            console.log(e)
+          alert("회원정보수정에 실패하였습니다.")
         }
-        }
+      }
 
 
 
@@ -132,7 +131,7 @@ const UserDetail = (req) => {
         }
       catch(e)
       {
-          console.log(e)
+        alert("회원 삭제에 실패하였습니다.")
       }
    }
   

@@ -4,7 +4,6 @@ import { all, call, put, takeEvery,fork } from 'redux-saga/effects';
 import { REPORT_LOADING_REQUEST,REPORT_LOADING_FAILURE,REPORT_LOADING_SUCCESS,REPORT_SEARCH_SUCCESS,REPORT_SEARCH_FAILURE,REPORT_SEARCH_REQUEST,REPORT_DETAIL_FAILURE,REPORT_DETAIL_SUCCESS,REPORT_DETAIL_REQUEST,REPORT_MANAGE_FAILURE,REPORT_MANAGE_SUCCESS,REPORT_MANAGE_REQUEST } from "../../actions/reportAction"
 
 const loadReportAPI = (payload) =>{
-    console.log(payload)
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -17,7 +16,6 @@ const loadReportAPI = (payload) =>{
 
 function* loadReport (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadReportAPI,action.payload)
     yield put({
@@ -39,7 +37,6 @@ function* loadReport (action)
 
 
 const searchReportAPI = (payload) =>{
-    console.log(payload)
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -51,7 +48,6 @@ const searchReportAPI = (payload) =>{
 
 function* searchReport (action)
 {
-    console.log(action)
     try {
     const result =  yield call(searchReportAPI,action.payload)
     yield put({
@@ -74,7 +70,6 @@ function* searchReport (action)
 
 
 const loadDetailReportAPI = (payload) =>{
-    console.log(payload)
     const config = {
         headers:{
             "Content-Type" : "application/json",
@@ -86,10 +81,8 @@ const loadDetailReportAPI = (payload) =>{
 
 function* loadDetailReport (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadDetailReportAPI,action.payload)
-    console.log(result)
 
     yield put({
         type:REPORT_DETAIL_SUCCESS,
@@ -120,10 +113,8 @@ const manageReportAPI = (payload) =>{
 
 function* manageReport (action)
 {
-    console.log(action)
     try {
     const result =  yield call(manageReportAPI,action.payload)
-    console.log(result)
 
     yield put({
         type:REPORT_MANAGE_SUCCESS,
