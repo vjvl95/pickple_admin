@@ -64,6 +64,8 @@ const Reportdetail = (req) =>{
         return (<div>경고 조치</div>)
       case "NO_PROBLEM":
          return (<div>문제 없음</div>)
+      default :
+         return null
     }
 }
 

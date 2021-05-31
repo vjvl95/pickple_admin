@@ -50,7 +50,7 @@ const openProfileAPI = (payload) =>{
 function* openProfile (action)
 {
     try {
-    const result =  yield call(openProfileAPI,action.payload)
+     yield call(openProfileAPI,action.payload)
     yield put({
         type:PROFILE_OPEN_SUCCESS,
     })    
@@ -83,7 +83,7 @@ const closeProfileAPI = (payload) =>{
 function* closeProfile (action)
 {
     try {
-    const result =  yield call(closeProfileAPI,action.payload)
+    yield call(closeProfileAPI,action.payload)
     yield put({
         type:PROFILE_CLOSE_SUCCESS,
     })

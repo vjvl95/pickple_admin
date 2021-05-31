@@ -27,14 +27,14 @@ function Paperbase(props) {
   useEffect(()=>{
     dispatch({
       type: REPORT_SEARCH_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage},  reportState: "BEFORE" },
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:10},  reportState: "BEFORE" },
     })
     dispatch({
       type: APPLY_LOADING_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}, reviewState:"WAITING"},
+      payload:{pageRequest:{direction:"ASC", page:currentPage, size:10}, reviewState:"WAITING"},
     })
   
-    },[currentPage],
+    },[currentPage,dispatch],
     )
   return (
     <Fragment>

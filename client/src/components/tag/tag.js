@@ -28,10 +28,10 @@ const Tag = () => {
 
     dispatch({
       type: TAG_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
       currentPage:currentPage
     })
-    },[dispatch,currentPage,form.keyword])
+    },[dispatch,currentPage,form.keyword,form])
 
   const onChange= (e) => {
     setValues(

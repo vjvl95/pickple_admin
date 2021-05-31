@@ -73,7 +73,7 @@ const UserDeleteAPI = (payload) =>{
 
 function* UserDelete(action){
     try{
-        const result= yield call(UserDeleteAPI,action.payload)
+       yield call(UserDeleteAPI,action.payload)
 
         yield put({
             type:USER_DELETE_SUCCESS,
@@ -143,7 +143,7 @@ const UserUploadAPI = (payload) =>{
 
 function* UserUpload(action){
     try{
-        const result= yield call(UserUploadAPI,action.payload)
+        yield call(UserUploadAPI,action.payload)
 
         yield put({
             type:USER_UPLOAD_SUCCESS,

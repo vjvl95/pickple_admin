@@ -5,7 +5,6 @@ import Select from '@material-ui/core/Select';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import { APPLY_LOADING_REQUEST } from '../../actions/applyAction';
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
@@ -35,7 +34,7 @@ const Apply = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10);
-  const { applys, totalElements,pre_reviewStatetype,pre_isContracted} = useSelector((state) => state.apply);
+  const { applys, totalElements} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("DESC")
@@ -45,16 +44,12 @@ const Apply = () => {
   useEffect(() => {
     const {keyword} = form
 
-    if(pre_reviewStatetype!== reviewStatetype || pre_isContracted!== isContracted  )
-    {
-      setCurrentPage(1)
-    }
 
     if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted,
         keyword:keyword
@@ -64,7 +59,7 @@ const Apply = () => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
@@ -73,7 +68,7 @@ const Apply = () => {
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        payload:{keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
@@ -81,12 +76,12 @@ const Apply = () => {
     else{
       dispatch({
         type: APPLY_LOADING_REQUEST,
-        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}, reviewState:reviewStatetype},
+        payload:{isContracted:isContracted,keyword:keyword ,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
     }    
-}, [currentPage,direction,isContracted,reviewStatetype,form.keyword])
+}, [dispatch,currentPage,direction,isContracted,reviewStatetype,form.keyword,form])
 
   const onChange= (e) => {
     setValues(

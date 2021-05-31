@@ -52,7 +52,7 @@ const uploadTagAPI = (payload) =>
 
 function* uploadTag(action){
     try{
-        const result= yield call(uploadTagAPI,action.payload)
+         yield call(uploadTagAPI,action.payload)
         yield put({
             type:TAG_UPLOADING_SUCCESS,
         })
@@ -101,7 +101,7 @@ const deleteTagAPI = (payload) =>
 
 function* deleteTag(action){
     try{
-        const result= yield call(deleteTagAPI, action.payload)
+        yield call(deleteTagAPI, action.payload)
         yield put({
             type:TAG_DELETE_SUCCESS,
         })

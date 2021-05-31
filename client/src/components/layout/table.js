@@ -41,6 +41,8 @@ const reviewState = (reviewstate) =>
         return (<div>리뷰 승인</div>)
       case "REJECT":
         return (<div>리뷰 반려</div>)
+      default :
+        return null
     }
 }
 
@@ -54,8 +56,10 @@ const reportresult = (result) =>{
         return (<div>회원 삭제</div>)
       case "GIVE_WARNING":
         return (<div>경고 조치</div>)
-        case "NO_PROBLEM":
+      case "NO_PROBLEM":
           return (<div>문제 없음</div>)
+      default :
+          return null
     }
 }
 
@@ -68,7 +72,8 @@ const registerType = (registerType) => {
         return (<div>네이버</div>)
       case "SE":
         return (<div>소공</div>)
-        
+      default :
+        return null
     }
 
 

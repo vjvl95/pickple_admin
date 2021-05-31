@@ -12,7 +12,6 @@ import {useDispatch, useSelector} from "react-redux"
 import { Fragment } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Input} from 'reactstrap'
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import "./report.css"
 import InputLabel from '@material-ui/core/InputLabel';
@@ -57,7 +56,7 @@ const Report = (req) => {
     {
       dispatch({
         type: REPORT_SEARCH_REQUEST,
-        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }},
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }},
         currentPage: currentPage
       })
     }
@@ -65,7 +64,7 @@ const Report = (req) => {
     {
       dispatch({
         type: REPORT_SEARCH_REQUEST,
-        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage },reportResult: reportResult},
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 },reportResult: reportResult},
         currentPage: currentPage
       })
     }
@@ -74,19 +73,19 @@ const Report = (req) => {
     {
       dispatch({
         type: REPORT_SEARCH_REQUEST,
-        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportState: reportState},
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }, reportState: reportState},
         currentPage: currentPage
       })
     }
     else{
       dispatch({
         type: REPORT_SEARCH_REQUEST,
-        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }, reportResult: reportResult, reportState: reportState},
         currentPage: currentPage
       })
 
     }      
-    },[currentPage,direction,reportResult,reportState,form.keyword])
+    },[dispatch,form,currentPage,direction,reportResult,reportState,form.keyword])
   
       const onChange= (e) => {
         setValues(

@@ -7,7 +7,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { USER_SEARCH_REQUEST} from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
@@ -38,7 +37,7 @@ const User = () => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {users,totalElements,previous_type} = useSelector((state) => state.user);
+  const {users,totalElements} = useSelector((state) => state.user);
   useEffect(()=>{
     
     const {keyword} = form
@@ -46,19 +45,19 @@ const User = () => {
     if(type!=="ALL"){
       dispatch({
         type:USER_SEARCH_REQUEST,
-        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
         accounttype:type
     })
     }
     else{
       dispatch({ 
       type:USER_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
       accounttype:type
 
     })
   }
-    },[currentPage,type,form.keyword])
+    },[dispatch,form,currentPage,type,form.keyword])
 
   const onChange= (e) => {
     setValues(

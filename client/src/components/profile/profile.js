@@ -30,10 +30,10 @@ const Profile = () => {
 
       dispatch({
         type: PROFILE_SEARCH_REQUEST,
-        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
         currentPage: currentPage
       })
-      },[currentPage,direction,form.keyword])
+      },[dispatch,form,currentPage,direction,form.keyword])
    
       const onChange= (e) => {
         setValues(

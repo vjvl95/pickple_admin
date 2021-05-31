@@ -3,7 +3,6 @@ import React ,{useRef}from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { BOARD_SEARCH_REQUEST } from '../../actions/boardAction';
@@ -20,22 +19,20 @@ const Board = () => {
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage]=useState(1)
-  const [postsPerPage]=useState(10);
   const {boards,totalElements} = useSelector((state) => state.board);
   const [form, setValues] = useState({keyword:""})
   const [direction, setDirection]=useState("DESC")
-  const [count,setCount]=useState(0)
 
   useEffect(()=>{
     const {keyword} = form
 
     dispatch({
       type: BOARD_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+      payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:10}},
       currentPage: currentPage,
       pre_direction:direction
     })
-    },[currentPage,direction,form.keyword])
+    },[currentPage,direction,form.keyword,form,dispatch])
    
 
     const onChange= (e) => {
@@ -47,10 +44,6 @@ const Board = () => {
       )
   }
 
-
-  const onSubmit = (value) => {
-
-}
 const handleChange = (event) => {
   setDirection(event.target.value)
 };
@@ -81,7 +74,7 @@ const handleChange = (event) => {
       <div className="contentWrapper">
       <Table boards={boards} tablenum={2}/>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts = {totalElements} paginate={setCurrentPage}  page={currentPage}/>
+      <Pagination postsPerPage={10} totalPosts = {totalElements} paginate={setCurrentPage}  page={currentPage}/>
 
     </Paper>
   );

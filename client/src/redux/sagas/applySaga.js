@@ -82,7 +82,7 @@ const reviewAcceptAPI = (payload) =>{
 function* reviewAccept (action)
 {
     try {
-    const result =  yield call(reviewAcceptAPI,action.payload)
+     yield call(reviewAcceptAPI,action.payload)
     yield put({
         type:REVIEW_ACCEPT_SUCCESS,
     })
@@ -113,7 +113,8 @@ const reviewRejectAPI = (payload) =>{
 function* reviewReject (action)
 {
     try {
-    const result =  yield call(reviewRejectAPI,action.payload)
+    yield call(reviewRejectAPI,action.payload)
+   
     yield put({
         type:REVIEW_REJECT_SUCCESS,
     })
