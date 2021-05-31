@@ -58,7 +58,7 @@ const ProfileDetail = (req) => {
     return(
         <Fragment>
       <Header/>
-      <Paper className="paper-detail" elevation={3} style={{margin:"auto",marginTop:"70px",width:"65",borderRadius:"0px",    padding: "10px 30px 10px 10px"}}>
+      <Paper className="paper-detail" elevation={3} style={{margin:"auto",marginTop:"70px",width:"65",borderRadius:"0px",    padding: "10px 30px 10px 10px",    marginBottom: "100px"}}>
       <div className="contentWrapper-detail">
         <Typography color="textSecondary">
        <h2 className="profiletitle">

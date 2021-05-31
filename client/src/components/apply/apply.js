@@ -34,7 +34,7 @@ const Apply = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10);
-  const { applys, totalElements,pre_page} = useSelector((state) => state.apply);
+  const { applys, totalElements} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("DESC")
@@ -44,13 +44,7 @@ const Apply = () => {
   
 
   useEffect(() => {
-    if(pre_page!==currentPage)
-    {
-
-    }
-    else{
-      setCurrentPage(1)
-    } 
+    
     const {keyword} = form  
 
     if(reviewStatetype==="ALL"&&isContracted==="ALL")
@@ -108,10 +102,14 @@ const Apply = () => {
 
 const handleChange = (e) => {  
   setisContracted(e.target.value);
+  setCurrentPage(1)
+
 };
 
 const handleChange_reviewState = (e) => {  
   setreviewStatetype(e.target.value);
+  setCurrentPage(1)
+
 };
 
 const handleChange_direction = (event) => {

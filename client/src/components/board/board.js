@@ -42,10 +42,12 @@ const Board = () => {
               [e.target.name]:e.target.value
           }
       )
+      setCurrentPage(1)
   }
 
 const handleChange = (event) => {
   setDirection(event.target.value)
+  setCurrentPage(1)
 };
   return (
     <Paper className="board-paper">

@@ -42,6 +42,8 @@ const Profile = () => {
                 [e.target.name]:e.target.value
             }
         )
+        setCurrentPage(1)
+
     }
   
   

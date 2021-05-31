@@ -94,14 +94,19 @@ const Report = (req) => {
                 [e.target.name]:e.target.value
             }
         )
+        setCurrentPage(1)
     }
     
     const handleChange_reportResult = (e) => {  
       setReportResult(e.target.value);
+      setCurrentPage(1)
+
     };
     
     const handleChange_reportState = (e) => {  
       setReportState(e.target.value);
+      setCurrentPage(1)
+
     
     };
     

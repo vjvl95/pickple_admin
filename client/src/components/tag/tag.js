@@ -40,6 +40,7 @@ const Tag = () => {
             [e.target.name]:e.target.value
         }
     )
+    setCurrentPage(1)
 }
 const onuploadClick = () => {
 

@@ -66,11 +66,13 @@ const User = () => {
             [e.target.name]:e.target.value
         }
     )
+    setCurrentPage(1)
 }
 
 
 const handleChange = (e) => {  
   setType(e.target.value);
+  setCurrentPage(1)
 };
 
 
