@@ -33,7 +33,7 @@ const Reportdetail = (req) =>{
         type: REPORT_DETAIL_REQUEST,
         payload:req.match.params.id
       })
-      },[dispatch])
+      },[dispatch,req.match.params.id])
 
     const onSubmit = async(e) => {
       await e.preventDefault()  

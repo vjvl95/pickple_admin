@@ -1,41 +1,8 @@
 import axios from 'axios'
 import { all, call, put, takeEvery,fork } from 'redux-saga/effects';
-import { push } from "connected-react-router";
+import { PROFILE_DETAIL_FAILURE,PROFILE_DETAIL_REQUEST,PROFILE_DETAIL_SUCCESS,PROFILE_SEARCH_SUCCESS,PROFILE_SEARCH_REQUEST,PROFILE_SEARCH_FAILURE,PROFILE_CLOSE_FAILURE,PROFILE_CLOSE_REQUEST,PROFILE_CLOSE_SUCCESS,PROFILE_OPEN_FAILURE,PROFILE_OPEN_SUCCESS,PROFILE_OPEN_REQUEST } from "../../actions/profileAction"
 
-import { PROFILE_LOADING_FAILURE, PROFILE_LOADING_REQUEST, PROFILE_LOADING_SUCCESS,PROFILE_DETAIL_FAILURE,PROFILE_DETAIL_REQUEST,PROFILE_DETAIL_SUCCESS,PROFILE_SEARCH_SUCCESS,PROFILE_SEARCH_REQUEST,PROFILE_SEARCH_FAILURE,PROFILE_CLOSE_FAILURE,PROFILE_CLOSE_REQUEST,PROFILE_CLOSE_SUCCESS,PROFILE_OPEN_FAILURE,PROFILE_OPEN_SUCCESS,PROFILE_OPEN_REQUEST } from "../../actions/profileAction"
 
-/*
-const loadProfileAPI = (payload) =>{
-    
-    console.log(payload)
-
-    return axios.get("/api/v1/profile",payload)
-}
-
-function* loadProfile (action)
-{
-    console.log(action)
-    try {
-    const result =  yield call(loadProfileAPI,action.payload)
-    console.log(result)
-    yield put({
-        type:PROFILE_LOADING_SUCCESS,
-        payload:result.data.data.content
-    })
-    } catch (error) {
-        if(error.response.status===403) 
-        {
-            localStorage.removeItem("token");
-        }         
-        yield put({
-            type:PROFILE_LOADING_FAILURE,
-            payload: error,
-          });
-
-    }
-}
-
-*/
 
 const searchProfileAPI = (payload) =>{
     const config = {

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { TAG_LOADING_FAILURE, TAG_LOADING_REQUEST, TAG_LOADING_SUCCESS, TAG_SEARCH_SUCCESS,TAG_SEARCH_FAILURE,TAG_SEARCH_REQUEST, TAG_DELETE_SUCCESS, TAG_DELETE_REQUEST,TAG_DELETE_FAILURE,TAG_UPLOADING_SUCCESS,TAG_UPLOADING_REQUEST,TAG_UPLOADING_FAILURE} from "../../actions/tagAction";
 import { all, call, put, takeEvery,fork } from 'redux-saga/effects';
-import { push } from "connected-react-router";
 
 
 const loadTagAPI = (payload) =>

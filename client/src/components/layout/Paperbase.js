@@ -36,14 +36,7 @@ function Paperbase(props) {
     })
   
     },[currentPage],
-    
-    
-
     )
-   
-
-      console.log(applys)
-      console.log(reports)
   return (
     <Fragment>
     <Header/>

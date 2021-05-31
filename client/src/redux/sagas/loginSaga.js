@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { all, call, put, takeEvery,fork } from 'redux-saga/effects';
-import { LOGIN_FAILURE, LOGIN_SUCCESS,LOGIN_REQUEST,LOGOUT_FAILURE,LOGOUT_REQUEST,LOGOUT_SUCCESS } from '../../actions/loginAction'
+import { LOGIN_SUCCESS,LOGIN_REQUEST,LOGOUT_FAILURE,LOGOUT_REQUEST,LOGOUT_SUCCESS } from '../../actions/loginAction'
 import { push } from "connected-react-router";
 
 const loginUserAPI = (payload) => {

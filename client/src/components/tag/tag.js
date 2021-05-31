@@ -26,20 +26,20 @@ const Tag = () => {
   
   console.log(totalElements)
   useEffect(()=>{
+    const {keyword} = form
+
     dispatch({
       type: TAG_SEARCH_REQUEST,
-      payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
       currentPage:currentPage
     })
-    },[currentPage])
+    },[dispatch,currentPage,form.keyword])
 
     const onReset = () =>
     {
       setCurrentPage(1)
       setValues("")
-
         resetValue.current.value=""
-
         dispatch({
           type: TAG_SEARCH_REQUEST,
           payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }},
@@ -47,16 +47,6 @@ const Tag = () => {
         })
     }
 
-    const onSubmit = async(e) => {
-      await e.preventDefault()
-      const {keyword} = form
-      setCurrentPage(1)
-      dispatch({
-          type:TAG_SEARCH_REQUEST,
-          payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }}
-      })
-    
-  }
 
   const onChange= (e) => {
     setValues(
@@ -102,15 +92,10 @@ const onuploadClick = () => {
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginBottom:"5px" , marginTop:"10px",width: "35%",  marginLeft: "4rem"}}/>
             <div className="buttondiv" style={{marginTop:"10px"}}>
 
-            <Button className="tag_button" variant="contained" color="primary"  onClick={onSubmit} style={{marginLeft:"30px",marginRight:"10px"}} >
-          검색
-            </Button>
             <Button className="tag_button" variant="contained" color="primary" onClick={onuploadClick}  style={{marginLeft:"10px",marginRight:"10px"}}  >
-        등록
-        </Button>
-            <Button className="tag_button" variant="contained" onClick={onReset}   style={{marginLeft:"10px",marginRight:"10px"}} >
-          초기화
+            등록
             </Button>
+          
             </div>
             </div>
         </Fragment>  

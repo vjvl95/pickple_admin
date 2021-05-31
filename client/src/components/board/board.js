@@ -15,22 +15,27 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 const Board = () => {
   const resetValue=useRef(null)
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {boards,totalElements,pre_direction} = useSelector((state) => state.board);
+  const {boards,totalElements} = useSelector((state) => state.board);
   const [form, setValues] = useState({keyword:""})
   const [direction, setDirection]=useState("DESC")
   const [count,setCount]=useState(0)
 
-  console.log(pre_direction)
   useEffect(()=>{
-    onSubmit()
-    },[currentPage,direction])
+    const {keyword} = form
+
+    dispatch({
+      type: BOARD_SEARCH_REQUEST,
+      payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+      currentPage: currentPage,
+      pre_direction:direction
+    })
+    },[currentPage,direction,form.keyword])
    
 
     const onChange= (e) => {
@@ -44,31 +49,10 @@ const Board = () => {
 
 
   const onSubmit = (value) => {
-    const {keyword} = form
 
-    console.log(count)
-    if(count===0&& direction==="ASC")
-    {
-    dispatch({
-      type: BOARD_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-      currentPage: currentPage,
-      pre_direction:direction
-    })
-    setCount(1)
-  }
-  else{
-      dispatch({
-        type: BOARD_SEARCH_REQUEST,
-        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
-        currentPage: currentPage,
-        pre_direction:direction
-      })
-    }
 }
 const handleChange = (event) => {
   setDirection(event.target.value)
-  setCurrentPage(1)
 };
   return (
     <Paper className="board-paper">
@@ -88,9 +72,7 @@ const handleChange = (event) => {
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
             <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:제목,내용</span>
             </div>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"40px" , marginTop:"5px"}} >
-            검색
-            </Button>      
+           
            </div>
       </Fragment>  
          

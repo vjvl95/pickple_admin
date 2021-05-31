@@ -68,7 +68,7 @@ const UserDetail = (req) => {
       })
       
     
-      },[dispatch])
+      },[dispatch,req.match.params.id])
 
       useEffect(()=>{
         if(usersDetail.studentId===undefined)
@@ -86,7 +86,7 @@ const UserDetail = (req) => {
             newStudentId:usersDetail.studentId
           })
         }
-      },[usersDetail.email])
+      },[usersDetail.email,usersDetail.accountType,usersDetail.studentId])
 
       const onupdate = () => {
         
@@ -165,7 +165,7 @@ const UserDetail = (req) => {
             <div className="label2">
             <div className="userbody"><span className="userspan">회원 번호</span> <span  className="userspan2">:</span> <span className="userspan3">{usersDetail.accountId}</span></div>
             <div className="userbody"><span className="userspan" style={{marginTop:"25px"}}>회원 타입</span> <span  className="userspan2" style={{marginTop:"25px"}}>:</span> 
-            <FormControl className={classes.formControl} style={{bottom:"15px", position:"relative",left:"-30px",bottom:"3px"}} >
+            <FormControl className={classes.formControl} style={{bottom:"15px", position:"relative",left:"-30px"}} >
                 <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>회원타입</InputLabel>
                   <Select labelId="demo-simple-select-label" id="demo-simple-select" value={form.accountType}  name="accountType" onChange={onChange} style={{width:"100px", marginLeft:"1.5rem"}}>
                   <MenuItem value="MEMBER">멤버</MenuItem>

@@ -51,9 +51,42 @@ const Report = (req) => {
 
   useEffect(()=>{
 
-     onSubmit()
-      
-    },[currentPage,direction,reportResult,reportState])
+    const {keyword} = form
+   
+    if(reportState ==="ALL" && reportResult==="ALL" )
+    {
+      dispatch({
+        type: REPORT_SEARCH_REQUEST,
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }},
+        currentPage: currentPage
+      })
+    }
+    else if(reportState ==="ALL")
+    {
+      dispatch({
+        type: REPORT_SEARCH_REQUEST,
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage },reportResult: reportResult},
+        currentPage: currentPage
+      })
+    }
+ 
+    else if(reportResult==="ALL")
+    {
+      dispatch({
+        type: REPORT_SEARCH_REQUEST,
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportState: reportState},
+        currentPage: currentPage
+      })
+    }
+    else{
+      dispatch({
+        type: REPORT_SEARCH_REQUEST,
+        payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
+        currentPage: currentPage
+      })
+
+    }      
+    },[currentPage,direction,reportResult,reportState,form.keyword])
   
       const onChange= (e) => {
         setValues(
@@ -73,43 +106,7 @@ const Report = (req) => {
     
     };
     
-    const onSubmit = async(e) => {
-      const {keyword} = form
-   
-      if(reportState ==="ALL" && reportResult==="ALL" )
-      {
-        dispatch({
-          type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }},
-          currentPage: currentPage
-        })
-      }
-      else if(reportState ==="ALL")
-      {
-        dispatch({
-          type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage },reportResult: reportResult},
-          currentPage: currentPage
-        })
-      }
-   
-      else if(reportResult==="ALL")
-      {
-        dispatch({
-          type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportState: reportState},
-          currentPage: currentPage
-        })
-      }
-      else{
-        dispatch({
-          type: REPORT_SEARCH_REQUEST,
-          payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:postsPerPage }, reportResult: reportResult, reportState: reportState},
-          currentPage: currentPage
-        })
-
-      }
-  }
+    
   const handleChange = (event) => {
     setDirection(event.target.value);
     setCurrentPage(1)
@@ -159,9 +156,7 @@ const Report = (req) => {
 
           </Select>
           </FormControl>
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
-              검색
-                </Button>      
+                 
       </div>
         </Fragment>  
   

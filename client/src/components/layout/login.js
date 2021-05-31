@@ -1,5 +1,5 @@
 import React,{ useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {} from "reactstrap"
 import { LOGIN_REQUEST } from "../../actions/loginAction";
 import "./login.css"
@@ -8,17 +8,9 @@ import Button from '@material-ui/core/Button';
 
 
 const Login = () =>{
-    const [form,setValues]= useState({id:"",password:""})
     const [id,setId]=  useState("") 
     const [password,setPassword]=  useState("") 
     const dispatch=useDispatch()
-    
-    const onChange= (e) =>{
-        setValues({
-            ...form,
-            [e.target.name]:e.target.value
-        })
-    }
 
     const onSubmit = (id,password) => {
         console.log(id)

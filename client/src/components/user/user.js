@@ -41,9 +41,24 @@ const User = () => {
   const {users,totalElements,previous_type} = useSelector((state) => state.user);
   useEffect(()=>{
     
-    onSubmit()
+    const {keyword} = form
 
-    },[currentPage,type])
+    if(type!=="ALL"){
+      dispatch({
+        type:USER_SEARCH_REQUEST,
+        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+        accounttype:type
+    })
+    }
+    else{
+      dispatch({ 
+      type:USER_SEARCH_REQUEST,
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      accounttype:type
+
+    })
+  }
+    },[currentPage,type,form.keyword])
 
   const onChange= (e) => {
     setValues(
@@ -59,29 +74,8 @@ const handleChange = (e) => {
   setType(e.target.value);
 };
 
-const onSubmit = async(e) => {
-    const {keyword} = form
-    if(previous_type!==type)
-    {
-      setCurrentPage(1)
-    }
-    
-    if(type!=="ALL"){
-      dispatch({
-        type:USER_SEARCH_REQUEST,
-        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-        accounttype:type
-    })
-    }
-    else{
-      dispatch({ 
-      type:USER_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
-      accounttype:type
 
-    })
-}
-}
+
 
 const resetValue=useRef(null)
 
@@ -110,11 +104,7 @@ const resetValue=useRef(null)
               <MenuItem value="ALL">전체</MenuItem>
             </Select>
           </FormControl>
-              
-
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
-              검색
-                </Button>      
+                
       </div>
         </Fragment>  
             </Grid>

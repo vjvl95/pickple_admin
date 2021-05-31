@@ -1,8 +1,6 @@
 import axios from "axios";
 import { APPLY_LOADING_REQUEST, APPLY_LOADING_FAILURE,APPLY_LOADING_SUCCESS,APPLY_DETAIL_FAILURE,APPLY_DETAIL_REQUEST,APPLY_DETAIL_SUCCESS,REVIEW_ACCEPT_REQUEST, REVIEW_ACCEPT_SUCCESS, REVIEW_ACCEPT_FAILURE, REVIEW_REJECT_SUCCESS, REVIEW_REJECT_FAILURE, REVIEW_REJECT_REQUEST} from "../../actions/applyAction"
 import { call, put, takeEvery, all, fork} from "redux-saga/effects";
-import { push } from "connected-react-router";
-
 
 const loadApplyAPI = (payload) =>{
     const config = {

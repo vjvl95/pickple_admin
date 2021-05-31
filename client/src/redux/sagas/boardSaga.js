@@ -65,12 +65,6 @@ function* loadBoardDetail (action)
 }
 
 const deleteBoardAPI = (payload) =>{
-    const config = {
-        headers:{
-            "Content-Type" : "application/json",
-            "X-AUTH-TOKEN": localStorage.getItem("token")
-        }
-    }
     return axios.delete(`/api/v1/recboard/${payload}`,{ headers:{"X-AUTH-TOKEN":localStorage.getItem("token"),"Content-Type" : "application/json"}})
 }
 

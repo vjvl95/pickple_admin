@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Header from "../components/header/Header"
-import { Switch, Route, BrowserRouter} from "react-router-dom";
+import { Switch, Route} from "react-router-dom";
 import Navigator from '../components/layout/Navigator'
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "../components/layout/theme"

@@ -19,7 +19,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -36,7 +35,7 @@ const Apply = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10);
-  const { applys, totalElements,pre_reviewStatetype,pre_isContracted,pre_keyword} = useSelector((state) => state.apply);
+  const { applys, totalElements,pre_reviewStatetype,pre_isContracted} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("DESC")
@@ -44,36 +43,6 @@ const Apply = () => {
   const classes = useStyles();
   const resetValue=useRef(null)
   useEffect(() => {
-    
-    onSubmit()
-    
-}, [currentPage,direction,isContracted,reviewStatetype])
-
-  const onChange= (e) => {
-    setValues(
-        {
-            ...form,
-            [e.target.name]:e.target.value
-        }
-    )
-}
-
-const handleChange = (e) => {  
-  setisContracted(e.target.value);
-};
-
-const handleChange_reviewState = (e) => {  
-  setreviewStatetype(e.target.value);
-};
-
-const handleChange_direction = (event) => {
-  setDirection(event.target.value);
-  setCurrentPage(1)
-};
-
-
-
-  const onSubmit = async(e) => {
     const {keyword} = form
 
     if(pre_reviewStatetype!== reviewStatetype || pre_isContracted!== isContracted  )
@@ -116,8 +85,33 @@ const handleChange_direction = (event) => {
         reviewStatetype:reviewStatetype,
         isContracted:isContracted
       })
-    }
+    }    
+}, [currentPage,direction,isContracted,reviewStatetype,form.keyword])
+
+  const onChange= (e) => {
+    setValues(
+        {
+            ...form,
+            [e.target.name]:e.target.value
+        }
+    )
 }
+
+const handleChange = (e) => {  
+  setisContracted(e.target.value);
+};
+
+const handleChange_reviewState = (e) => {  
+  setreviewStatetype(e.target.value);
+};
+
+const handleChange_direction = (event) => {
+  setDirection(event.target.value);
+  setCurrentPage(1)
+};
+
+
+
 
   return (
     <div>
@@ -162,9 +156,6 @@ const handleChange_direction = (event) => {
             <MenuItem value="ALL">전체</MenuItem>
           </Select>
           </FormControl>
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
-              검색
-                </Button>      
       </div>
         </Fragment>  
      

@@ -28,12 +28,14 @@ const Profile = () => {
     const {profiles,totalElements} = useSelector((state) => state.profile);
     console.log(totalElements)
     useEffect(()=>{
+      const {keyword} = form
+
       dispatch({
         type: PROFILE_SEARCH_REQUEST,
-        payload:{pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
-        currentPage:currentPage
+        payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
+        currentPage: currentPage
       })
-      },[currentPage,direction])
+      },[currentPage,direction,form.keyword])
    
       const onChange= (e) => {
         setValues(
@@ -45,15 +47,6 @@ const Profile = () => {
     }
   
   
-    const onSubmit = async(e) => {
-      const {keyword} = form
-      console.log(keyword)
-        dispatch({
-          type: PROFILE_SEARCH_REQUEST,
-          payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
-          currentPage: currentPage
-        })
-  }
 
 
   const handleChange = (event) => {
@@ -78,9 +71,7 @@ const Profile = () => {
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
             <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:아이디,카카오ID,사용자이름</span>
             </div>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
-            검색
-            </Button>      
+       
     </div>
       </Fragment>  
          

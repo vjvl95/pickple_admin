@@ -21,7 +21,7 @@ const ProfileDetail = (req) => {
             type:PROFILE_DETAIL_REQUEST,
             payload:req.match.params.id
         })
-    },[dispatch])
+    },[dispatch,req.match.params.id])
 
     const {profileDetail} = useSelector((state) => state.profile);
 

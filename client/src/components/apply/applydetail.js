@@ -23,7 +23,7 @@ const Applydetail = (req) => {
           type: APPLY_DETAIL_REQUEST,
           payload:applyId
         })
-        },[])
+        },[applyId,dispatch])
     
 
 
