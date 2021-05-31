@@ -49,12 +49,21 @@
 .skile-div {
   width: 50%;
   padding-top: 20px;
+  display: flex;
+  text-align: center;
+  position: relative;
+  padding-left: 10px;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 10px;
 }
 
 .skile-label {
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
   font-weight: bold;
+  padding-right: 5px;
+  padding-bottom: 3px;
 }
 .introduce-detail {
   margin-left: 10px;
@@ -82,4 +91,5 @@
   font-size: 13px;
   margin-right: 15px;
   margin-left: 10px;
+  height: 30px;
 }

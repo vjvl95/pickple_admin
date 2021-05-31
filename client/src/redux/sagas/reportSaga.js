@@ -130,6 +130,7 @@ function* manageReport (action)
         type:REPORT_MANAGE_SUCCESS,
         payload:result.data.data
     })
+    alert("신고가 정상적으로 처리되었습니다.")
     window.location.reload()
 } catch (error) {
         if(error.response.status===403) 

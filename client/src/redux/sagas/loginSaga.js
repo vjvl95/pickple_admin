@@ -24,6 +24,8 @@ function* loginUser(action)
             payload:result.data
         })
         yield put(push(`/admin/`))
+        window.location.reload()
+
     }
     catch(e){
     }

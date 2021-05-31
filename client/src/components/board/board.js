@@ -22,16 +22,15 @@ const Board = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {boards,totalElements} = useSelector((state) => state.board);
+  const {boards,totalElements,pre_direction} = useSelector((state) => state.board);
   const [form, setValues] = useState({keyword:""})
-  const [direction, setDirection]=useState("ASC")
+  const [direction, setDirection]=useState("DESC")
+  const [count,setCount]=useState(0)
+
+  console.log(pre_direction)
   useEffect(()=>{
-    dispatch({
-      type: BOARD_SEARCH_REQUEST,
-      payload:{pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
-      currentPage:currentPage
-    })
-    },[currentPage])
+    onSubmit()
+    },[currentPage,direction])
    
 
     const onChange= (e) => {
@@ -44,19 +43,32 @@ const Board = () => {
   }
 
 
-  const onSubmit = async(e) => {
-    await e.preventDefault()
+  const onSubmit = (value) => {
     const {keyword} = form
-  
+
+    console.log(count)
+    if(count===0&& direction==="ASC")
+    {
+    dispatch({
+      type: BOARD_SEARCH_REQUEST,
+      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage}},
+      currentPage: currentPage,
+      pre_direction:direction
+    })
+    setCount(1)
+  }
+  else{
       dispatch({
         type: BOARD_SEARCH_REQUEST,
         payload:{keyword:keyword,pageRequest:{direction:direction, page:currentPage, size:postsPerPage}},
-        currentPage: currentPage
+        currentPage: currentPage,
+        pre_direction:direction
       })
+    }
 }
 const handleChange = (event) => {
-  setDirection(event.target.value);
-  console.log(direction)
+  setDirection(event.target.value)
+  setCurrentPage(1)
 };
   return (
     <Paper className="board-paper">
@@ -64,8 +76,7 @@ const handleChange = (event) => {
         <Toolbar style={{paddingTop:"10px", paddingBottom: "10px",justifyContent:"center"}}>
         
     <FormControl component="fieldset">
-       <FormLabel component="legend" style={{fontWeight:"bold", marginLeft:"35%",color: "rgba(0, 0, 0, 0.54)"}}>정렬</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange} style={{flexDirection:"unset"}}>
+          <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={(e)=>handleChange(e)} style={{flexDirection:"unset"}}>
                 <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
                 <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
            </RadioGroup>
@@ -73,8 +84,11 @@ const handleChange = (event) => {
 
       <Fragment>      
            <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
+           <div style={{display:"flex", flexDirection:"column"}}>
             <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
-            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"40px" }} >
+            <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:제목,내용</span>
+            </div>
+            <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"40px" , marginTop:"5px"}} >
             검색
             </Button>      
            </div>

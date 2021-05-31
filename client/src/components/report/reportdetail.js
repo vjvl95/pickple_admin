@@ -36,14 +36,22 @@ const Reportdetail = (req) =>{
       },[dispatch])
 
     const onSubmit = async(e) => {
-      await e.preventDefault()
-      console.log(reportState)
-  
+      await e.preventDefault()  
     
-      dispatch({
-        type: REPORT_MANAGE_REQUEST,
-        payload:{reportId:req.match.params.id, reportResult:reportState }
-      })
+      try{
+        var answer = window.confirm("신고를 처리하시겠습니까?")
+        if(answer)
+        {
+          dispatch({
+            type: REPORT_MANAGE_REQUEST,
+            payload:{reportId:req.match.params.id, reportResult:reportState}
+          })
+        }
+  }
+  catch(e)
+  {
+      console.log(e)
+  }
   }
 
   const reportresult = (result) =>{
@@ -57,7 +65,7 @@ const Reportdetail = (req) =>{
         return (<div>회원 삭제</div>)
       case "GIVE_WARNING":
         return (<div>경고 조치</div>)
-      case "NONE":
+      case "NO_PROBLEM":
          return (<div>문제 없음</div>)
     }
 }
@@ -101,7 +109,7 @@ const Reportdetail = (req) =>{
           <MenuItem value="BOARD_MODIFIED">게시물 수정</MenuItem>
           <MenuItem value="ACCOUNT_DELETED">회원 삭제</MenuItem>
           <MenuItem value="GIVE_WARNING">회원 경고</MenuItem>
-          <MenuItem value="NONE">문제없음</MenuItem>
+          <MenuItem value="NO_PROBLEM">문제없음</MenuItem>
         </Select>
         <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"30px" }} >
           처리

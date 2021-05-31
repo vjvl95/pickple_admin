@@ -37,14 +37,13 @@ const User = () => {
   const classes = useStyles();
 
   const [currentPage, setCurrentPage]=useState(1)
-  const [postsPerPage, setTagsPerPage]=useState(10);
+  const [postsPerPage]=useState(10);
   const {users,totalElements,previous_type} = useSelector((state) => state.user);
-  const [dispatchindex, setDispatchindex]= useState("")
   useEffect(()=>{
     
     onSubmit()
 
-    },[currentPage])
+    },[currentPage,type])
 
   const onChange= (e) => {
     setValues(
@@ -56,16 +55,12 @@ const User = () => {
 }
 
 
-console.log(totalElements)
 const handleChange = (e) => {  
   setType(e.target.value);
 };
 
 const onSubmit = async(e) => {
     const {keyword} = form
-    console.log(dispatchindex)
-
-    console.log(previous_type)
     if(previous_type!==type)
     {
       setCurrentPage(1)
@@ -102,7 +97,10 @@ const resetValue=useRef(null)
       <Grid item xs>     
             <Fragment>
         <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-                <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"85%"}}/>
+                <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 이름,사용자ID</span>
+                 </div>
                 <FormControl className={classes.formControl} style={{bottom:"15px"}}>
                 <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>멤버 타입</InputLabel>
 
@@ -114,7 +112,7 @@ const resetValue=useRef(null)
           </FormControl>
               
 
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
               검색
                 </Button>      
       </div>

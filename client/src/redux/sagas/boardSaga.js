@@ -46,13 +46,11 @@ const loadBoardDetailAPI = (payload) =>{
 
 function* loadBoardDetail (action)
 {
-    console.log(action)
     try {
     const result =  yield call(loadBoardDetailAPI,action.payload)
-    console.log(result.data)
     yield put({
         type:BOARD_DETAIL_SUCCESS,
-        payload:result.data
+        payload:result.data,
     })
     } catch (error) {
         if(error.response.status===403) 
@@ -112,12 +110,16 @@ const searchBoardAPI = (payload) =>{
 
 function* searchBoard(action)
 {
+    console.log(action.pre_direction)
+
     try {
     const result =  yield call(searchBoardAPI,action.payload)
     console.log(result)
     yield put({
         type:BOARD_SEARCH_SUCCESS,
-        payload:result.data.data
+        payload:result.data.data,
+        pre_direction:action.pre_direction
+
     })
     } catch (error) {
         if(error.response.status===403) 

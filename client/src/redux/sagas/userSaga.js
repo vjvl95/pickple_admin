@@ -158,8 +158,8 @@ function* UserUpload(action){
             type:USER_UPLOAD_SUCCESS,
         })
         alert("회원정보가 변경되었습니다.")
+        window.location.reload()
 
-        yield put(push("/admin/user"))
     } catch(e){
 
          

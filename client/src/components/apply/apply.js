@@ -39,7 +39,7 @@ const Apply = () => {
   const { applys, totalElements,pre_reviewStatetype,pre_isContracted,pre_keyword} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
-  const [direction,setDirection]=useState("ASC")
+  const [direction,setDirection]=useState("DESC")
   const [form, setValues] = useState({keyword:""})
   const classes = useStyles();
   const resetValue=useRef(null)
@@ -47,7 +47,7 @@ const Apply = () => {
     
     onSubmit()
     
-}, [currentPage])
+}, [currentPage,direction,isContracted,reviewStatetype])
 
   const onChange= (e) => {
     setValues(
@@ -68,18 +68,14 @@ const handleChange_reviewState = (e) => {
 
 const handleChange_direction = (event) => {
   setDirection(event.target.value);
-  console.log(direction)
+  setCurrentPage(1)
 };
 
-  console.log(reviewStatetype)
-  console.log(isContracted)
 
 
   const onSubmit = async(e) => {
     const {keyword} = form
-    console.log(pre_reviewStatetype)
-    console.log(pre_isContracted)
-    console.log(pre_keyword)
+
     if(pre_reviewStatetype!== reviewStatetype || pre_isContracted!== isContracted  )
     {
       setCurrentPage(1)
@@ -130,7 +126,6 @@ const handleChange_direction = (event) => {
           <Toolbar style={{paddingTop:"15px", justifyContent:"center"}}>
             
           <FormControl component="fieldset">
-       <FormLabel component="legend" style={{fontWeight:"bold", marginLeft:"35%",color: "rgba(0, 0, 0, 0.54)"}}>정렬</FormLabel>
           <RadioGroup aria-label="gender" name="gender1" value={direction} onChange={handleChange_direction} style={{flexDirection:"unset"}}>
                 <FormControlLabel value="ASC" control={<Radio  size="small"color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }} />} label="등록순" />
                 <FormControlLabel value="DESC" control={<Radio  size="small" color="default" name="radio-button-demo" inputProps={{ 'aria-label': 'D' }}  />} label="최신순" />
@@ -140,7 +135,12 @@ const handleChange_direction = (event) => {
 
               <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+              <div style={{display:"flex", flexDirection:"column"}}>
+
+              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
+              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준:리뷰내용, 모집글 작성자</span>
+              </div>
+
               <FormControl className={classes.formControl} style={{bottom:"15px"}} >
               <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>계약 여부</InputLabel>
 
@@ -162,7 +162,7 @@ const handleChange_direction = (event) => {
             <MenuItem value="ALL">전체</MenuItem>
           </Select>
           </FormControl>
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
               검색
                 </Button>      
       </div>

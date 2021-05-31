@@ -1,23 +1,14 @@
 
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import { useHistory } from "react-router-dom";
 
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import { USER_LOADING_REQUEST, USER_DETAIL_REQUEST,USER_DELETE_REQUEST,USER_UPLOAD_REQUEST } from '../../actions/userAction';
+
+import { USER_DETAIL_REQUEST,USER_DELETE_REQUEST,USER_UPLOAD_REQUEST } from '../../actions/userAction';
 import {  useEffect,useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import { Link } from "react-router-dom";
-import {RouteComponentProps} from "react-router"
-import theme from '../layout/theme'
-import styles from '../layout/style'
+
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Header from '../header/UserHeader'
@@ -41,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
+
 const UserDetail = (req) => {
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -54,6 +49,18 @@ const UserDetail = (req) => {
       history.goBack();
      };
 
+     const checkEmail = (email) => {
+      var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      // 검증에 사용할 정규식 변수 regExp에 저장
+    
+      if (email.match(regExp) != null) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    
+    }
     useEffect(()=>{
       dispatch({
         type: USER_DETAIL_REQUEST,
@@ -82,17 +89,26 @@ const UserDetail = (req) => {
       },[usersDetail.email])
 
       const onupdate = () => {
-        console.log(form.accountType)
-        console.log(form.newemail)
+        
         try{
             var answer = window.confirm("회원정보를 수정하시겠습니까?")
+            console.log()
         if(answer)
         {
+          if(!checkEmail(form.newemail)){
+            alert("잘못된 이메일 형식입니다.")
+          }
+          else if(form.newStudentId.length<8){
+            alert("학번은 최소 8글자 이상입니다.")
+          }
+          else
+          {
             dispatch({
                 type:USER_UPLOAD_REQUEST,
                 payload:{accountId:usersDetail.accountId,accountType:form.accountType, newEmail:form.newemail,newStudentId:form.newStudentId},
             },[])
-            }  
+          }
+      }  
         }
         catch(e)
         {

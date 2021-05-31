@@ -36,11 +36,7 @@ const authLink = (
 
 );
 
-const guestLink = (
-  <Button color="inherit" >
-  LOGIN
-  </Button>
-)
+
   return (
 
 
@@ -53,7 +49,7 @@ const guestLink = (
           <Grid container spacing={1} alignItems="center">
             <Grid item xs />            
             <Grid item>
-              {token ? authLink : guestLink}
+              {token ? authLink : ""}
             </Grid>
           </Grid>
         </Toolbar>

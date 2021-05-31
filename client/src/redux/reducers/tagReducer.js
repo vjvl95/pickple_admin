@@ -65,6 +65,7 @@ const initialState={
             return {
                 ...state,
                 tags: [...state.tags, ...action.payload.content],
+                totalElements:action.payload.totalElements,
                 loading: false,
             }
         case TAG_SEARCH_FAILURE:

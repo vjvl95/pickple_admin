@@ -54,7 +54,7 @@ const reportresult = (result) =>{
         return (<div>회원 삭제</div>)
       case "GIVE_WARNING":
         return (<div>경고 조치</div>)
-        case "NONE":
+        case "NO_PROBLEM":
           return (<div>문제 없음</div>)
     }
 }

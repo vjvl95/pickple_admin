@@ -36,27 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Report = (req) => {
   const resetValue=useRef(null)
-  
-
-
-
-
-
-
-
-
-
-  const styles = {
-    tableHead :{
-      textAlign : 'center',
-    },
-    tableCell : {
-      textAlign : 'center',
-      textOverflow: "ellipsis",
-      whiteSpace:"nowrap",
-      overflow:"hidden",
-      maxWidth: "100px"    },
-}
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -68,13 +47,13 @@ const Report = (req) => {
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
   const [form, setValues] = useState({keyword:""})
-  const [direction,setDirection]=useState("ASC")
+  const [direction,setDirection]=useState("DESC")
 
   useEffect(()=>{
 
      onSubmit()
       
-    },[currentPage])
+    },[currentPage,direction,reportResult,reportState])
   
       const onChange= (e) => {
         setValues(
@@ -133,7 +112,7 @@ const Report = (req) => {
   }
   const handleChange = (event) => {
     setDirection(event.target.value);
-    console.log(direction)
+    setCurrentPage(1)
   };
   return (
     <Paper className="report-paper">
@@ -152,7 +131,10 @@ const Report = (req) => {
 
             <Fragment>
               <div className="search-bar" style={{height:"50px",display:"flex" , justifyContent:"center", margin:"10px"}}>
-              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"30%"}}/>
+              <div style={{display:"flex", flexDirection:"column"}}>
+              <Input name="keyword" onChange={onChange} innerRef={resetValue} style={{marginLeft:"10px", marginTop:"5px", width:"100%"}}/>
+              <span style={{marginTop:"5px", marginLeft:"10px",fontSize:"11px",color:"darkgray"}}>검색기준: 내용,신고자ID</span>
+            </div>
               <FormControl className={classes.formControl} style={{bottom:"15px"}}>
               <InputLabel id="demo-simple-select-label" style={{left:"30px"}}>처리 상태</InputLabel>
 
@@ -172,11 +154,12 @@ const Report = (req) => {
             <MenuItem value="BOARD_MODIFIED">게시글 수정</MenuItem>
             <MenuItem value="ACCOUNT_DELETED">작성자 삭제</MenuItem>
             <MenuItem value="GIVE_WARNING">작성자 경고</MenuItem>
+            <MenuItem value="NO_PROBLEM">문제없음</MenuItem>
             <MenuItem value="ALL">전체</MenuItem>
 
           </Select>
           </FormControl>
-                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "50px", marginLeft:"20px" }} >
+                <Button className="searchsubmit" variant="contained" color="primary"  onClick={onSubmit} style={{height: "38px", marginLeft:"20px", marginTop:"5px" }} >
               검색
                 </Button>      
       </div>

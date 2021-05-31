@@ -48,7 +48,7 @@ function Paperbase(props) {
     <Fragment>
     <Header/>
 
-    <Paper className="paper_tagadd">
+    <Paper className="paper_tagadd"  style={{minWidth:"624px"}}>
     <AppBar className="searchBar" position="static" color="default" elevation={0}>
       <Toolbar>
       </Toolbar>
@@ -62,7 +62,7 @@ function Paperbase(props) {
 
   </Paper>
 
-  <Paper className="paper_tagadd">
+  <Paper className="paper_tagadd" style={{minWidth:"624px"}}>
     <AppBar className="searchBar" position="static" color="default" elevation={0}>
       <Toolbar>
       </Toolbar>

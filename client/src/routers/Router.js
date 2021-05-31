@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import theme from "../components/layout/theme"
 import mainpage from "../pages/mainpage"
 import tagpage from "../pages/tagpage"
-import reportpage from "../components/report/report"
+import reportpage from "../pages/reportpage"
 
 import userpage from "../pages/userpage"
 import applypage from "../pages/applypage"
@@ -20,6 +20,7 @@ import profiledetailpage from "../components/profile/profiledetail"
 import applydetailpage from "../components/apply/applydetail"
 import reportdetailpage from "../components/report/reportdetail"
 import NoneNavigator from "../components/layout/NoneNavigator"
+
 const Router = () => {
   const token=localStorage.getItem("token")
 
@@ -28,7 +29,8 @@ const Router = () => {
 
           <ThemeProvider theme={theme}>
           <Header/>                              
-          {token?<Navigator  className="Navigator" PaperProps={{ style: { width: "241px"} }}/> :  <NoneNavigator className="Navigator" PaperProps={{ style: { width: "241px"} }}/>}
+          {token? <Navigator  className="Navigator" PaperProps={{ style: { width: "241px"} }}/> :  <NoneNavigator className="Navigator" PaperProps={{ style: { width: "241px"} }}/>}
+          
           <Route path="/" exact component={loginpage}/>                              
                             <Switch>
                                         <PrivateRoute path="/admin" exact component={mainpage} /> 

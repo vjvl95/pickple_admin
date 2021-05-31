@@ -24,6 +24,7 @@ const Tag = () => {
 
   const dispatch = useDispatch();
   
+  console.log(totalElements)
   useEffect(()=>{
     dispatch({
       type: TAG_SEARCH_REQUEST,
@@ -34,7 +35,11 @@ const Tag = () => {
 
     const onReset = () =>
     {
+      setCurrentPage(1)
+      setValues("")
+
         resetValue.current.value=""
+
         dispatch({
           type: TAG_SEARCH_REQUEST,
           payload:{pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }},
@@ -45,18 +50,12 @@ const Tag = () => {
     const onSubmit = async(e) => {
       await e.preventDefault()
       const {keyword} = form
-
-      if(keyword)
-      { 
+      setCurrentPage(1)
       dispatch({
           type:TAG_SEARCH_REQUEST,
           payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:postsPerPage }}
       })
-      }
     
-      else{
-          alert("검색어를 입력하십시요.")
-      }
   }
 
   const onChange= (e) => {
