@@ -36,7 +36,7 @@ const Apply = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10);
-  const { applys, totalElements} = useSelector((state) => state.apply);
+  const { applys, totalElements,pre_page} = useSelector((state) => state.apply);
   const [isContracted, setisContracted] = React.useState('ALL');
   const [reviewStatetype, setreviewStatetype] = React.useState('ALL');
   const [direction,setDirection]=useState("DESC")
@@ -46,9 +46,27 @@ const Apply = () => {
   
   
   useEffect(() => {
-    const {keyword} = form
 
-    if(reviewStatetype==="ALL"&&isContracted==="ALL")
+    onSubmit()
+    
+    
+}, [dispatch,currentPage,direction,isContracted,reviewStatetype])
+
+const onSubmit = async(e) => {
+
+  const {keyword} = form
+
+ 
+  if(pre_page!==currentPage)
+  {
+
+  }
+  else
+  {
+    setCurrentPage(1)
+  }
+ 
+  if(reviewStatetype==="ALL"&&isContracted==="ALL")
     {
       dispatch({
         type: APPLY_LOADING_REQUEST,
@@ -88,19 +106,6 @@ const Apply = () => {
         currentPage:currentPage
       })
     }   
-    
-}, [dispatch,currentPage,direction,isContracted,reviewStatetype])
-
-const onSubmit = async(e) => {
-
-  const {keyword} = form
-
-  setCurrentPage(1)
-  dispatch({
-  type: APPLY_LOADING_REQUEST,
-  payload:{keyword:keyword,isContracted:isContracted,pageRequest:{direction:direction, page:currentPage, size:10}, reviewState:reviewStatetype},
-  currentPage:currentPage
-  })
 
 }
   const onChange= (e) => {

@@ -41,7 +41,7 @@ const Report = () => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {reports,totalElements} = useSelector((state) => state.report);
+  const {reports,totalElements,pre_page} = useSelector((state) => state.report);
 
   const [reportResult, setReportResult] = React.useState('ALL');
   const [reportState, setReportState] = React.useState('ALL');
@@ -49,8 +49,41 @@ const Report = () => {
   const [direction,setDirection]=useState("DESC")
 
   useEffect(()=>{
-    const {keyword} = form
-    if(reportState ==="ALL" && reportResult==="ALL" )
+    onSubmit()    
+    },[dispatch,currentPage,direction,reportResult,reportState])
+  
+      const onChange= (e) => {
+        setValues(
+            {
+                ...form,
+                [e.target.name]:e.target.value
+            }
+        )
+        setCurrentPage(1)
+    }
+    
+    const handleChange_reportResult = (e) => {  
+      setReportResult(e.target.value);
+      setCurrentPage(1)
+
+    };
+    
+    const handleChange_reportState = (e) => {  
+      setReportState(e.target.value);
+      setCurrentPage(1)
+    };
+    const onSubmit = async(e) => {
+
+      const {keyword} = form
+      if(pre_page!==currentPage)
+      {
+
+      }
+      else
+      {
+        setCurrentPage(1)
+      }
+      if(reportState ==="ALL" && reportResult==="ALL" )
     {
       dispatch({
         type: REPORT_SEARCH_REQUEST,
@@ -82,37 +115,6 @@ const Report = () => {
         currentPage: currentPage
       })
     }      
-    },[dispatch,currentPage,direction,reportResult,reportState])
-  
-      const onChange= (e) => {
-        setValues(
-            {
-                ...form,
-                [e.target.name]:e.target.value
-            }
-        )
-        setCurrentPage(1)
-    }
-    
-    const handleChange_reportResult = (e) => {  
-      setReportResult(e.target.value);
-      setCurrentPage(1)
-
-    };
-    
-    const handleChange_reportState = (e) => {  
-      setReportState(e.target.value);
-      setCurrentPage(1)
-    };
-    const onSubmit = async(e) => {
-
-      const {keyword} = form
-      setCurrentPage(1)
-      dispatch({
-      type: REPORT_SEARCH_REQUEST,
-      payload:{keyword:keyword, pageRequest:{direction:direction, page:currentPage, size:10 }, reportResult: reportResult, reportState: reportState},
-      currentPage:currentPage
-      })
     }
     
   const handleChange = (event) => {

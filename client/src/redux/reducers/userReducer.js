@@ -19,7 +19,8 @@ const initialState={
     error:"",
     searchBy:"",
     previous_type:"",
-    searchResult:""
+    searchResult:"",
+    pre_page:""
 };
 
 const userReducer = (state = initialState, action) => {
@@ -95,6 +96,7 @@ const userReducer = (state = initialState, action) => {
                             users:action.payload.content,
                             totalElements:action.payload.totalElements,
                             previous_type:action.accounttype,
+                            pre_page:action.currentPage,
                             loading: false,
                         }
             

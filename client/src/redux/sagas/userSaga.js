@@ -113,7 +113,7 @@ function* UserSearch(action){
         yield put({
             type:USER_SEARCH_SUCCESS,
             payload:result.data.data,
-            accounttype:action.accounttype
+            currentPage:action.currentPage,
         })
     } catch(e){
  

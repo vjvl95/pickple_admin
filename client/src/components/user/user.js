@@ -38,26 +38,12 @@ const User = () => {
 
   const [currentPage, setCurrentPage]=useState(1)
   const [postsPerPage]=useState(10);
-  const {users,totalElements} = useSelector((state) => state.user);
+  const {users,totalElements,pre_page} = useSelector((state) => state.user);
   useEffect(()=>{
     
-    const {keyword} = form
-
-    if(type!=="ALL"){
-      dispatch({
-        type:USER_SEARCH_REQUEST,
-        payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
-        accounttype:type
-    })
-    }
-    else{
-      dispatch({ 
-      type:USER_SEARCH_REQUEST,
-      payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
-      accounttype:type
-
-    })
-  }
+    onSubmit()
+    
+  
     },[dispatch,currentPage,type])
 
   const onChange= (e) => {
@@ -83,13 +69,33 @@ const resetValue=useRef(null)
 const onSubmit = async(e) => {
 
   const {keyword} = form
-  setCurrentPage(1)
 
-  dispatch({
-  type: USER_SEARCH_REQUEST,
-  payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
-  currentPage:currentPage
+  if(pre_page!==currentPage)
+  {
+
+  }
+  else
+  {
+    setCurrentPage(1)
+  }
+
+  if(type!=="ALL"){
+    dispatch({
+      type:USER_SEARCH_REQUEST,
+      payload:{accountType:type , keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+      currentPage:currentPage,
+      accounttype:type
   })
+  }
+  else{
+    dispatch({ 
+    type:USER_SEARCH_REQUEST,
+    payload:{keyword:keyword,pageRequest:{direction:"ASC", page:currentPage, size:10}},
+    currentPage:currentPage,
+    accounttype:type
+
+  })
+}
 }
 
    

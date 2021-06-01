@@ -12,14 +12,13 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
-import InputLabel from '@material-ui/core/InputLabel';
 
 const Reportdetail = (req) =>{
 
     const dispatch = useDispatch();
     const {reportdetail} = useSelector((state) => state.report);
     const history = useHistory();
-    const [reportState,setreportState]=React.useState('');
+    const [reportState,setreportState]=React.useState('NO_PROBLEM');
     const handleChange = (e) => {  
       setreportState(e.target.value);
     };

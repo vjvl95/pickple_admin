@@ -49,6 +49,7 @@ const Profile = () => {
     const onSubmit = async(e) => {
 
       const {keyword} = form
+    
       setCurrentPage(1)
     
       dispatch({

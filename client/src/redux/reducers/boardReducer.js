@@ -84,7 +84,7 @@ const boardReducer = (state = initialState, action) => {
             case BOARD_SEARCH_SUCCESS:
                 return {
                     ...state,
-                    boards: [...state.boards, ...action.payload.content],
+                    boards: action.payload.content,
                     totalElements: action.payload.totalElements,
                     pre_direction:action.pre_direction
                 }
